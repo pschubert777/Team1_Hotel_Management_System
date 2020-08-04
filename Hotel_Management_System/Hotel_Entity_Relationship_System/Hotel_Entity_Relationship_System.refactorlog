@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Operations Version="1.0" xmlns="http://schemas.microsoft.com/sqlserver/dac/Serialization/2012/02">
+  <Operation Name="Rename Refactor" Key="8237132b-c5c4-4b1a-865e-a053992c67aa" ChangeDateTime="08/04/2020 16:35:12">
+    <Property Name="ElementName" Value="[dbo].[Transactions].[Reward_Points_Spent]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[Transactions]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="Reward_points_spent" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="83adc976-980d-4005-b8a3-26d1da753307" ChangeDateTime="08/04/2020 16:45:09">
+    <Property Name="ElementName" Value="[dbo].[Logs].[UserID]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[Logs]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="User_id" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="ebc04277-68e6-4b75-9590-9473358882f3" ChangeDateTime="08/04/2020 16:48:36">
+    <Property Name="ElementName" Value="[dbo].[Rewards].[Points]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[Rewards]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="Points_recieved" />
+  </Operation>
+</Operations>
