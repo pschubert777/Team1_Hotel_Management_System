@@ -8,6 +8,10 @@
     [End_date] DATE NOT NULL, 
     [Hotel_location_Id] INT NOT NULL, 
     [Points_earned] INT NOT NULL DEFAULT 0, 
+    [Check_in] BIT NOT NULL DEFAULT 0, 
+    [Check_out] BIT NOT NULL DEFAULT 0, 
+    [Third_party_Id] INT NULL, 
+    [Reservation_status] NVARCHAR(50) NOT NULL DEFAULT 'Reserved', 
     CONSTRAINT [Customer_Id] FOREIGN KEY ([Customer_Id]) REFERENCES [Customer]([Id]), 
     CONSTRAINT [Hotel_Location_ID] FOREIGN KEY ([Hotel_location_Id]) REFERENCES [Hotel]([Id])
 )
