@@ -65,6 +65,8 @@
     <Build Include="Transactions.sql" />
     <Build Include="Reservation.sql" />
     <Build Include="Logs.sql" />
+    <Build Include="Package.sql" />
+    <Build Include="Maintenance.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="Hotel_Entity_Relationship_System.refactorlog" />
