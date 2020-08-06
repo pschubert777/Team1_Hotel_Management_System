@@ -10,11 +10,16 @@ using System.Windows.Forms;
 
 namespace Hotel_Management_System
 {
-    public partial class Form1 : Form
+    public partial class Metrics_Page : Form
     {
-        public Form1()
+        public Metrics_Page()
         {
             InitializeComponent();
+        }
+
+        private void Generate_Report_Button_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show($"{start_date_picker.Text} and {end_date_picker.Text}");
         }
     }
 }

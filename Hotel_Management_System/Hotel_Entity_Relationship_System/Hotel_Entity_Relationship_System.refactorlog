@@ -21,4 +21,11 @@
     <Property Name="ParentElementType" Value="SqlTable" />
     <Property Name="NewName" Value="Points_recieved" />
   </Operation>
+  <Operation Name="Rename Refactor" Key="f0bdf95a-24fd-41f1-a2a3-5ec07d0936a2" ChangeDateTime="08/06/2020 14:56:56">
+    <Property Name="ElementName" Value="[dbo].[Rewards].[Points_recieved]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[Rewards]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="Points_earned" />
+  </Operation>
 </Operations>
