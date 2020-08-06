@@ -28,4 +28,18 @@
     <Property Name="ParentElementType" Value="SqlTable" />
     <Property Name="NewName" Value="Points_earned" />
   </Operation>
+  <Operation Name="Rename Refactor" Key="30f2d31a-0810-41aa-b3f7-c6f904244731" ChangeDateTime="08/06/2020 22:20:11">
+    <Property Name="ElementName" Value="[dbo].[Package].[Description]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[Package]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="Description_amenities" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="79714bef-ff88-4ad9-89a5-84dcf6dbaf62" ChangeDateTime="08/06/2020 22:27:32">
+    <Property Name="ElementName" Value="[dbo].[FK_Maintenance_ToTable]" />
+    <Property Name="ElementType" Value="SqlForeignKeyConstraint" />
+    <Property Name="ParentElementName" Value="[dbo].[Maintenance]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="[Room_ID]" />
+  </Operation>
 </Operations>
