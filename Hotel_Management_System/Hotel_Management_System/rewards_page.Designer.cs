@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.rewardsListLabel = new System.Windows.Forms.Label();
-            this.listBox1 = new System.Windows.Forms.ListBox();
+            this.rewardsListBox = new System.Windows.Forms.ListBox();
             this.rewardNameLabel = new System.Windows.Forms.Label();
             this.rewardTypeLabel = new System.Windows.Forms.Label();
             this.rewardDetailsLabel = new System.Windows.Forms.Label();
@@ -52,13 +52,13 @@
             this.rewardsListLabel.TabIndex = 0;
             this.rewardsListLabel.Text = "Rewards List";
             // 
-            // listBox1
+            // rewardsListBox
             // 
-            this.listBox1.FormattingEnabled = true;
-            this.listBox1.Location = new System.Drawing.Point(392, 129);
-            this.listBox1.Name = "listBox1";
-            this.listBox1.Size = new System.Drawing.Size(307, 212);
-            this.listBox1.TabIndex = 1;
+            this.rewardsListBox.FormattingEnabled = true;
+            this.rewardsListBox.Location = new System.Drawing.Point(392, 129);
+            this.rewardsListBox.Name = "rewardsListBox";
+            this.rewardsListBox.Size = new System.Drawing.Size(307, 212);
+            this.rewardsListBox.TabIndex = 1;
             // 
             // rewardNameLabel
             // 
@@ -157,7 +157,7 @@
             this.Controls.Add(this.rewardDetailsLabel);
             this.Controls.Add(this.rewardTypeLabel);
             this.Controls.Add(this.rewardNameLabel);
-            this.Controls.Add(this.listBox1);
+            this.Controls.Add(this.rewardsListBox);
             this.Controls.Add(this.rewardsListLabel);
             this.Name = "rewards_page";
             this.Text = "rewards_page";
@@ -169,7 +169,7 @@
         #endregion
 
         private System.Windows.Forms.Label rewardsListLabel;
-        private System.Windows.Forms.ListBox listBox1;
+        private System.Windows.Forms.ListBox rewardsListBox;
         private System.Windows.Forms.Label rewardNameLabel;
         private System.Windows.Forms.Label rewardTypeLabel;
         private System.Windows.Forms.Label rewardDetailsLabel;
