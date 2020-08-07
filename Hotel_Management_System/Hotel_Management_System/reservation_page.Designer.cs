@@ -31,11 +31,9 @@
             this.hotelLocationBox = new System.Windows.Forms.ComboBox();
             this.roomTypeBox = new System.Windows.Forms.ComboBox();
             this.numberOfGuestsBox = new System.Windows.Forms.TextBox();
-            this.paymentMethodBox = new System.Windows.Forms.ComboBox();
             this.creditCardNumberBox = new System.Windows.Forms.TextBox();
             this.currentReservationsLabel = new System.Windows.Forms.Label();
             this.reservationListBox = new System.Windows.Forms.ListBox();
-            this.calendar = new System.Windows.Forms.MonthCalendar();
             this.reservationSearchLabel = new System.Windows.Forms.Label();
             this.reservationIdLabel = new System.Windows.Forms.Label();
             this.reservationIdBox = new System.Windows.Forms.TextBox();
@@ -46,7 +44,6 @@
             this.hotelLocationLabel = new System.Windows.Forms.Label();
             this.roomTypeLabel = new System.Windows.Forms.Label();
             this.numberOfGuestsLabel = new System.Windows.Forms.Label();
-            this.paymentLabel = new System.Windows.Forms.Label();
             this.cardNumberLabel = new System.Windows.Forms.Label();
             this.endDateLabel = new System.Windows.Forms.Label();
             this.endDatePicker = new System.Windows.Forms.DateTimePicker();
@@ -56,7 +53,7 @@
             // hotelLocationBox
             // 
             this.hotelLocationBox.FormattingEnabled = true;
-            this.hotelLocationBox.Location = new System.Drawing.Point(136, 271);
+            this.hotelLocationBox.Location = new System.Drawing.Point(145, 203);
             this.hotelLocationBox.Name = "hotelLocationBox";
             this.hotelLocationBox.Size = new System.Drawing.Size(162, 21);
             this.hotelLocationBox.TabIndex = 3;
@@ -64,29 +61,21 @@
             // roomTypeBox
             // 
             this.roomTypeBox.FormattingEnabled = true;
-            this.roomTypeBox.Location = new System.Drawing.Point(136, 304);
+            this.roomTypeBox.Location = new System.Drawing.Point(145, 236);
             this.roomTypeBox.Name = "roomTypeBox";
             this.roomTypeBox.Size = new System.Drawing.Size(142, 21);
             this.roomTypeBox.TabIndex = 3;
             // 
             // numberOfGuestsBox
             // 
-            this.numberOfGuestsBox.Location = new System.Drawing.Point(136, 339);
+            this.numberOfGuestsBox.Location = new System.Drawing.Point(145, 271);
             this.numberOfGuestsBox.Name = "numberOfGuestsBox";
             this.numberOfGuestsBox.Size = new System.Drawing.Size(50, 20);
             this.numberOfGuestsBox.TabIndex = 1;
             // 
-            // paymentMethodBox
-            // 
-            this.paymentMethodBox.FormattingEnabled = true;
-            this.paymentMethodBox.Location = new System.Drawing.Point(136, 370);
-            this.paymentMethodBox.Name = "paymentMethodBox";
-            this.paymentMethodBox.Size = new System.Drawing.Size(121, 21);
-            this.paymentMethodBox.TabIndex = 3;
-            // 
             // creditCardNumberBox
             // 
-            this.creditCardNumberBox.Location = new System.Drawing.Point(136, 402);
+            this.creditCardNumberBox.Location = new System.Drawing.Point(145, 305);
             this.creditCardNumberBox.Name = "creditCardNumberBox";
             this.creditCardNumberBox.Size = new System.Drawing.Size(179, 20);
             this.creditCardNumberBox.TabIndex = 1;
@@ -108,12 +97,6 @@
             this.reservationListBox.Name = "reservationListBox";
             this.reservationListBox.Size = new System.Drawing.Size(336, 199);
             this.reservationListBox.TabIndex = 5;
-            // 
-            // calendar
-            // 
-            this.calendar.Location = new System.Drawing.Point(81, 18);
-            this.calendar.Name = "calendar";
-            this.calendar.TabIndex = 6;
             // 
             // reservationSearchLabel
             // 
@@ -143,7 +126,7 @@
             // 
             // submitUpdateButton
             // 
-            this.submitUpdateButton.Location = new System.Drawing.Point(121, 439);
+            this.submitUpdateButton.Location = new System.Drawing.Point(130, 342);
             this.submitUpdateButton.Name = "submitUpdateButton";
             this.submitUpdateButton.Size = new System.Drawing.Size(103, 23);
             this.submitUpdateButton.TabIndex = 8;
@@ -152,7 +135,7 @@
             // 
             // cancelButton
             // 
-            this.cancelButton.Location = new System.Drawing.Point(240, 439);
+            this.cancelButton.Location = new System.Drawing.Point(249, 342);
             this.cancelButton.Name = "cancelButton";
             this.cancelButton.Size = new System.Drawing.Size(75, 23);
             this.cancelButton.TabIndex = 8;
@@ -171,7 +154,7 @@
             // startDateLabel
             // 
             this.startDateLabel.AutoSize = true;
-            this.startDateLabel.Location = new System.Drawing.Point(75, 205);
+            this.startDateLabel.Location = new System.Drawing.Point(84, 137);
             this.startDateLabel.Name = "startDateLabel";
             this.startDateLabel.Size = new System.Drawing.Size(55, 13);
             this.startDateLabel.TabIndex = 9;
@@ -180,7 +163,7 @@
             // hotelLocationLabel
             // 
             this.hotelLocationLabel.AutoSize = true;
-            this.hotelLocationLabel.Location = new System.Drawing.Point(54, 274);
+            this.hotelLocationLabel.Location = new System.Drawing.Point(63, 206);
             this.hotelLocationLabel.Name = "hotelLocationLabel";
             this.hotelLocationLabel.Size = new System.Drawing.Size(76, 13);
             this.hotelLocationLabel.TabIndex = 9;
@@ -189,7 +172,7 @@
             // roomTypeLabel
             // 
             this.roomTypeLabel.AutoSize = true;
-            this.roomTypeLabel.Location = new System.Drawing.Point(68, 307);
+            this.roomTypeLabel.Location = new System.Drawing.Point(77, 239);
             this.roomTypeLabel.Name = "roomTypeLabel";
             this.roomTypeLabel.Size = new System.Drawing.Size(62, 13);
             this.roomTypeLabel.TabIndex = 9;
@@ -198,25 +181,16 @@
             // numberOfGuestsLabel
             // 
             this.numberOfGuestsLabel.AutoSize = true;
-            this.numberOfGuestsLabel.Location = new System.Drawing.Point(38, 342);
+            this.numberOfGuestsLabel.Location = new System.Drawing.Point(47, 274);
             this.numberOfGuestsLabel.Name = "numberOfGuestsLabel";
             this.numberOfGuestsLabel.Size = new System.Drawing.Size(92, 13);
             this.numberOfGuestsLabel.TabIndex = 9;
             this.numberOfGuestsLabel.Text = "Number of Guests";
             // 
-            // paymentLabel
-            // 
-            this.paymentLabel.AutoSize = true;
-            this.paymentLabel.Location = new System.Drawing.Point(31, 373);
-            this.paymentLabel.Name = "paymentLabel";
-            this.paymentLabel.Size = new System.Drawing.Size(99, 13);
-            this.paymentLabel.TabIndex = 9;
-            this.paymentLabel.Text = "Method of Payment";
-            // 
             // cardNumberLabel
             // 
             this.cardNumberLabel.AutoSize = true;
-            this.cardNumberLabel.Location = new System.Drawing.Point(61, 405);
+            this.cardNumberLabel.Location = new System.Drawing.Point(70, 308);
             this.cardNumberLabel.Name = "cardNumberLabel";
             this.cardNumberLabel.Size = new System.Drawing.Size(69, 13);
             this.cardNumberLabel.TabIndex = 9;
@@ -225,7 +199,7 @@
             // endDateLabel
             // 
             this.endDateLabel.AutoSize = true;
-            this.endDateLabel.Location = new System.Drawing.Point(78, 240);
+            this.endDateLabel.Location = new System.Drawing.Point(87, 172);
             this.endDateLabel.Name = "endDateLabel";
             this.endDateLabel.Size = new System.Drawing.Size(52, 13);
             this.endDateLabel.TabIndex = 9;
@@ -233,14 +207,14 @@
             // 
             // endDatePicker
             // 
-            this.endDatePicker.Location = new System.Drawing.Point(136, 236);
+            this.endDatePicker.Location = new System.Drawing.Point(145, 168);
             this.endDatePicker.Name = "endDatePicker";
             this.endDatePicker.Size = new System.Drawing.Size(196, 20);
             this.endDatePicker.TabIndex = 10;
             // 
             // startDatePicker
             // 
-            this.startDatePicker.Location = new System.Drawing.Point(136, 201);
+            this.startDatePicker.Location = new System.Drawing.Point(145, 133);
             this.startDatePicker.Name = "startDatePicker";
             this.startDatePicker.Size = new System.Drawing.Size(196, 20);
             this.startDatePicker.TabIndex = 10;
@@ -253,7 +227,6 @@
             this.Controls.Add(this.startDatePicker);
             this.Controls.Add(this.endDatePicker);
             this.Controls.Add(this.cardNumberLabel);
-            this.Controls.Add(this.paymentLabel);
             this.Controls.Add(this.numberOfGuestsLabel);
             this.Controls.Add(this.roomTypeLabel);
             this.Controls.Add(this.hotelLocationLabel);
@@ -263,11 +236,9 @@
             this.Controls.Add(this.cancelButton);
             this.Controls.Add(this.submitUpdateButton);
             this.Controls.Add(this.reservationIdLabel);
-            this.Controls.Add(this.calendar);
             this.Controls.Add(this.reservationListBox);
             this.Controls.Add(this.reservationSearchLabel);
             this.Controls.Add(this.currentReservationsLabel);
-            this.Controls.Add(this.paymentMethodBox);
             this.Controls.Add(this.roomTypeBox);
             this.Controls.Add(this.hotelLocationBox);
             this.Controls.Add(this.creditCardNumberBox);
@@ -284,11 +255,9 @@
         private System.Windows.Forms.ComboBox hotelLocationBox;
         private System.Windows.Forms.ComboBox roomTypeBox;
         private System.Windows.Forms.TextBox numberOfGuestsBox;
-        private System.Windows.Forms.ComboBox paymentMethodBox;
         private System.Windows.Forms.TextBox creditCardNumberBox;
         private System.Windows.Forms.Label currentReservationsLabel;
         private System.Windows.Forms.ListBox reservationListBox;
-        private System.Windows.Forms.MonthCalendar calendar;
         private System.Windows.Forms.Label reservationSearchLabel;
         private System.Windows.Forms.Label reservationIdLabel;
         private System.Windows.Forms.TextBox reservationIdBox;
@@ -299,7 +268,6 @@
         private System.Windows.Forms.Label hotelLocationLabel;
         private System.Windows.Forms.Label roomTypeLabel;
         private System.Windows.Forms.Label numberOfGuestsLabel;
-        private System.Windows.Forms.Label paymentLabel;
         private System.Windows.Forms.Label cardNumberLabel;
         private System.Windows.Forms.Label endDateLabel;
         private System.Windows.Forms.DateTimePicker endDatePicker;
