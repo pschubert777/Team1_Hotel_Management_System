@@ -26,23 +26,39 @@ namespace Hotel_Management_System
             }
             else
             {
-
-                if (Rewards_summary_button.Checked)
+                // SqlConnection connection = new SqlConnection(@"Data Source= "):
+                try
                 {
+                    /*  if (connection.State == ConnectionState.Closed)
+                      {
+                          connection.Open();
+                      }*/
+                    if (Rewards_summary_button.Checked)
+                    {
 
-                }
-                else if (Occupancy_Summary_button.Checked)
-                {
+                    }
+                    else if (Occupancy_Summary_button.Checked)
+                    {
 
-                }
-                else if (Customer_Report_button.Checked)
-                {
+                    }
+                    else if (Customer_Report_button.Checked)
+                    {
 
+                    }
+                    else
+                    {
+                        Display_error_message();
+                    }
                 }
-                else
+                catch(Exception error)
                 {
-                    Display_error_message();
+                    MessageBox.Show(error.Message);
                 }
+                finally
+                {
+                    //connection.Close();
+                }
+
             }
         }
 
