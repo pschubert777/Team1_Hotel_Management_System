@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
+
 namespace Hotel_Management_System
 {
     public partial class Metrics_Page : Form
@@ -19,7 +20,35 @@ namespace Hotel_Management_System
 
         private void Generate_Report_Button_Click(object sender, EventArgs e)
         {
-            MessageBox.Show($"{start_date_picker.Text} and {end_date_picker.Text}");
+            if (start_date_picker.Value.Date > end_date_picker.Value.Date)
+            {
+                Display_error_message();
+            }
+            else
+            {
+
+                if (Rewards_summary_button.Checked)
+                {
+
+                }
+                else if (Occupancy_Summary_button.Checked)
+                {
+
+                }
+                else if (Customer_Report_button.Checked)
+                {
+
+                }
+                else
+                {
+                    Display_error_message();
+                }
+            }
+        }
+
+        private void Display_error_message()
+        {
+            MessageBox.Show("Invalid Data! Please Try Again!");
         }
     }
 }
