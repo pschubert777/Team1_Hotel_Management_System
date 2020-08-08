@@ -38,7 +38,13 @@ namespace Hotel_Management_System
                       }*/
                     if (Rewards_summary_button.Checked)
                     {
-                       // SqlDataAdapter command = new SqlDataAdapter("CustomerDataManipulation", connection);
+                        // SqlDataAdapter query1 = new SqlDataAdapter("Select SUM(Reward_Points) from Customer", connection);
+                        // SqlDataAdapter query2 = new SqlDataAdapter("Select SUM(Reward_points_spent) from Transactions Where Transaction_date Between @StartDate AND @EndDate", connection);
+                        //query2.Parameters.AddWithValue("@StartDate", start_date_picker.Text);
+                        //query2.Parameters.AddWithValue("@EndDate", end_date_picker.Text);
+
+                        //SqlDataReader total_reward_points = query1.ExecuteReader();
+                        //query1.
                     }
                     else if (Occupancy_Summary_button.Checked)
                     {
