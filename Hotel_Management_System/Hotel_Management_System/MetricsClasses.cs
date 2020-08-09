@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Data;
+using System.IO;
 using System.Data.SqlClient;
 
 namespace Hotel_Management_System
@@ -131,6 +132,15 @@ namespace Hotel_Management_System
 
         public void Export_file()
         {
+
+            StreamWriter writer = new StreamWriter(@"C:\Users\peterschubert\Documents\FilesTest");
+            writer.WriteLine($"Rewards as of {Start_date}: {Rewards_outstanding_start_date}");
+            writer.WriteLine($"Rewards as of {End_date}: {Rewards_outstanding_end_date}");
+            writer.WriteLine($"Total Rewards Earned: {Rewards_earned}");
+            writer.WriteLine($"Total Rewards Spent: {Rewards_redeemed}");
+            writer.Close();
+         
+
 
         }
 
