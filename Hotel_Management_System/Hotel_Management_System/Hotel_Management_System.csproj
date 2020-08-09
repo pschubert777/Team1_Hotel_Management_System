@@ -52,6 +52,7 @@
     <Compile Include="check_in_out_page.Designer.cs">
       <DependentUpon>check_in_out_page.cs</DependentUpon>
     </Compile>
+    <Compile Include="MetricsClasses.cs" />
     <Compile Include="Metrics_Page.cs">
       <SubType>Form</SubType>
     </Compile>
