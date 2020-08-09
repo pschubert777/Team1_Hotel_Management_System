@@ -79,11 +79,6 @@ namespace Hotel_Management_System
             Rewards_outstanding_end_date = (Customer_rewards_present - Customer_Rewards_gained) + Customer_Rewards_spent;
 
 
-
-
-
-
-
             if (Connection.State == ConnectionState.Open)
             {
                 Connection.Close();
@@ -92,15 +87,46 @@ namespace Hotel_Management_System
 
 
         }
-
+        // Rewards earned during the time period start date and end date
         public void Calculate_rewards_earned()
         {
+            if (Connection.State == ConnectionState.Closed)
+            {
+                Connection.Open();
+            }
 
+            SqlCommand query1 = new SqlCommand("Select SUM(Reward_points_spent) from Transactions Where Transaction_date Between @StartDate AND @EndDate", Connection);
+            query1.Parameters.AddWithValue("@StartDate", Start_date);
+            query1.Parameters.AddWithValue("@EndDate", End_date);
+            Rewards_earned = Convert.ToInt32(query1.ExecuteScalar());
+
+
+
+            if (Connection.State == ConnectionState.Open)
+            {
+                Connection.Close();
+            }
         }
 
+        // Rewards earned during the time period start date and end date
         public void Calculate_rewards_redeemed()
         {
+            if (Connection.State == ConnectionState.Closed)
+            {
+                Connection.Open();
+            }
 
+            SqlCommand query1 = new SqlCommand("Select SUM(Reward_points_spent) from Transactions Where Transaction_date Between @StartDate AND @EndDate", Connection);
+            query1.Parameters.AddWithValue("@StartDate", Start_date);
+            query1.Parameters.AddWithValue("@EndDate", End_date);
+            Rewards_redeemed = Convert.ToInt32(query1.ExecuteScalar());
+
+
+
+            if (Connection.State == ConnectionState.Open)
+            {
+                Connection.Close();
+            }
         }
 
         public void Export_file()
