@@ -133,7 +133,7 @@ namespace Hotel_Management_System
         public void Export_file()
         {
 
-            StreamWriter writer = new StreamWriter(@"C:\Users\peterschubert\Documents\FilesTest");
+            StreamWriter writer = new StreamWriter(@"C:\Users\peterschubert\Documents\FilesTest\Test.txt");
             writer.WriteLine($"Rewards as of {Start_date}: {Rewards_outstanding_start_date}");
             writer.WriteLine($"Rewards as of {End_date}: {Rewards_outstanding_end_date}");
             writer.WriteLine($"Total Rewards Earned: {Rewards_earned}");
