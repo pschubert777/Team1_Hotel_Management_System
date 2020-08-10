@@ -143,15 +143,71 @@ namespace Hotel_Management_System
 
 
         }
-
-
-        ~RewardsSummary()
-        {
-          
-        }
       
+    }
 
 
+    class OccupancySummary
+    {
+        private string Start_date;
+        private string End_date;
+        private string today_date;
+        private SqlConnection Connection;
+
+        public int TotalRevenue { get; set; }
+        public double Percentage_Rooms_Occupied;
+        public double Percentage_Rooms_Unoccupied;
+
+        public OccupancySummary(string start_date, string end_date)
+        {
+            Start_date = start_date;
+            End_date = end_date;
+            today_date = DateTime.UtcNow.ToString("MM-dd-yyyy");
+            Connection = new SqlConnection(@"Data Source=(localdb)\ProjectsV13;Initial Catalog=Hotel_Entity_Relationship_System;Integrated Security=True;Connect Timeout=60;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False");
+
+        }
+
+        public void calculateRoomsOccupied()
+        {
+            if (Connection.State == ConnectionState.Closed)
+            {
+                Connection.Open();
+            }
+
+
+            if (Connection.State == ConnectionState.Open)
+            {
+                Connection.Close();
+            }
+        }
+
+        public void calculateRoomsUnOccupied()
+        {
+            if (Connection.State == ConnectionState.Closed)
+            {
+                Connection.Open();
+            }
+
+
+            if (Connection.State == ConnectionState.Open)
+            {
+                Connection.Close();
+            }
+        }
+
+        public void calculateTotalRevenue()
+        {
+            if (Connection.State == ConnectionState.Closed)
+            {
+                Connection.Open();
+            }
+
+
+            if (Connection.State == ConnectionState.Open)
+            {
+                Connection.Close();
+            }
+        }
 
     }
 }
