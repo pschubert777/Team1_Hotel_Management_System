@@ -27,7 +27,7 @@ namespace Hotel_Management_System
         {
             Start_date = start_date;
             End_date = end_date;
-            today_date = DateTime.UtcNow.ToString("MM-dd-yyyy");
+            today_date = DateTime.UtcNow.ToString("yyyy-MM-dd");
 
             Rewards_earned = 0;
             Rewards_redeemed = 0;
@@ -155,15 +155,16 @@ namespace Hotel_Management_System
         private SqlConnection Connection;
 
         public int TotalRevenue { get; set; }
-        public double Percentage_Rooms_Occupied;
-        public double Percentage_Rooms_Unoccupied;
+        public double Rooms_Occupied;
+        public double Rooms_Unoccupied;
+        public double Rooms_Unoccupied_maintenance;
         public int TotalRooms { get; set; }
 
         public OccupancySummary(string start_date, string end_date)
         {
             Start_date = start_date;
             End_date = end_date;
-            today_date = DateTime.UtcNow.ToString("MM-dd-yyyy");
+            today_date = DateTime.UtcNow.ToString("yyyy-MM-dd");
             Connection = new SqlConnection(@"Data Source=(localdb)\ProjectsV13;Initial Catalog=Hotel_Entity_Relationship_System;Integrated Security=True;Connect Timeout=60;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False");
            
             if (Connection.State == ConnectionState.Closed)
@@ -189,7 +190,11 @@ namespace Hotel_Management_System
             {
                 Connection.Open();
             }
-
+            SqlCommand query1 = new SqlCommand("Select Count(*) from Reservation INNER Join Transaction on Reservation.Id = Transactions.Reservation_Id where Transactions.Transaction_date BETWEEN @StartDate AND @EndDate AND Reservation.Reservation_status <> @Status ");
+            query1.Parameters.AddWithValue("@Status", "Cancelled");
+            query1.Parameters.AddWithValue("@StartDate", Start_date);
+            query1.Parameters.AddWithValue("@EndDate", End_date);
+            Rooms_Occupied = Convert.ToInt32(query1.ExecuteScalar());
 
 
 
