@@ -157,6 +157,7 @@ namespace Hotel_Management_System
         public int TotalRevenue { get; set; }
         public double Percentage_Rooms_Occupied;
         public double Percentage_Rooms_Unoccupied;
+        public int TotalRooms { get; set; }
 
         public OccupancySummary(string start_date, string end_date)
         {
@@ -164,6 +165,21 @@ namespace Hotel_Management_System
             End_date = end_date;
             today_date = DateTime.UtcNow.ToString("MM-dd-yyyy");
             Connection = new SqlConnection(@"Data Source=(localdb)\ProjectsV13;Initial Catalog=Hotel_Entity_Relationship_System;Integrated Security=True;Connect Timeout=60;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False");
+           
+            if (Connection.State == ConnectionState.Closed)
+            {
+                Connection.Open();
+            }
+
+            SqlCommand query1 = new SqlCommand("Select Count(*) From Room", Connection);
+            TotalRooms = Convert.ToInt32(query1.ExecuteScalar());
+
+
+
+            if (Connection.State == ConnectionState.Open)
+            {
+                Connection.Close();
+            }
 
         }
 
@@ -205,7 +221,9 @@ namespace Hotel_Management_System
                 Connection.Open();
             }
 
-            SqlCommand query1 = new SqlCommand(@"Select SUM(Transactions.Money_Spent)FROM Transactions INNER JOIN Reservation ON Transactions.Reservation_Id = Reservation.Id WHERE Reservation.Check_out = @value", Connection);
+            SqlCommand query1 = new SqlCommand("Select SUM(Transactions.Money_Spent)FROM Transactions INNER JOIN Reservation ON Transactions.Reservation_Id = Reservation.Id WHERE Reservation.Check_out = @value AND Transactions.Transaction_date Between @StartDate AND @EndDate", Connection);
+            query1.Parameters.AddWithValue("@StartDate", Start_date);
+            query1.Parameters.AddWithValue("@EndDate", End_date);
             query1.Parameters.AddWithValue("@ID", "true");
             TotalRevenue = Convert.ToInt32(query1.ExecuteScalar());
 
