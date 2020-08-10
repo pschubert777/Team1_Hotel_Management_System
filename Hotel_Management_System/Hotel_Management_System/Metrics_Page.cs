@@ -29,21 +29,16 @@ namespace Hotel_Management_System
             }
             else
             {
-                // SqlConnection connection = new SqlConnection(@"Data Source= "):
-                try
-                {
-                    /*  if (connection.State == ConnectionState.Closed)
-                      {
-                          connection.Open();
-                      }*/
+                
+                   
                     if (Rewards_summary_button.Checked)
                     {
-                        // SqlDataAdapter query1_1 = new SqlDataAdapter("Select SUM(Reward_Points) from Customer", connection);
-                        // SqlDataAdapter query1_2 = new SqlDataAdapter("Select SUM(Reward_points_spent) from Transactions Where Transaction_date Between @StartDate AND @EndDate", connection);
-                        //query2.Parameters.AddWithValue("@StartDate", start_date_picker.Text);
-                        //query2.Parameters.AddWithValue("@EndDate", end_date_picker.Text);
-                        //Int total_reward_points =Convert.ToInt32 (query1.ExecuteScalar());
-                        //int total
+                    RewardsSummary summary = new RewardsSummary(start_date_picker.Text, end_date_picker.Text);
+                    summary.Calculate_rewards_outstanding();
+                    summary.Calculate_rewards_earned();
+                    summary.Calculate_rewards_redeemed();
+                    summary.Export_file();
+
                     }
                     else if (Occupancy_Summary_button.Checked)
                     {
@@ -57,15 +52,7 @@ namespace Hotel_Management_System
                     {
                         Display_error_message();
                     }
-                }
-                catch(Exception error)
-                {
-                    MessageBox.Show(error.Message);
-                }
-                finally
-                {
-                    //connection.Close();
-                }
+                
 
             }
         }
