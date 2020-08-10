@@ -175,6 +175,9 @@ namespace Hotel_Management_System
             }
 
 
+
+
+
             if (Connection.State == ConnectionState.Open)
             {
                 Connection.Close();
@@ -202,6 +205,9 @@ namespace Hotel_Management_System
                 Connection.Open();
             }
 
+            SqlCommand query1 = new SqlCommand(@"Select SUM(Transactions.Money_Spent)FROM Transactions INNER JOIN Reservation ON Transactions.Reservation_Id = Reservation.Id WHERE Reservation.Check_out = @value", Connection);
+            query1.Parameters.AddWithValue("@ID", "true");
+            TotalRevenue = Convert.ToInt32(query1.ExecuteScalar());
 
             if (Connection.State == ConnectionState.Open)
             {
