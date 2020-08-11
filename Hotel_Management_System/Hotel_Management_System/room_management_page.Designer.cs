@@ -33,13 +33,14 @@
             this.statusBox = new System.Windows.Forms.TextBox();
             this.hotelBox = new System.Windows.Forms.TextBox();
             this.roomTypeBox = new System.Windows.Forms.TextBox();
-            this.roomNumberBox = new System.Windows.Forms.TextBox();
             this.statusLabel = new System.Windows.Forms.Label();
             this.hotelLabel = new System.Windows.Forms.Label();
             this.roomTypeLabel = new System.Windows.Forms.Label();
             this.roomNumberLabel = new System.Windows.Forms.Label();
             this.roomListBox = new System.Windows.Forms.ListBox();
             this.roomListLabel = new System.Windows.Forms.Label();
+            this.roomNumberBox = new System.Windows.Forms.NumericUpDown();
+            ((System.ComponentModel.ISupportInitialize)(this.roomNumberBox)).BeginInit();
             this.SuspendLayout();
             // 
             // cancelButton
@@ -50,6 +51,7 @@
             this.cancelButton.TabIndex = 17;
             this.cancelButton.Text = "Cancel";
             this.cancelButton.UseVisualStyleBackColor = true;
+            this.cancelButton.Click += new System.EventHandler(this.cancelButton_Click);
             // 
             // submitButton
             // 
@@ -59,6 +61,7 @@
             this.submitButton.TabIndex = 16;
             this.submitButton.Text = "Submit / Update";
             this.submitButton.UseVisualStyleBackColor = true;
+            this.submitButton.Click += new System.EventHandler(this.submitButton_Click);
             // 
             // statusBox
             // 
@@ -66,6 +69,7 @@
             this.statusBox.Name = "statusBox";
             this.statusBox.Size = new System.Drawing.Size(100, 20);
             this.statusBox.TabIndex = 12;
+            this.statusBox.TextChanged += new System.EventHandler(this.statusBox_TextChanged);
             // 
             // hotelBox
             // 
@@ -73,6 +77,7 @@
             this.hotelBox.Name = "hotelBox";
             this.hotelBox.Size = new System.Drawing.Size(100, 20);
             this.hotelBox.TabIndex = 13;
+            this.hotelBox.TextChanged += new System.EventHandler(this.hotelBox_TextChanged);
             // 
             // roomTypeBox
             // 
@@ -80,13 +85,7 @@
             this.roomTypeBox.Name = "roomTypeBox";
             this.roomTypeBox.Size = new System.Drawing.Size(100, 20);
             this.roomTypeBox.TabIndex = 14;
-            // 
-            // roomNumberBox
-            // 
-            this.roomNumberBox.Location = new System.Drawing.Point(174, 135);
-            this.roomNumberBox.Name = "roomNumberBox";
-            this.roomNumberBox.Size = new System.Drawing.Size(100, 20);
-            this.roomNumberBox.TabIndex = 15;
+            this.roomTypeBox.TextChanged += new System.EventHandler(this.roomTypeBox_TextChanged);
             // 
             // statusLabel
             // 
@@ -131,6 +130,7 @@
             this.roomListBox.Name = "roomListBox";
             this.roomListBox.Size = new System.Drawing.Size(307, 212);
             this.roomListBox.TabIndex = 7;
+            this.roomListBox.SelectedIndexChanged += new System.EventHandler(this.roomListBox_SelectedIndexChanged);
             // 
             // roomListLabel
             // 
@@ -142,17 +142,24 @@
             this.roomListLabel.TabIndex = 6;
             this.roomListLabel.Text = "Room List";
             // 
+            // roomNumberBox
+            // 
+            this.roomNumberBox.Location = new System.Drawing.Point(174, 136);
+            this.roomNumberBox.Name = "roomNumberBox";
+            this.roomNumberBox.Size = new System.Drawing.Size(100, 20);
+            this.roomNumberBox.TabIndex = 18;
+            // 
             // room_management_page
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(776, 484);
+            this.Controls.Add(this.roomNumberBox);
             this.Controls.Add(this.cancelButton);
             this.Controls.Add(this.submitButton);
             this.Controls.Add(this.statusBox);
             this.Controls.Add(this.hotelBox);
             this.Controls.Add(this.roomTypeBox);
-            this.Controls.Add(this.roomNumberBox);
             this.Controls.Add(this.statusLabel);
             this.Controls.Add(this.hotelLabel);
             this.Controls.Add(this.roomTypeLabel);
@@ -161,6 +168,7 @@
             this.Controls.Add(this.roomListLabel);
             this.Name = "room_management_page";
             this.Text = "room_management_page";
+            ((System.ComponentModel.ISupportInitialize)(this.roomNumberBox)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -173,12 +181,12 @@
         private System.Windows.Forms.TextBox statusBox;
         private System.Windows.Forms.TextBox hotelBox;
         private System.Windows.Forms.TextBox roomTypeBox;
-        private System.Windows.Forms.TextBox roomNumberBox;
         private System.Windows.Forms.Label statusLabel;
         private System.Windows.Forms.Label hotelLabel;
         private System.Windows.Forms.Label roomTypeLabel;
         private System.Windows.Forms.Label roomNumberLabel;
         private System.Windows.Forms.ListBox roomListBox;
         private System.Windows.Forms.Label roomListLabel;
+        private System.Windows.Forms.NumericUpDown roomNumberBox;
     }
 }

@@ -17,9 +17,10 @@ namespace Hotel_Management_System
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             //comment out below lines to prevent a certain page from opening
-            Application.Run(new Metrics_Page());
+            //Application.Run(new Metrics_Page());
             //reservation page will open after the metrics page closes
-            Application.Run(new reservation_page());
+            //Application.Run(new reservation_page());
+            Application.Run(new check_in_out_page());
         }
     }
 }

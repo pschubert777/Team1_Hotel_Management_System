@@ -37,9 +37,10 @@
             this.rewardNameBox = new System.Windows.Forms.TextBox();
             this.rewardTypeBox = new System.Windows.Forms.TextBox();
             this.rewardDetailsBox = new System.Windows.Forms.TextBox();
-            this.pointAmountBox = new System.Windows.Forms.TextBox();
             this.submitButton = new System.Windows.Forms.Button();
             this.cancelButton = new System.Windows.Forms.Button();
+            this.pointAmountBox = new System.Windows.Forms.NumericUpDown();
+            ((System.ComponentModel.ISupportInitialize)(this.pointAmountBox)).BeginInit();
             this.SuspendLayout();
             // 
             // rewardsListLabel
@@ -102,6 +103,7 @@
             this.rewardNameBox.Name = "rewardNameBox";
             this.rewardNameBox.Size = new System.Drawing.Size(100, 20);
             this.rewardNameBox.TabIndex = 3;
+            this.rewardNameBox.TextChanged += new System.EventHandler(this.rewardNameBox_TextChanged);
             // 
             // rewardTypeBox
             // 
@@ -109,6 +111,7 @@
             this.rewardTypeBox.Name = "rewardTypeBox";
             this.rewardTypeBox.Size = new System.Drawing.Size(100, 20);
             this.rewardTypeBox.TabIndex = 3;
+            this.rewardTypeBox.TextChanged += new System.EventHandler(this.rewardTypeBox_TextChanged);
             // 
             // rewardDetailsBox
             // 
@@ -116,13 +119,7 @@
             this.rewardDetailsBox.Name = "rewardDetailsBox";
             this.rewardDetailsBox.Size = new System.Drawing.Size(100, 20);
             this.rewardDetailsBox.TabIndex = 3;
-            // 
-            // pointAmountBox
-            // 
-            this.pointAmountBox.Location = new System.Drawing.Point(182, 274);
-            this.pointAmountBox.Name = "pointAmountBox";
-            this.pointAmountBox.Size = new System.Drawing.Size(100, 20);
-            this.pointAmountBox.TabIndex = 3;
+            this.rewardDetailsBox.TextChanged += new System.EventHandler(this.rewardDetailsBox_TextChanged);
             // 
             // submitButton
             // 
@@ -132,6 +129,7 @@
             this.submitButton.TabIndex = 4;
             this.submitButton.Text = "Submit / Update";
             this.submitButton.UseVisualStyleBackColor = true;
+            this.submitButton.Click += new System.EventHandler(this.submitButton_Click);
             // 
             // cancelButton
             // 
@@ -141,15 +139,23 @@
             this.cancelButton.TabIndex = 5;
             this.cancelButton.Text = "Cancel";
             this.cancelButton.UseVisualStyleBackColor = true;
+            this.cancelButton.Click += new System.EventHandler(this.cancelButton_Click);
+            // 
+            // pointAmountBox
+            // 
+            this.pointAmountBox.Location = new System.Drawing.Point(182, 275);
+            this.pointAmountBox.Name = "pointAmountBox";
+            this.pointAmountBox.Size = new System.Drawing.Size(100, 20);
+            this.pointAmountBox.TabIndex = 6;
             // 
             // rewards_page
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(776, 484);
+            this.Controls.Add(this.pointAmountBox);
             this.Controls.Add(this.cancelButton);
             this.Controls.Add(this.submitButton);
-            this.Controls.Add(this.pointAmountBox);
             this.Controls.Add(this.rewardDetailsBox);
             this.Controls.Add(this.rewardTypeBox);
             this.Controls.Add(this.rewardNameBox);
@@ -161,6 +167,7 @@
             this.Controls.Add(this.rewardsListLabel);
             this.Name = "rewards_page";
             this.Text = "rewards_page";
+            ((System.ComponentModel.ISupportInitialize)(this.pointAmountBox)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -177,8 +184,8 @@
         private System.Windows.Forms.TextBox rewardNameBox;
         private System.Windows.Forms.TextBox rewardTypeBox;
         private System.Windows.Forms.TextBox rewardDetailsBox;
-        private System.Windows.Forms.TextBox pointAmountBox;
         private System.Windows.Forms.Button submitButton;
         private System.Windows.Forms.Button cancelButton;
+        private System.Windows.Forms.NumericUpDown pointAmountBox;
     }
 }

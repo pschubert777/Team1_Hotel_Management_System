@@ -129,7 +129,7 @@
             // 
             // end_date_picker
             // 
-            this.end_date_picker.CustomFormat = "MM-dd-yyyy";
+            this.end_date_picker.CustomFormat = "yyyy-MM-dd";
             this.end_date_picker.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.end_date_picker.Location = new System.Drawing.Point(332, 120);
             this.end_date_picker.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
@@ -140,7 +140,7 @@
             // 
             // start_date_picker
             // 
-            this.start_date_picker.CustomFormat = "MM-dd-yyyy";
+            this.start_date_picker.CustomFormat = "yyyy-MM-dd";
             this.start_date_picker.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.start_date_picker.Location = new System.Drawing.Point(120, 120);
             this.start_date_picker.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);

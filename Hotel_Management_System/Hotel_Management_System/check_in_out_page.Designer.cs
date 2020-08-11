@@ -43,7 +43,7 @@
             // 
             this.searchReservationLabel.AutoSize = true;
             this.searchReservationLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 13F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.searchReservationLabel.Location = new System.Drawing.Point(80, 110);
+            this.searchReservationLabel.Location = new System.Drawing.Point(451, 299);
             this.searchReservationLabel.Name = "searchReservationLabel";
             this.searchReservationLabel.Size = new System.Drawing.Size(216, 22);
             this.searchReservationLabel.TabIndex = 0;
@@ -53,7 +53,7 @@
             // 
             this.checkInOutLabel.AutoSize = true;
             this.checkInOutLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 13F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.checkInOutLabel.Location = new System.Drawing.Point(80, 245);
+            this.checkInOutLabel.Location = new System.Drawing.Point(87, 150);
             this.checkInOutLabel.Name = "checkInOutLabel";
             this.checkInOutLabel.Size = new System.Drawing.Size(200, 22);
             this.checkInOutLabel.TabIndex = 0;
@@ -63,7 +63,7 @@
             // 
             this.resultLabel.AutoSize = true;
             this.resultLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 13F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.resultLabel.Location = new System.Drawing.Point(481, 124);
+            this.resultLabel.Location = new System.Drawing.Point(487, 78);
             this.resultLabel.Name = "resultLabel";
             this.resultLabel.Size = new System.Drawing.Size(136, 22);
             this.resultLabel.TabIndex = 0;
@@ -72,7 +72,7 @@
             // reservationIdLabel
             // 
             this.reservationIdLabel.AutoSize = true;
-            this.reservationIdLabel.Location = new System.Drawing.Point(50, 159);
+            this.reservationIdLabel.Location = new System.Drawing.Point(421, 348);
             this.reservationIdLabel.Name = "reservationIdLabel";
             this.reservationIdLabel.Size = new System.Drawing.Size(76, 13);
             this.reservationIdLabel.TabIndex = 1;
@@ -80,35 +80,42 @@
             // 
             // reservationIdBox
             // 
-            this.reservationIdBox.Location = new System.Drawing.Point(132, 156);
+            this.reservationIdBox.Location = new System.Drawing.Point(503, 345);
             this.reservationIdBox.Name = "reservationIdBox";
             this.reservationIdBox.Size = new System.Drawing.Size(164, 20);
             this.reservationIdBox.TabIndex = 2;
+            this.reservationIdBox.TextChanged += new System.EventHandler(this.reservationIdBox_TextChanged);
             // 
             // checkInOutStatusBox
             // 
             this.checkInOutStatusBox.FormattingEnabled = true;
-            this.checkInOutStatusBox.Location = new System.Drawing.Point(118, 288);
+            this.checkInOutStatusBox.Items.AddRange(new object[] {
+            "Check In",
+            "Check Out"});
+            this.checkInOutStatusBox.Location = new System.Drawing.Point(125, 193);
             this.checkInOutStatusBox.Name = "checkInOutStatusBox";
             this.checkInOutStatusBox.Size = new System.Drawing.Size(121, 21);
             this.checkInOutStatusBox.TabIndex = 3;
+            this.checkInOutStatusBox.SelectedIndexChanged += new System.EventHandler(this.checkInOutStatusBox_SelectedIndexChanged);
             // 
             // resultsBox
             // 
             this.resultsBox.FormattingEnabled = true;
-            this.resultsBox.Location = new System.Drawing.Point(407, 149);
+            this.resultsBox.Location = new System.Drawing.Point(413, 103);
             this.resultsBox.Name = "resultsBox";
             this.resultsBox.Size = new System.Drawing.Size(288, 160);
             this.resultsBox.TabIndex = 4;
+            this.resultsBox.SelectedIndexChanged += new System.EventHandler(this.resultsBox_SelectedIndexChanged);
             // 
             // statusSubmitButton
             // 
-            this.statusSubmitButton.Location = new System.Drawing.Point(142, 315);
+            this.statusSubmitButton.Location = new System.Drawing.Point(149, 220);
             this.statusSubmitButton.Name = "statusSubmitButton";
             this.statusSubmitButton.Size = new System.Drawing.Size(75, 23);
             this.statusSubmitButton.TabIndex = 5;
             this.statusSubmitButton.Text = "Submit";
             this.statusSubmitButton.UseVisualStyleBackColor = true;
+            this.statusSubmitButton.Click += new System.EventHandler(this.statusSubmitButton_Click);
             // 
             // returnButton
             // 
@@ -118,6 +125,7 @@
             this.returnButton.TabIndex = 5;
             this.returnButton.Text = "Employee Menu";
             this.returnButton.UseVisualStyleBackColor = true;
+            this.returnButton.Click += new System.EventHandler(this.returnButton_Click);
             // 
             // check_in_out_page
             // 
