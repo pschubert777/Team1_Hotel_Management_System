@@ -42,7 +42,11 @@ namespace Hotel_Management_System
                     }
                     else if (Occupancy_Summary_button.Checked)
                     {
-                        // SqlDataAdapter command = new SqlDataAdapter("CustomerDataManipulation", connection);
+                    // SqlDataAdapter command = new SqlDataAdapter("CustomerDataManipulation", connection);
+                    OccupancySummary summary = new OccupancySummary(start_date_picker.Value.Date, end_date_picker.Value.Date);
+                    summary.calculateRoomsOccupied_Unoccupied();
+                    summary.calculateTotalRevenue();
+                    summary.ExportFile();
                     }
                     else if (Customer_Report_button.Checked)
                     {
