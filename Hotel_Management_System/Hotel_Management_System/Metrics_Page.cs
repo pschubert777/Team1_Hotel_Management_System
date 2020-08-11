@@ -33,7 +33,7 @@ namespace Hotel_Management_System
                    
                     if (Rewards_summary_button.Checked)
                     {
-                    RewardsSummary summary = new RewardsSummary(start_date_picker.Text, end_date_picker.Text);
+                    RewardsSummary summary = new RewardsSummary(start_date_picker.Value.Date, end_date_picker.Value.Date);
                     summary.Calculate_rewards_outstanding();
                     summary.Calculate_rewards_earned();
                     summary.Calculate_rewards_redeemed();

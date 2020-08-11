@@ -11,9 +11,9 @@ namespace Hotel_Management_System
 {
     class RewardsSummary
     {
-        private string Start_date;
-        private string End_date;
-        private string today_date;
+        private DateTime Start_date;
+        private DateTime End_date;
+        private DateTime today_date;
         public int Rewards_outstanding_start_date { get; set; }
         public int Rewards_outstanding_end_date { get; set; }
         public int Rewards_redeemed { get; set; }
@@ -23,11 +23,11 @@ namespace Hotel_Management_System
         private SqlConnection Connection;
         
 
-        public RewardsSummary(string start_date, string end_date)
+        public RewardsSummary(DateTime start_date, DateTime end_date)
         {
-            Start_date = start_date;
-            End_date = end_date;
-            today_date = DateTime.UtcNow.ToString("yyyy-MM-dd");
+            Start_date = start_date.Date;
+            End_date = end_date.Date;
+            today_date = DateTime.Now.Date;
 
             Rewards_earned = 0;
             Rewards_redeemed = 0;
@@ -149,9 +149,9 @@ namespace Hotel_Management_System
 
     class OccupancySummary
     {
-        private string Start_date;
-        private string End_date;
-        private string today_date;
+        private DateTime Start_date;
+        private DateTime End_date;
+        private DateTime today_date;
         private SqlConnection Connection;
 
         public int TotalRevenue { get; set; }
@@ -160,11 +160,11 @@ namespace Hotel_Management_System
         public double Rooms_Unoccupied_maintenance;
         public int TotalRooms { get; set; }
 
-        public OccupancySummary(string start_date, string end_date)
+        public OccupancySummary(DateTime start_date, DateTime end_date)
         {
-            Start_date = start_date;
-            End_date = end_date;
-            today_date = DateTime.UtcNow.ToString("yyyy-MM-dd");
+            Start_date = start_date.Date;
+            End_date = end_date.Date;
+            today_date = DateTime.Now.Date;
             Connection = new SqlConnection(@"Data Source=(localdb)\ProjectsV13;Initial Catalog=Hotel_Entity_Relationship_System;Integrated Security=True;Connect Timeout=60;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False");
            
             if (Connection.State == ConnectionState.Closed)
