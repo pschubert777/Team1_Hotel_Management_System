@@ -13,9 +13,10 @@ namespace Hotel_Management_System
     public partial class reservation_page : Form
     {
         Reservation res = new Reservation();
-        string reservationSearchID = "";
+        private string reservationSearchID { get; set; }
         public reservation_page()
         {
+            //default values
             InitializeComponent();
             res.startDate = startDatePicker.Value;
             res.endDate = endDatePicker.Value;
@@ -23,6 +24,7 @@ namespace Hotel_Management_System
             res.roomType = "";
             res.numGuests = 0;
             res.cardNum = 0;
+            reservationSearchID = "";
         }
 
         private void startDatePicker_ValueChanged(object sender, EventArgs e)
@@ -49,7 +51,6 @@ namespace Hotel_Management_System
         {
             try { res.numGuests = numberOfGuestsBox.Value; }
             catch (FormatException _e) { Console.WriteLine(_e.Message); }
-            MessageBox.Show(numberOfGuestsBox.Value + " " + res.numGuests);
         }
 
         private void creditCardNumberBox_TextChanged(object sender, EventArgs e)
@@ -60,14 +61,21 @@ namespace Hotel_Management_System
 
         private void submitUpdateButton_Click(object sender, EventArgs e)
         {
-            //test line to show values when submitted. delete before turning in
-            MessageBox.Show(res.startDate.ToString() + "\n" + res.endDate.ToString() + "\n" + res.hotel + "\n" + res.roomType + "\n" + res.numGuests + "\n" + res.cardNum);
-            //reward points dialogue box
-            //only show this if user has at least 50 reward points
-            var confirmRewards = MessageBox.Show("Would you like to use 50 reward points to get a 10% discount?", "Reward Points", MessageBoxButtons.YesNo);
-            if(confirmRewards == DialogResult.Yes)
+            if (startDatePicker.Value.Date > endDatePicker.Value.Date)
             {
-                //apply rewards
+                MessageBox.Show("Error - Start Date later than End Date");
+            }
+            else
+            {
+                //test line to show values when submitted. delete before turning in
+                MessageBox.Show(res.startDate.ToString() + "\n" + res.endDate.ToString() + "\n" + res.hotel + "\n" + res.roomType + "\n" + res.numGuests + "\n" + res.cardNum);
+                //reward points dialogue box
+                //only show this if user has at least 50 reward points
+                var confirmRewards = MessageBox.Show("Would you like to use 50 reward points to get a 10% discount?", "Reward Points", MessageBoxButtons.YesNo);
+                if (confirmRewards == DialogResult.Yes)
+                {
+                    //apply rewards
+                }
             }
         }
 
