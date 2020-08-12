@@ -67,12 +67,6 @@
     <Compile Include="reservation_page.Designer.cs">
       <DependentUpon>reservation_page.cs</DependentUpon>
     </Compile>
-    <Compile Include="rewards_page.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="rewards_page.Designer.cs">
-      <DependentUpon>rewards_page.cs</DependentUpon>
-    </Compile>
     <Compile Include="room_management_page.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -96,9 +90,6 @@
     </Compile>
     <EmbeddedResource Include="reservation_page.resx">
       <DependentUpon>reservation_page.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="rewards_page.resx">
-      <DependentUpon>rewards_page.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="room_management_page.resx">
       <DependentUpon>room_management_page.cs</DependentUpon>
