@@ -45,10 +45,11 @@ namespace Hotel_Management_System
             res.roomType = roomTypeBox.Text;
         }
 
-        private void numberOfGuestsBox_TextChanged(object sender, EventArgs e)
+        private void numberOfGuestsBox_ValueChanged(object sender, EventArgs e)
         {
-            try { res.numGuests = Int32.Parse(numberOfGuestsBox.Text); }
+            try { res.numGuests = numberOfGuestsBox.Value; }
             catch (FormatException _e) { Console.WriteLine(_e.Message); }
+            MessageBox.Show(numberOfGuestsBox.Value + " " + res.numGuests);
         }
 
         private void creditCardNumberBox_TextChanged(object sender, EventArgs e)
@@ -62,6 +63,7 @@ namespace Hotel_Management_System
             //test line to show values when submitted. delete before turning in
             MessageBox.Show(res.startDate.ToString() + "\n" + res.endDate.ToString() + "\n" + res.hotel + "\n" + res.roomType + "\n" + res.numGuests + "\n" + res.cardNum);
             //reward points dialogue box
+            //only show this if user has at least 50 reward points
             var confirmRewards = MessageBox.Show("Would you like to use 50 reward points to get a 10% discount?", "Reward Points", MessageBoxButtons.YesNo);
             if(confirmRewards == DialogResult.Yes)
             {
@@ -98,7 +100,7 @@ namespace Hotel_Management_System
         public DateTime endDate { get; set; }
         public string hotel { get; set; }
         public string roomType { get; set; }
-        public int numGuests { get; set; }
+        public decimal numGuests { get; set; }
         public int cardNum { get; set; }
     }
 }
