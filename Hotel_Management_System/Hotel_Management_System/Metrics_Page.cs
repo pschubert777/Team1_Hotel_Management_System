@@ -14,7 +14,7 @@ namespace Hotel_Management_System
 {
     public partial class Metrics_Page : Form
     {
-        private string user_id {get; set;}
+        private int user_id {get; set;}
         private string user_type { get; set; }
         public Metrics_Page()
         {
