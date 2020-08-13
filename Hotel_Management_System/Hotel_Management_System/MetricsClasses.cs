@@ -209,8 +209,8 @@ namespace Hotel_Management_System
 
             for (var individual_date = Start_date; individual_date <= End_date; individual_date.AddDays(1))
             {
-                SqlCommand query2 = new SqlCommand("Select Count(*) From Reservation where Reservation_status NOT LIKE @Status% AND @selectedDate Between Start_date and End_date", Connection);
-                query2.Parameters.AddWithValue("@Status", "Canceled");
+                SqlCommand query2 = new SqlCommand("Select Count(*) From Reservation where Reservation_status NOT LIKE @Status AND @selectedDate Between Start_date and End_date", Connection);
+                query2.Parameters.AddWithValue("@Status", "Cancelled%");
                 query2.Parameters.AddWithValue("@selectedDate", individual_date);
 
                 int Rooms_Occupied = Convert.ToInt32(query2.ExecuteScalar());
