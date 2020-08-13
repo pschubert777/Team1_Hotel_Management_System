@@ -134,6 +134,7 @@ namespace Hotel_Management_System
         {
 
             StreamWriter writer = new StreamWriter(@"C:\Users\peterschubert\Documents\FilesTest\RewardsSummary.txt");
+            writer.WriteLine($"Rewards Summary from {Start_date.ToShortDateString()} to {End_date.ToShortDateString()}");
             writer.WriteLine($"Rewards as of {Start_date}: {Rewards_outstanding_start_date}");
             writer.WriteLine($"Rewards as of {End_date}: {Rewards_outstanding_end_date}");
             writer.WriteLine($"Total Rewards Earned: {Rewards_earned}");
@@ -151,7 +152,7 @@ namespace Hotel_Management_System
     {
         private DateTime Start_date;
         private DateTime End_date;
-        private DateTime today_date;
+       // private DateTime today_date;
         private int date_difference;
         private SqlConnection Connection;
 
@@ -168,7 +169,7 @@ namespace Hotel_Management_System
             End_date = end_date.Date;
             date_difference = (Start_date - End_date).Days;
 
-            today_date = DateTime.Now.Date;
+            //today_date = DateTime.Now.Date;
             Connection = new SqlConnection(@"Data Source=(localdb)\ProjectsV13;Initial Catalog=Hotel_Entity_Relationship_System;Integrated Security=True;Connect Timeout=60;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False");
             Total_rooms_Occupied = 0;
             Total_rooms_Unoccupied = 0;
@@ -253,10 +254,99 @@ namespace Hotel_Management_System
         public void ExportFile()
         {
             StreamWriter writer = new StreamWriter(@"C:\Users\peterschubert\Documents\FilesTest\Occupancy.txt");
+            writer.WriteLine($"Occupancy Summary from {Start_date.ToShortDateString()} to {End_date.ToShortDateString()}");
             writer.WriteLine($"Average Percentage of Occupied Rooms {((Total_rooms_Occupied/date_difference)/TotalRooms)*100}%");
             writer.WriteLine($"Average Percentage of Unoccupied Rooms {((Total_rooms_Unoccupied / date_difference) / TotalRooms) * 100}%");
             writer.WriteLine($"Average Percentage of Unoccupied Rooms due to maintenance {((Total_rooms_Unoccupied_maintenance/ date_difference) / TotalRooms) * 100}% ");
         }
+
+    }
+
+    class CustomerSummary
+    {
+        private DateTime Start_date;
+        private DateTime End_date;
+
+        private SqlConnection Connection;
+
+        private int Repeat_customers;
+        private int Total_Num_Customers;
+        private int Num_Reservations;
+        private int Num_Cancellations;
+
+
+
+
+        CustomerSummary(DateTime start_date, DateTime end_date)
+        {
+            Start_date = start_date.Date;
+            End_date = end_date.Date;
+            Connection = new SqlConnection(@"Data Source=(localdb)\ProjectsV13;Initial Catalog=Hotel_Entity_Relationship_System;Integrated Security=True;Connect Timeout=60;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False");
+
+            Repeat_customers = 0;
+            Num_Reservations = 0;
+            Num_Cancellations = 0;
+        }
+        public void Caculate_Repeat_customer()
+        {
+            if (Connection.State == ConnectionState.Closed)
+            {
+                Connection.Open();
+            }
+            SqlCommand query1 = new SqlCommand("Select Count (Customer_Id) From Transactions Group BY Customer_Id Having Count(Id) >= @NUM_Id", Connection);
+            query1.Parameters.AddWithValue("@NUM_Id", 2);
+            Repeat_customers = Convert.ToInt32(query1.ExecuteScalar());
+
+            SqlCommand query2 = new SqlCommand("Select Count (*) From Customer", Connection);
+            Total_Num_Customers = Convert.ToInt32(query2.ExecuteScalar());
+
+            if (Connection.State == ConnectionState.Open)
+            {
+                Connection.Close();
+            }
+        }
+        public void Calculate_Reservations_made()
+        {
+            if (Connection.State == ConnectionState.Closed)
+            {
+                Connection.Open();
+            }
+            SqlCommand query1 = new SqlCommand("Select Count(*) From Logs Where Action_type Like @ActionType% AND Action_date BETWEEN @Start_date AND @End_date", Connection);
+            query1.Parameters.AddWithValue("@ActionType", "Made Reservation");
+            query1.Parameters.AddWithValue("@Start_date", Start_date.Date);
+            query1.Parameters.AddWithValue("@End_date", End_date.Date);
+            Num_Reservations = Convert.ToInt32(query1.ExecuteScalar());
+            {
+                Connection.Close();
+            }
+        }
+        public void Calculate_num_cancellations()
+        {
+            if (Connection.State == ConnectionState.Closed)
+            {
+                Connection.Open();
+            }
+            SqlCommand query1 = new SqlCommand("Select Count(*) From Logs Where Action_type Like @ActionType% AND Action_date BETWEEN @Start_date AND @End_date", Connection);
+            query1.Parameters.AddWithValue("@ActionType", "Cancelled");
+            query1.Parameters.AddWithValue("@Start_date", Start_date.Date);
+            query1.Parameters.AddWithValue("@End_date", End_date.Date);
+            Num_Cancellations = Convert.ToInt32(query1.ExecuteScalar());
+            if (Connection.State == ConnectionState.Open)
+            {
+                Connection.Close();
+            }
+        }
+        public void ExportFile()
+        {
+            StreamWriter writer = new StreamWriter(@"C:\Users\peterschubert\Documents\FilesTest\Customer.txt");
+            writer.WriteLine($"Customer Summary from {Start_date.ToShortDateString()} to {End_date.ToShortDateString()}");
+            writer.WriteLine($"Number of Repeat Customers : {Repeat_customers} repeat customers");
+            writer.WriteLine($"Perecentage of Repeat Customers : {Convert.ToInt32((Repeat_customers/ Convert.ToDouble(Total_Num_Customers))*100)} %");
+            writer.WriteLine($"Number of Reservations Made: {Num_Reservations} reservations");
+            writer.WriteLine($"Number of Cancellations: {Num_Cancellations} cancellations");
+        }
+
+
 
     }
 }
