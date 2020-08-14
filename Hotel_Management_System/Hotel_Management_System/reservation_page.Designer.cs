@@ -48,6 +48,8 @@
             this.startDatePicker = new System.Windows.Forms.DateTimePicker();
             this.numberOfGuestsBox = new System.Windows.Forms.NumericUpDown();
             this.ReservationDataGridView = new System.Windows.Forms.DataGridView();
+            this.Customer_Id_textbox = new System.Windows.Forms.TextBox();
+            this.label1 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.numberOfGuestsBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ReservationDataGridView)).BeginInit();
             this.SuspendLayout();
@@ -59,7 +61,7 @@
             "testItem",
             "testItem_2"});
             this.hotelLocationBox.Location = new System.Drawing.Point(300, 350);
-            this.hotelLocationBox.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.hotelLocationBox.Margin = new System.Windows.Forms.Padding(6);
             this.hotelLocationBox.Name = "hotelLocationBox";
             this.hotelLocationBox.Size = new System.Drawing.Size(320, 33);
             this.hotelLocationBox.TabIndex = 3;
@@ -72,7 +74,7 @@
             "testItem",
             "testItem2"});
             this.roomTypeBox.Location = new System.Drawing.Point(300, 413);
-            this.roomTypeBox.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.roomTypeBox.Margin = new System.Windows.Forms.Padding(6);
             this.roomTypeBox.Name = "roomTypeBox";
             this.roomTypeBox.Size = new System.Drawing.Size(280, 33);
             this.roomTypeBox.TabIndex = 4;
@@ -81,7 +83,7 @@
             // creditCardNumberBox
             // 
             this.creditCardNumberBox.Location = new System.Drawing.Point(300, 546);
-            this.creditCardNumberBox.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.creditCardNumberBox.Margin = new System.Windows.Forms.Padding(6);
             this.creditCardNumberBox.Name = "creditCardNumberBox";
             this.creditCardNumberBox.Size = new System.Drawing.Size(354, 31);
             this.creditCardNumberBox.TabIndex = 6;
@@ -122,7 +124,7 @@
             // reservationIdBox
             // 
             this.reservationIdBox.Location = new System.Drawing.Point(1038, 665);
-            this.reservationIdBox.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.reservationIdBox.Margin = new System.Windows.Forms.Padding(6);
             this.reservationIdBox.Name = "reservationIdBox";
             this.reservationIdBox.Size = new System.Drawing.Size(358, 31);
             this.reservationIdBox.TabIndex = 10;
@@ -131,7 +133,7 @@
             // submitUpdateButton
             // 
             this.submitUpdateButton.Location = new System.Drawing.Point(270, 617);
-            this.submitUpdateButton.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.submitUpdateButton.Margin = new System.Windows.Forms.Padding(6);
             this.submitUpdateButton.Name = "submitUpdateButton";
             this.submitUpdateButton.Size = new System.Drawing.Size(206, 44);
             this.submitUpdateButton.TabIndex = 7;
@@ -142,7 +144,7 @@
             // cancelButton
             // 
             this.cancelButton.Location = new System.Drawing.Point(508, 617);
-            this.cancelButton.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.cancelButton.Margin = new System.Windows.Forms.Padding(6);
             this.cancelButton.Name = "cancelButton";
             this.cancelButton.Size = new System.Drawing.Size(150, 44);
             this.cancelButton.TabIndex = 8;
@@ -153,7 +155,7 @@
             // reservationSearchButton
             // 
             this.reservationSearchButton.Location = new System.Drawing.Point(1134, 731);
-            this.reservationSearchButton.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.reservationSearchButton.Margin = new System.Windows.Forms.Padding(6);
             this.reservationSearchButton.Name = "reservationSearchButton";
             this.reservationSearchButton.Size = new System.Drawing.Size(150, 44);
             this.reservationSearchButton.TabIndex = 11;
@@ -224,7 +226,7 @@
             // endDatePicker
             // 
             this.endDatePicker.Location = new System.Drawing.Point(300, 283);
-            this.endDatePicker.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.endDatePicker.Margin = new System.Windows.Forms.Padding(6);
             this.endDatePicker.Name = "endDatePicker";
             this.endDatePicker.Size = new System.Drawing.Size(388, 31);
             this.endDatePicker.TabIndex = 2;
@@ -233,7 +235,7 @@
             // startDatePicker
             // 
             this.startDatePicker.Location = new System.Drawing.Point(300, 215);
-            this.startDatePicker.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.startDatePicker.Margin = new System.Windows.Forms.Padding(6);
             this.startDatePicker.Name = "startDatePicker";
             this.startDatePicker.Size = new System.Drawing.Size(388, 31);
             this.startDatePicker.TabIndex = 1;
@@ -242,7 +244,7 @@
             // numberOfGuestsBox
             // 
             this.numberOfGuestsBox.Location = new System.Drawing.Point(300, 483);
-            this.numberOfGuestsBox.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.numberOfGuestsBox.Margin = new System.Windows.Forms.Padding(6);
             this.numberOfGuestsBox.Name = "numberOfGuestsBox";
             this.numberOfGuestsBox.Size = new System.Drawing.Size(64, 31);
             this.numberOfGuestsBox.TabIndex = 5;
@@ -261,11 +263,31 @@
             this.ReservationDataGridView.Size = new System.Drawing.Size(657, 395);
             this.ReservationDataGridView.TabIndex = 12;
             // 
+            // Customer_Id_textbox
+            // 
+            this.Customer_Id_textbox.Location = new System.Drawing.Point(300, 145);
+            this.Customer_Id_textbox.Margin = new System.Windows.Forms.Padding(6);
+            this.Customer_Id_textbox.Name = "Customer_Id_textbox";
+            this.Customer_Id_textbox.Size = new System.Drawing.Size(354, 31);
+            this.Customer_Id_textbox.TabIndex = 13;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(150, 151);
+            this.label1.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(130, 25);
+            this.label1.TabIndex = 14;
+            this.label1.Text = "Customer ID";
+            // 
             // reservation_page
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1552, 931);
+            this.Controls.Add(this.label1);
+            this.Controls.Add(this.Customer_Id_textbox);
             this.Controls.Add(this.ReservationDataGridView);
             this.Controls.Add(this.numberOfGuestsBox);
             this.Controls.Add(this.startDatePicker);
@@ -286,7 +308,7 @@
             this.Controls.Add(this.hotelLocationBox);
             this.Controls.Add(this.creditCardNumberBox);
             this.Controls.Add(this.reservationIdBox);
-            this.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.Margin = new System.Windows.Forms.Padding(6);
             this.Name = "reservation_page";
             this.Text = "reservation_page";
             ((System.ComponentModel.ISupportInitialize)(this.numberOfGuestsBox)).EndInit();
@@ -317,5 +339,7 @@
         private System.Windows.Forms.DateTimePicker startDatePicker;
         private System.Windows.Forms.NumericUpDown numberOfGuestsBox;
         private System.Windows.Forms.DataGridView ReservationDataGridView;
+        private System.Windows.Forms.TextBox Customer_Id_textbox;
+        private System.Windows.Forms.Label label1;
     }
 }
