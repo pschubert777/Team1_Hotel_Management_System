@@ -232,16 +232,55 @@ namespace Hotel_Management_System
 
         public void book_reservation(string result, string user_type, int user_id)
         {
-           
-            if (result == "Yes" && Check_rewards_enough(user_id))
+            double total_Room_Cost = 0,discount = 1;
+            int date_difference = Convert.ToInt32((startDate.Date - endDate.Date).TotalDays);
+            int total_points_earned = date_difference * 25;
+            bool enough_rewards = Check_rewards_enough(user_id);
+            SqlConnection Connection = new SqlConnection(@"Data Source=(localdb)\ProjectsV13;Initial Catalog=Hotel_Entity_Relationship_System;Integrated Security=True;Connect Timeout=60;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False");
+            
+            
+            
+            if (Connection.State == ConnectionState.Closed)
             {
-               // NEED TO FINISH
+                Connection.Open();
+            }
+
+            SqlCommand query = new SqlCommand("Select distinct Monetary_cost from Room  where Room_type = @Type", Connection);
+            query.Parameters.AddWithValue("@Type", roomType);
+            total_Room_Cost = Convert.ToDouble(query.ExecuteScalar());
+
+            SqlCommand query1 = new SqlCommand("Update Customer  SET Reward_Points + @NumPoints Where Id =@CustomerId", Connection);
+            query1.Parameters.AddWithValue("@NumPoints", (result == "Yes" && enough_rewards) ? total_points_earned - 50 : total_points_earned);
+            query1.Parameters.AddWithValue("@CustomerId", user_id);
+            total_Room_Cost = Convert.ToDouble(query1.ExecuteScalar());
+
+            if (Connection.State == ConnectionState.Open)
+            {
+                Connection.Close();
+            }
+
+
+
+
+         
+                // 10% of the original price  is total price *.9
+                if (result == "Yes" && Check_rewards_enough(user_id)) 
+                 { 
+                discount = 0.9;
+                
+                 
               
+
+
             }
             else
             {
 
             }
+
+            total_Room_Cost= total_Room_Cost* discount;
+
+          
 
 
 
