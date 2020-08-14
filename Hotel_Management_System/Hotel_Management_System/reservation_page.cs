@@ -245,7 +245,7 @@ namespace Hotel_Management_System
 
             // 10% of the original price  is total price *.9
             if (result == "Yes" && enough_rewards) { discount = 0.9; }
-            total_Room_Cost = total_Room_Cost * discount;
+            
 
             if (Connection.State == ConnectionState.Closed)
             {
@@ -259,32 +259,32 @@ namespace Hotel_Management_System
             SqlCommand query1 = new SqlCommand("Update Customer  SET Reward_Points + @NumPoints Where Id =@CustomerId", Connection);
             query1.Parameters.AddWithValue("@NumPoints", (result == "Yes" && enough_rewards) ? total_points_earned - 50 : total_points_earned);
             query1.Parameters.AddWithValue("@CustomerId", user_id);
-            total_Room_Cost = Convert.ToDouble(query1.ExecuteScalar());
+            query1.ExecuteNonQuery();
 
-            SqlCommand query2 = new SqlCommand("Insert into Reservation(Room_type, Num_guests, Start_date, End_date, Hotel_location_Id, Points_earned) Values(@UserID, @NumGuests, @Startdate, @EndDate, @HotelID, @PointsEarned)", Connection);
+            // insert reservation information and return the reservation id to insert into transaction
+            SqlCommand query2 = new SqlCommand("Insert into Reservation(Room_type, Num_guests, Start_date, End_date, Hotel_location_Id, Points_earned) OUTPUT Inserted.ID Values(@UserID, @NumGuests, @Startdate, @EndDate, @HotelID, @PointsEarned)", Connection);
             query2.Parameters.AddWithValue("@UserID", user_id);
             query2.Parameters.AddWithValue("@NumGuests", numGuests);
             query2.Parameters.AddWithValue("@Startdate", startDate);
             query2.Parameters.AddWithValue("@EndDate", endDate);
             query2.Parameters.AddWithValue("@HotelID", hotel_id);
             query2.Parameters.AddWithValue("@PointsEarned", total_points_earned);
+            int reservation_id = Convert.ToInt32(query2.ExecuteScalar());
+
+            SqlCommand query3 = new SqlCommand("Insert into Transactions (Reservation_Id, Customer_Id, Reward_points_spent, Money_spent, Activity_type, Reward_points_gained, Transaction_date) Values (@ReservationID, @CustomerID, @RewardsSpent, @MoneySpent, @ActivityType, @RewardsGained, @TransactionDate", Connection);
+            query3.Parameters.AddWithValue("@ReservationID", reservation_id);
+            query3.Parameters.AddWithValue("@CustomerID", user_id);
+            query3.Parameters.AddWithValue("@RewardsSpent", (result == "Yes" && enough_rewards) ? 50: 0);
+            query3.Parameters.AddWithValue("@MoneySpent", total_Room_Cost *= discount);
+            query3.Parameters.AddWithValue("@RewardsGained",total_points_earned);
+            query3.Parameters.AddWithValue("@TransactionDate", DateTime.Now.Date);
+
+
+
             if (Connection.State == ConnectionState.Open)
             {
                 Connection.Close();
             }
-
-
-
-
-         
-               
-               
-          
-
-         
-
-          
-
 
 
         }
