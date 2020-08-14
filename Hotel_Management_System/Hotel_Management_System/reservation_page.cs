@@ -53,7 +53,7 @@ namespace Hotel_Management_System
 
         private void numberOfGuestsBox_ValueChanged(object sender, EventArgs e)
         {
-            try { res.numGuests = numberOfGuestsBox.Value; }
+            try { res.numGuests = Convert.ToInt32(numberOfGuestsBox.Value); }
             catch (FormatException _e) { Console.WriteLine(_e.Message); }
         }
 
@@ -86,10 +86,10 @@ namespace Hotel_Management_System
                     switch (user_type)
                     {
                         case "Customer":
-                            res.book_reservation(useRewards, user_type, user_id);
+                            res.book_reservation(useRewards,  user_id);
                             break;
                         default:
-                            res.book_reservation(useRewards, user_type, 0);
+                            res.book_reservation(useRewards, 0);
                             break;
                     }//*****PlaceHolder NEED to come up with functionality to retrieve Customer ID if user is EMPLOYEE
 
@@ -173,7 +173,7 @@ namespace Hotel_Management_System
         public DateTime endDate { get; set; }
         public int hotel_id { get; set; }
         public string roomType { get; set; }
-        public decimal numGuests { get; set; }
+        public int numGuests { get; set; }
         public int cardNum { get; set; }
 
         public int Third_party_id { get; set; } = -1;
@@ -230,16 +230,23 @@ namespace Hotel_Management_System
         }
 
 
-        public void book_reservation(string result, string user_type, int user_id)
-        {
+        public void book_reservation(string result, int user_id)
+        {   // discount 1 =100%, 0.9 = 90% of the original
             double total_Room_Cost = 0,discount = 1;
+            // get the number of nights 
             int date_difference = Convert.ToInt32((startDate.Date - endDate.Date).TotalDays);
+
+            //25 points earned a night
             int total_points_earned = date_difference * 25;
+
+            // check if user has enough points 
             bool enough_rewards = Check_rewards_enough(user_id);
             SqlConnection Connection = new SqlConnection(@"Data Source=(localdb)\ProjectsV13;Initial Catalog=Hotel_Entity_Relationship_System;Integrated Security=True;Connect Timeout=60;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False");
-            
-            
-            
+
+            // 10% of the original price  is total price *.9
+            if (result == "Yes" && enough_rewards) { discount = 0.9; }
+            total_Room_Cost = total_Room_Cost * discount;
+
             if (Connection.State == ConnectionState.Closed)
             {
                 Connection.Open();
@@ -254,6 +261,13 @@ namespace Hotel_Management_System
             query1.Parameters.AddWithValue("@CustomerId", user_id);
             total_Room_Cost = Convert.ToDouble(query1.ExecuteScalar());
 
+            SqlCommand query2 = new SqlCommand("Insert into Reservation(Room_type, Num_guests, Start_date, End_date, Hotel_location_Id, Points_earned) Values(@UserID, @NumGuests, @Startdate, @EndDate, @HotelID, @PointsEarned)", Connection);
+            query2.Parameters.AddWithValue("@UserID", user_id);
+            query2.Parameters.AddWithValue("@NumGuests", numGuests);
+            query2.Parameters.AddWithValue("@Startdate", startDate);
+            query2.Parameters.AddWithValue("@EndDate", endDate);
+            query2.Parameters.AddWithValue("@HotelID", hotel_id);
+            query2.Parameters.AddWithValue("@PointsEarned", total_points_earned);
             if (Connection.State == ConnectionState.Open)
             {
                 Connection.Close();
@@ -263,22 +277,11 @@ namespace Hotel_Management_System
 
 
          
-                // 10% of the original price  is total price *.9
-                if (result == "Yes" && Check_rewards_enough(user_id)) 
-                 { 
-                discount = 0.9;
-                
-                 
-              
+               
+               
+          
 
-
-            }
-            else
-            {
-
-            }
-
-            total_Room_Cost= total_Room_Cost* discount;
+         
 
           
 
