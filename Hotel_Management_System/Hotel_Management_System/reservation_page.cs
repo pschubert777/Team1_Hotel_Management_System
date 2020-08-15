@@ -24,6 +24,21 @@ namespace Hotel_Management_System
         Reservation res = new Reservation();
         private string reservationSearchID { get; set; }
 
+        private void clear()
+        {
+            if(user_type == "Employee")
+            {
+                Customer_Id_textbox.Text = string.Empty;
+            }
+            hotelLocationBox.Text = string.Empty;
+            roomTypeBox.Text = string.Empty;
+            numberOfGuestsBox.Value = 0;
+            creditCardNumberBox.Text = string.Empty;
+
+            startDatePicker.Value = DateTime.Now.Date;
+            endDatePicker.Value = DateTime.Now.Date;
+        }
+
         // Fill Combo box
 
         // Hotel Combo Box
@@ -167,11 +182,11 @@ namespace Hotel_Management_System
             {
                 try
                 {
-                    //test line to show values when submitted. delete before turning in
-                    MessageBox.Show(res.startDate.ToString() + "\n" + res.endDate.ToString() + "\n" + res.hotel_id + "\n" + res.roomType + "\n" + res.numGuests + "\n" + res.cardNum);
+                    
+                    
                     //reward points dialogue box
                     //only show this if user has at least 50 reward points
-                    //res.DetermineAvailability();
+                    res.DetermineAvailability();
                     var confirmRewards = MessageBox.Show("Would you like to use 50 reward points to get a 10% discount?", "Reward Points", MessageBoxButtons.YesNo);
 
                     string useRewards = ""; ;
@@ -193,6 +208,8 @@ namespace Hotel_Management_System
                     MessageBox.Show(error.Message);
                 }
             }
+
+            clear();
         }
 
         private void cancelButton_Click(object sender, EventArgs e)
@@ -262,7 +279,8 @@ namespace Hotel_Management_System
 
         private void Customer_Id_textbox_TextChanged(object sender, EventArgs e)
         {
-            customer_id_employee = Convert.ToInt32(Customer_Id_textbox.Text);
+            if(Customer_Id_textbox.Text != string.Empty) { customer_id_employee = Convert.ToInt32(Customer_Id_textbox.Text); }
+            
         }
     }
 
@@ -291,7 +309,7 @@ namespace Hotel_Management_System
             }
 
 
-            for (var individual_date = startDate; individual_date <= endDate; individual_date.AddDays(1))
+            for (var individual_date = startDate; individual_date <= endDate;  individual_date = individual_date.AddDays(1))
             {
                 try
                 {

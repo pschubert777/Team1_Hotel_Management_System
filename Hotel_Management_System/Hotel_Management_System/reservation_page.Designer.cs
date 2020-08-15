@@ -131,7 +131,7 @@
             this.submitUpdateButton.Name = "submitUpdateButton";
             this.submitUpdateButton.Size = new System.Drawing.Size(206, 44);
             this.submitUpdateButton.TabIndex = 7;
-            this.submitUpdateButton.Text = "Submit / Update";
+            this.submitUpdateButton.Text = "Submit";
             this.submitUpdateButton.UseVisualStyleBackColor = true;
             this.submitUpdateButton.Click += new System.EventHandler(this.submitUpdateButton_Click);
             // 
