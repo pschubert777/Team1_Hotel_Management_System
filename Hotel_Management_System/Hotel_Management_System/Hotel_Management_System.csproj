@@ -76,13 +76,6 @@
     <Compile Include="frmLogin.designer.cs">
       <DependentUpon>frmLogin.cs</DependentUpon>
     </Compile>
-    <Compile Include="Display_Logs.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Display_Logs.Designer.cs">
-      <DependentUpon>Display_Logs.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Logging.cs" />
     <Compile Include="MetricsClasses.cs" />
     <Compile Include="Metrics_Page.cs">
       <SubType>Form</SubType>
@@ -97,12 +90,6 @@
     </Compile>
     <Compile Include="reservation_page.Designer.cs">
       <DependentUpon>reservation_page.cs</DependentUpon>
-    </Compile>
-    <Compile Include="rewards_page.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="rewards_page.Designer.cs">
-      <DependentUpon>rewards_page.cs</DependentUpon>
     </Compile>
     <Compile Include="room_management_page.cs">
       <SubType>Form</SubType>
@@ -124,8 +111,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmLogin.resx">
       <DependentUpon>frmLogin.cs</DependentUpon>
-    <EmbeddedResource Include="Display_Logs.resx">
-      <DependentUpon>Display_Logs.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Metrics_Page.resx">
       <DependentUpon>Metrics_Page.cs</DependentUpon>
@@ -141,9 +126,6 @@
     </Compile>
     <EmbeddedResource Include="reservation_page.resx">
       <DependentUpon>reservation_page.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="rewards_page.resx">
-      <DependentUpon>rewards_page.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="room_management_page.resx">
       <DependentUpon>room_management_page.cs</DependentUpon>

@@ -57,7 +57,7 @@
             this.hotelLocationBox.Items.AddRange(new object[] {
             "testItem",
             "testItem_2"});
-            this.hotelLocationBox.Location = new System.Drawing.Point(145, 203);
+            this.hotelLocationBox.Location = new System.Drawing.Point(150, 182);
             this.hotelLocationBox.Name = "hotelLocationBox";
             this.hotelLocationBox.Size = new System.Drawing.Size(162, 21);
             this.hotelLocationBox.TabIndex = 3;
@@ -69,7 +69,7 @@
             this.roomTypeBox.Items.AddRange(new object[] {
             "testItem",
             "testItem2"});
-            this.roomTypeBox.Location = new System.Drawing.Point(145, 236);
+            this.roomTypeBox.Location = new System.Drawing.Point(150, 215);
             this.roomTypeBox.Name = "roomTypeBox";
             this.roomTypeBox.Size = new System.Drawing.Size(142, 21);
             this.roomTypeBox.TabIndex = 4;
@@ -77,7 +77,7 @@
             // 
             // creditCardNumberBox
             // 
-            this.creditCardNumberBox.Location = new System.Drawing.Point(145, 305);
+            this.creditCardNumberBox.Location = new System.Drawing.Point(150, 284);
             this.creditCardNumberBox.Name = "creditCardNumberBox";
             this.creditCardNumberBox.Size = new System.Drawing.Size(179, 20);
             this.creditCardNumberBox.TabIndex = 6;
@@ -130,7 +130,7 @@
             // 
             // submitUpdateButton
             // 
-            this.submitUpdateButton.Location = new System.Drawing.Point(130, 342);
+            this.submitUpdateButton.Location = new System.Drawing.Point(135, 321);
             this.submitUpdateButton.Name = "submitUpdateButton";
             this.submitUpdateButton.Size = new System.Drawing.Size(103, 23);
             this.submitUpdateButton.TabIndex = 7;
@@ -140,7 +140,7 @@
             // 
             // cancelButton
             // 
-            this.cancelButton.Location = new System.Drawing.Point(249, 342);
+            this.cancelButton.Location = new System.Drawing.Point(254, 321);
             this.cancelButton.Name = "cancelButton";
             this.cancelButton.Size = new System.Drawing.Size(75, 23);
             this.cancelButton.TabIndex = 8;
@@ -161,7 +161,7 @@
             // startDateLabel
             // 
             this.startDateLabel.AutoSize = true;
-            this.startDateLabel.Location = new System.Drawing.Point(84, 137);
+            this.startDateLabel.Location = new System.Drawing.Point(89, 116);
             this.startDateLabel.Name = "startDateLabel";
             this.startDateLabel.Size = new System.Drawing.Size(55, 13);
             this.startDateLabel.TabIndex = 9;
@@ -170,7 +170,7 @@
             // hotelLocationLabel
             // 
             this.hotelLocationLabel.AutoSize = true;
-            this.hotelLocationLabel.Location = new System.Drawing.Point(63, 206);
+            this.hotelLocationLabel.Location = new System.Drawing.Point(68, 185);
             this.hotelLocationLabel.Name = "hotelLocationLabel";
             this.hotelLocationLabel.Size = new System.Drawing.Size(76, 13);
             this.hotelLocationLabel.TabIndex = 9;
@@ -179,7 +179,7 @@
             // roomTypeLabel
             // 
             this.roomTypeLabel.AutoSize = true;
-            this.roomTypeLabel.Location = new System.Drawing.Point(77, 239);
+            this.roomTypeLabel.Location = new System.Drawing.Point(82, 218);
             this.roomTypeLabel.Name = "roomTypeLabel";
             this.roomTypeLabel.Size = new System.Drawing.Size(62, 13);
             this.roomTypeLabel.TabIndex = 9;
@@ -188,7 +188,7 @@
             // numberOfGuestsLabel
             // 
             this.numberOfGuestsLabel.AutoSize = true;
-            this.numberOfGuestsLabel.Location = new System.Drawing.Point(47, 274);
+            this.numberOfGuestsLabel.Location = new System.Drawing.Point(52, 253);
             this.numberOfGuestsLabel.Name = "numberOfGuestsLabel";
             this.numberOfGuestsLabel.Size = new System.Drawing.Size(92, 13);
             this.numberOfGuestsLabel.TabIndex = 9;
@@ -197,7 +197,7 @@
             // cardNumberLabel
             // 
             this.cardNumberLabel.AutoSize = true;
-            this.cardNumberLabel.Location = new System.Drawing.Point(70, 308);
+            this.cardNumberLabel.Location = new System.Drawing.Point(75, 287);
             this.cardNumberLabel.Name = "cardNumberLabel";
             this.cardNumberLabel.Size = new System.Drawing.Size(69, 13);
             this.cardNumberLabel.TabIndex = 9;
@@ -206,7 +206,7 @@
             // endDateLabel
             // 
             this.endDateLabel.AutoSize = true;
-            this.endDateLabel.Location = new System.Drawing.Point(87, 172);
+            this.endDateLabel.Location = new System.Drawing.Point(92, 151);
             this.endDateLabel.Name = "endDateLabel";
             this.endDateLabel.Size = new System.Drawing.Size(52, 13);
             this.endDateLabel.TabIndex = 9;
@@ -214,7 +214,7 @@
             // 
             // endDatePicker
             // 
-            this.endDatePicker.Location = new System.Drawing.Point(145, 168);
+            this.endDatePicker.Location = new System.Drawing.Point(150, 147);
             this.endDatePicker.Name = "endDatePicker";
             this.endDatePicker.Size = new System.Drawing.Size(196, 20);
             this.endDatePicker.TabIndex = 2;
@@ -222,7 +222,7 @@
             // 
             // startDatePicker
             // 
-            this.startDatePicker.Location = new System.Drawing.Point(145, 133);
+            this.startDatePicker.Location = new System.Drawing.Point(150, 112);
             this.startDatePicker.Name = "startDatePicker";
             this.startDatePicker.Size = new System.Drawing.Size(196, 20);
             this.startDatePicker.TabIndex = 1;
@@ -230,10 +230,11 @@
             // 
             // numberOfGuestsBox
             // 
-            this.numberOfGuestsBox.Location = new System.Drawing.Point(145, 272);
+            this.numberOfGuestsBox.Location = new System.Drawing.Point(150, 251);
             this.numberOfGuestsBox.Name = "numberOfGuestsBox";
             this.numberOfGuestsBox.Size = new System.Drawing.Size(32, 20);
             this.numberOfGuestsBox.TabIndex = 5;
+            this.numberOfGuestsBox.ValueChanged += new System.EventHandler(this.numberOfGuestsBox_ValueChanged);
             // 
             // reservation_page
             // 

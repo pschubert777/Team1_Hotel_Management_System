@@ -67,7 +67,6 @@
     <Build Include="Logs.sql" />
     <Build Include="Package.sql" />
     <Build Include="Maintenance.sql" />
-    <Build Include="Occupied_Rooms.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="Hotel_Entity_Relationship_System.refactorlog" />
