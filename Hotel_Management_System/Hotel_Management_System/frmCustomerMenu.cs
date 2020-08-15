@@ -33,5 +33,13 @@ namespace AccountManagementInterface
             this.Hide();
             objFrmLogin.Show();
         }
+
+
+        private void btnActivityLog_Click_1(object sender, EventArgs e)
+        {
+            Hotel_Management_System.Display_Logs dl = new Hotel_Management_System.Display_Logs();
+            this.Hide();
+            dl.Show();
+        }
     }
 }

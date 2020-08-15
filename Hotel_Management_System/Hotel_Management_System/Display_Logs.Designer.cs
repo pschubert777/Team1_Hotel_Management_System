@@ -34,10 +34,11 @@
             this.Generate_Report_Button = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.Start_date_label = new System.Windows.Forms.Label();
-            this.listBox1 = new System.Windows.Forms.ListBox();
-            this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
-            this.logResults = new System.Windows.Forms.ListBox();
+            this.logResults = new System.Windows.Forms.ListView();
+            this.ActionDate = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.ActionType = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.userInfo = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // start_date_picker
@@ -107,26 +108,6 @@
             this.Start_date_label.TabIndex = 13;
             this.Start_date_label.Text = "Start Date";
             // 
-            // listBox1
-            // 
-            this.listBox1.FormattingEnabled = true;
-            this.listBox1.Location = new System.Drawing.Point(474, 97);
-            this.listBox1.Name = "listBox1";
-            this.listBox1.Size = new System.Drawing.Size(226, 238);
-            this.listBox1.TabIndex = 19;
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(470, 74);
-            this.label2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(149, 20);
-            this.label2.TabIndex = 20;
-            this.label2.Text = "Reservation Logs";
-            this.label2.Click += new System.EventHandler(this.label2_Click);
-            // 
             // label3
             // 
             this.label3.AutoSize = true;
@@ -134,28 +115,52 @@
             this.label3.Location = new System.Drawing.Point(212, 74);
             this.label3.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(119, 20);
+            this.label3.Size = new System.Drawing.Size(48, 20);
             this.label3.TabIndex = 22;
-            this.label3.Text = "Account Logs";
+            this.label3.Text = "Logs";
             // 
             // logResults
             // 
-            this.logResults.FormattingEnabled = true;
+            this.logResults.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.ActionDate,
+            this.ActionType});
+            this.logResults.HideSelection = false;
             this.logResults.Location = new System.Drawing.Point(216, 97);
             this.logResults.Name = "logResults";
-            this.logResults.Size = new System.Drawing.Size(238, 238);
-            this.logResults.TabIndex = 21;
-            this.logResults.SelectedIndexChanged += new System.EventHandler(this.listBox2_SelectedIndexChanged);
+            this.logResults.Size = new System.Drawing.Size(561, 246);
+            this.logResults.TabIndex = 23;
+            this.logResults.UseCompatibleStateImageBehavior = false;
+            this.logResults.View = System.Windows.Forms.View.Details;
+            // 
+            // ActionDate
+            // 
+            this.ActionDate.Text = "Action Date";
+            this.ActionDate.Width = 96;
+            // 
+            // ActionType
+            // 
+            this.ActionType.Text = "Action Type";
+            this.ActionType.Width = 186;
+            // 
+            // userInfo
+            // 
+            this.userInfo.AutoSize = true;
+            this.userInfo.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.userInfo.Location = new System.Drawing.Point(212, 28);
+            this.userInfo.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.userInfo.Name = "userInfo";
+            this.userInfo.Size = new System.Drawing.Size(76, 20);
+            this.userInfo.TabIndex = 24;
+            this.userInfo.Text = "userInfo";
             // 
             // Display_Logs
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Controls.Add(this.label3);
+            this.Controls.Add(this.userInfo);
             this.Controls.Add(this.logResults);
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.listBox1);
+            this.Controls.Add(this.label3);
             this.Controls.Add(this.start_date_picker);
             this.Controls.Add(this.end_date_picker);
             this.Controls.Add(this.back_menu_button);
@@ -177,9 +182,10 @@
         private System.Windows.Forms.Button Generate_Report_Button;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label Start_date_label;
-        private System.Windows.Forms.ListBox listBox1;
-        private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.ListBox logResults;
+        private System.Windows.Forms.ListView logResults;
+        private System.Windows.Forms.ColumnHeader ActionDate;
+        private System.Windows.Forms.ColumnHeader ActionType;
+        private System.Windows.Forms.Label userInfo;
     }
 }

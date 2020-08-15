@@ -1,9 +1,11 @@
-﻿using System;
+﻿using AccountManagementInterface;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Data.SqlClient;
 using System.Drawing;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -26,6 +28,10 @@ namespace Hotel_Management_System
         private void back_menu_button_Click(object sender, EventArgs e)
         {
 
+
+            frmCustomerMenu frmCustomerMenu = new frmCustomerMenu();
+            this.Hide();
+            frmCustomerMenu.Show();
         }
 
         private void listBox2_SelectedIndexChanged(object sender, EventArgs e)
@@ -81,9 +87,34 @@ namespace Hotel_Management_System
 
                 DataTable table = logging.displayLogs();
 
-                logResults.DisplayMember = "user_id";
-                logResults.ValueMember = "user_id";
-                logResults.DataSource = table;
+                DataGridView dgv = new DataGridView();
+
+               
+
+                /* logResults.DataSource = dgv
+
+
+                 logResults.Items.Add(dgv);*/
+
+                
+                
+
+                DataRow tempRow = null;
+
+                foreach (DataRow temp in table.Rows)
+                {
+
+                    tempRow = temp;
+
+                   
+                    ListViewItem item = new ListViewItem(tempRow["Action_date"].ToString());
+                    item.SubItems.Add(tempRow["Action_type"].ToString());
+
+
+                    logResults.Items.Add(item);
+                    
+                    
+                }
             }
         }
     }

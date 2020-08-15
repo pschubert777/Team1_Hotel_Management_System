@@ -82,6 +82,7 @@
     <Compile Include="frmLogin.designer.cs">
       <DependentUpon>frmLogin.cs</DependentUpon>
     </Compile>
+    <Compile Include="Logging.cs" />
     <Compile Include="MetricsClasses.cs" />
     <Compile Include="Metrics_Page.cs">
       <SubType>Form</SubType>
