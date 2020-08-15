@@ -314,6 +314,62 @@ namespace Hotel_Management_System
             if(Customer_Id_textbox.Text != string.Empty) { customer_id_employee = Convert.ToInt32(Customer_Id_textbox.Text); }
             
         }
+
+        private void ReservationDataGridView_DoubleClick(object sender, EventArgs e)
+        {
+            if(ReservationDataGridView.CurrentRow.Index >= 0)
+            {
+                
+                if( user_type == "Employee")
+                {
+                    Customer_Id_textbox.Text= ReservationDataGridView.CurrentRow.Cells[1].Value.ToString();
+                }
+                startDatePicker.Value = Convert.ToDateTime(ReservationDataGridView.CurrentRow.Cells[4].Value);
+                endDatePicker.Value = Convert.ToDateTime(ReservationDataGridView.CurrentRow.Cells[5].Value);
+                numberOfGuestsBox.Value = Convert.ToInt32(ReservationDataGridView.CurrentRow.Cells[3].Value);
+
+
+
+                // get the hotel id
+                int i = 0;
+                foreach(var item in hotelLocationBox.Items)
+                {
+                    
+                    string[] hotelId  = item.ToString().Split(' ');
+                    if (Convert.ToInt32(hotelId[0]) == Convert.ToInt32(ReservationDataGridView.CurrentRow.Cells[6].Value))
+                    {
+                        
+                        hotelLocationBox.Text = item.ToString();
+                        break;
+                    }
+                    i++;
+                }
+
+
+                i = 0;
+                foreach (var item in roomTypeBox.Items)
+                {
+
+                    string[] roomType = item.ToString().Split(' ');
+                    if (Convert.ToInt32(roomType[0]) == Convert.ToInt32(ReservationDataGridView.CurrentRow.Cells[2].Value))
+                    {
+                      roomTypeBox.Text= item.ToString();
+                        break;
+                    }
+                    i++;
+                }
+
+
+
+
+
+
+            }
+            else
+            {
+                MessageBox.Show("Index out of range");
+            }
+        }
     }
 
     public class Reservation

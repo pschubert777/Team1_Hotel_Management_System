@@ -50,6 +50,16 @@
             this.ReservationDataGridView = new System.Windows.Forms.DataGridView();
             this.Customer_Id_textbox = new System.Windows.Forms.TextBox();
             this.customerIDLabel = new System.Windows.Forms.Label();
+            this.Id = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Customer_Id = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Room_type = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Num_guests = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Start_date = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.End_date = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Hotel_location_Id = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Points_earned = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Third_party_Id = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Reservation_status = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.numberOfGuestsBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ReservationDataGridView)).BeginInit();
             this.SuspendLayout();
@@ -249,6 +259,17 @@
             this.ReservationDataGridView.AllowUserToAddRows = false;
             this.ReservationDataGridView.AllowUserToDeleteRows = false;
             this.ReservationDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.ReservationDataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.Id,
+            this.Customer_Id,
+            this.Room_type,
+            this.Num_guests,
+            this.Start_date,
+            this.End_date,
+            this.Hotel_location_Id,
+            this.Points_earned,
+            this.Third_party_Id,
+            this.Reservation_status});
             this.ReservationDataGridView.Location = new System.Drawing.Point(827, 145);
             this.ReservationDataGridView.Name = "ReservationDataGridView";
             this.ReservationDataGridView.ReadOnly = true;
@@ -256,6 +277,7 @@
             this.ReservationDataGridView.RowTemplate.Height = 33;
             this.ReservationDataGridView.Size = new System.Drawing.Size(1119, 395);
             this.ReservationDataGridView.TabIndex = 12;
+            this.ReservationDataGridView.DoubleClick += new System.EventHandler(this.ReservationDataGridView_DoubleClick);
             // 
             // Customer_Id_textbox
             // 
@@ -275,6 +297,96 @@
             this.customerIDLabel.Size = new System.Drawing.Size(130, 25);
             this.customerIDLabel.TabIndex = 14;
             this.customerIDLabel.Text = "Customer ID";
+            // 
+            // Id
+            // 
+            this.Id.DataPropertyName = "Id";
+            this.Id.HeaderText = "Reservation ID";
+            this.Id.MinimumWidth = 10;
+            this.Id.Name = "Id";
+            this.Id.ReadOnly = true;
+            this.Id.Width = 200;
+            // 
+            // Customer_Id
+            // 
+            this.Customer_Id.DataPropertyName = "Customer_Id";
+            this.Customer_Id.HeaderText = "Customer ID";
+            this.Customer_Id.MinimumWidth = 10;
+            this.Customer_Id.Name = "Customer_Id";
+            this.Customer_Id.ReadOnly = true;
+            this.Customer_Id.Width = 200;
+            // 
+            // Room_type
+            // 
+            this.Room_type.DataPropertyName = "Room_type";
+            this.Room_type.HeaderText = "Room Type";
+            this.Room_type.MinimumWidth = 10;
+            this.Room_type.Name = "Room_type";
+            this.Room_type.ReadOnly = true;
+            this.Room_type.Width = 200;
+            // 
+            // Num_guests
+            // 
+            this.Num_guests.DataPropertyName = "Num_guests";
+            this.Num_guests.HeaderText = "Number of Guests";
+            this.Num_guests.MinimumWidth = 10;
+            this.Num_guests.Name = "Num_guests";
+            this.Num_guests.ReadOnly = true;
+            this.Num_guests.Width = 200;
+            // 
+            // Start_date
+            // 
+            this.Start_date.DataPropertyName = "Start_date";
+            this.Start_date.HeaderText = "Start Date";
+            this.Start_date.MinimumWidth = 10;
+            this.Start_date.Name = "Start_date";
+            this.Start_date.ReadOnly = true;
+            this.Start_date.Width = 200;
+            // 
+            // End_date
+            // 
+            this.End_date.DataPropertyName = "End_date";
+            this.End_date.HeaderText = "End Date";
+            this.End_date.MinimumWidth = 10;
+            this.End_date.Name = "End_date";
+            this.End_date.ReadOnly = true;
+            this.End_date.Width = 200;
+            // 
+            // Hotel_location_Id
+            // 
+            this.Hotel_location_Id.DataPropertyName = "Hotel_location_Id";
+            this.Hotel_location_Id.HeaderText = "Hotel Location ID";
+            this.Hotel_location_Id.MinimumWidth = 10;
+            this.Hotel_location_Id.Name = "Hotel_location_Id";
+            this.Hotel_location_Id.ReadOnly = true;
+            this.Hotel_location_Id.Width = 200;
+            // 
+            // Points_earned
+            // 
+            this.Points_earned.DataPropertyName = "Points_earned";
+            this.Points_earned.HeaderText = "Points Earned";
+            this.Points_earned.MinimumWidth = 10;
+            this.Points_earned.Name = "Points_earned";
+            this.Points_earned.ReadOnly = true;
+            this.Points_earned.Width = 200;
+            // 
+            // Third_party_Id
+            // 
+            this.Third_party_Id.DataPropertyName = "Third_party_Id";
+            this.Third_party_Id.HeaderText = "Third Party ID";
+            this.Third_party_Id.MinimumWidth = 10;
+            this.Third_party_Id.Name = "Third_party_Id";
+            this.Third_party_Id.ReadOnly = true;
+            this.Third_party_Id.Width = 200;
+            // 
+            // Reservation_status
+            // 
+            this.Reservation_status.DataPropertyName = "Reservation_status";
+            this.Reservation_status.HeaderText = "Reservation Status";
+            this.Reservation_status.MinimumWidth = 10;
+            this.Reservation_status.Name = "Reservation_status";
+            this.Reservation_status.ReadOnly = true;
+            this.Reservation_status.Width = 200;
             // 
             // reservation_page
             // 
@@ -337,5 +449,15 @@
         private System.Windows.Forms.DataGridView ReservationDataGridView;
         private System.Windows.Forms.TextBox Customer_Id_textbox;
         private System.Windows.Forms.Label customerIDLabel;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Id;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Customer_Id;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Room_type;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Num_guests;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Start_date;
+        private System.Windows.Forms.DataGridViewTextBoxColumn End_date;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Hotel_location_Id;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Points_earned;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Third_party_Id;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Reservation_status;
     }
 }
