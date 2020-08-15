@@ -52,7 +52,13 @@
     <Compile Include="check_in_out_page.Designer.cs">
       <DependentUpon>check_in_out_page.cs</DependentUpon>
     </Compile>
-	 <Compile Include="frmCreateAccount.cs">
+    <Compile Include="Display_Logs.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Display_Logs.Designer.cs">
+      <DependentUpon>Display_Logs.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmCreateAccount.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="frmCreateAccount.designer.cs">
@@ -100,7 +106,10 @@
     <EmbeddedResource Include="check_in_out_page.resx">
       <DependentUpon>check_in_out_page.cs</DependentUpon>
     </EmbeddedResource>
-	  <EmbeddedResource Include="frmCreateAccount.resx">
+    <EmbeddedResource Include="Display_Logs.resx">
+      <DependentUpon>Display_Logs.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmCreateAccount.resx">
       <DependentUpon>frmCreateAccount.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmCustomerMenu.resx">
