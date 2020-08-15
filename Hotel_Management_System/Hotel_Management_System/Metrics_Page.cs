@@ -88,5 +88,35 @@ namespace Hotel_Management_System
         {
             MessageBox.Show("Invalid Data! Please Try Again!");
         }
+
+        private void Start_date_label_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void Metrics_Page_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void back_menu_button_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void start_date_picker_ValueChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void end_date_picker_ValueChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }
