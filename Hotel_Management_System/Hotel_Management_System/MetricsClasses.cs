@@ -133,7 +133,8 @@ namespace Hotel_Management_System
         public void Export_file()
         {
 
-            StreamWriter writer = new StreamWriter(@"C:\Users\peterschubert\Documents\FilesTest\Test.txt");
+            StreamWriter writer = new StreamWriter(@"C:\Users\peterschubert\Documents\FilesTest\RewardsSummary.txt");
+            writer.WriteLine($"Rewards Summary from {Start_date.ToShortDateString()} to {End_date.ToShortDateString()}");
             writer.WriteLine($"Rewards as of {Start_date}: {Rewards_outstanding_start_date}");
             writer.WriteLine($"Rewards as of {End_date}: {Rewards_outstanding_end_date}");
             writer.WriteLine($"Total Rewards Earned: {Rewards_earned}");
@@ -151,30 +152,39 @@ namespace Hotel_Management_System
     {
         private DateTime Start_date;
         private DateTime End_date;
-        private DateTime today_date;
+       // private DateTime today_date;
+        private int date_difference;
         private SqlConnection Connection;
 
         public int TotalRevenue { get; set; }
-        public double Rooms_Occupied;
-        public double Rooms_Unoccupied;
-        public double Rooms_Unoccupied_maintenance;
-        public int TotalRooms { get; set; }
+        public double TotalRooms { get; set; }
+        private double Total_rooms_Occupied;
+        private double Total_rooms_Unoccupied;
+        private double Total_rooms_Unoccupied_maintenance;
+        
 
         public OccupancySummary(DateTime start_date, DateTime end_date)
         {
             Start_date = start_date.Date;
             End_date = end_date.Date;
-            today_date = DateTime.Now.Date;
+            date_difference = (Start_date - End_date).Days;
+
+            //today_date = DateTime.Now.Date;
             Connection = new SqlConnection(@"Data Source=(localdb)\ProjectsV13;Initial Catalog=Hotel_Entity_Relationship_System;Integrated Security=True;Connect Timeout=60;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False");
+            Total_rooms_Occupied = 0;
+            Total_rooms_Unoccupied = 0;
+            Total_rooms_Unoccupied_maintenance = 0;
+            TotalRooms = 0;
            
             if (Connection.State == ConnectionState.Closed)
             {
                 Connection.Open();
             }
-
+            
             SqlCommand query1 = new SqlCommand("Select Count(*) From Room", Connection);
             TotalRooms = Convert.ToInt32(query1.ExecuteScalar());
 
+           
 
 
             if (Connection.State == ConnectionState.Open)
@@ -184,19 +194,34 @@ namespace Hotel_Management_System
 
         }
 
-        public void calculateRoomsOccupied()
+        public void calculateRoomsOccupied_Unoccupied()
         {
+            
             if (Connection.State == ConnectionState.Closed)
             {
                 Connection.Open();
             }
-            SqlCommand query1 = new SqlCommand("Select Count(*) from Reservation INNER Join Transaction on Reservation.Id = Transactions.Reservation_Id where Transactions.Transaction_date BETWEEN @StartDate AND @EndDate AND Reservation.Reservation_status <> @Status ");
-            query1.Parameters.AddWithValue("@Status", "Cancelled");
-            query1.Parameters.AddWithValue("@StartDate", Start_date);
-            query1.Parameters.AddWithValue("@EndDate", End_date);
-            Rooms_Occupied = Convert.ToInt32(query1.ExecuteScalar());
+            //SqlCommand query1 = new SqlCommand("Select Count(*) from Reservation INNER Join Transaction on Reservation.Id = Transactions.Reservation_Id where Transactions.Transaction_date BETWEEN @StartDate AND @EndDate AND Reservation.Reservation_status <> @Status ");
+            //query1.Parameters.AddWithValue("@Status", "Cancelled");
+            //query1.Parameters.AddWithValue("@StartDate", Start_date);
+            //query1.Parameters.AddWithValue("@EndDate", End_date);
+            //Rooms_Occupied = Convert.ToInt32(query1.ExecuteScalar());
 
+            for (var individual_date = Start_date; individual_date <= End_date; individual_date.AddDays(1))
+            {
+                SqlCommand query2 = new SqlCommand("Select Count(*) From Reservation where Reservation_status NOT LIKE @Status% AND @selectedDate Between Start_date and End_date", Connection);
+                query2.Parameters.AddWithValue("@Status", "Canceled");
+                query2.Parameters.AddWithValue("@selectedDate", individual_date);
 
+                int Rooms_Occupied = Convert.ToInt32(query2.ExecuteScalar());
+
+                Total_rooms_Unoccupied += Convert.ToDouble(TotalRooms -Rooms_Occupied);
+                Total_rooms_Occupied += Convert.ToDouble(Rooms_Occupied);
+            }
+            SqlCommand query3 = new SqlCommand("Select Count(*) From Maintenance where Date_maintenance BETWEEN @StartDate AND @Enddate", Connection);
+            query3.Parameters.AddWithValue("@StartDate", Start_date);
+            query3.Parameters.AddWithValue("@EndDate", End_date);
+            Total_rooms_Unoccupied_maintenance += Convert.ToDouble(query3.ExecuteScalar());
 
 
             if (Connection.State == ConnectionState.Open)
@@ -205,19 +230,6 @@ namespace Hotel_Management_System
             }
         }
 
-        public void calculateRoomsUnOccupied()
-        {
-            if (Connection.State == ConnectionState.Closed)
-            {
-                Connection.Open();
-            }
-
-
-            if (Connection.State == ConnectionState.Open)
-            {
-                Connection.Close();
-            }
-        }
 
         public void calculateTotalRevenue()
         {
@@ -237,6 +249,104 @@ namespace Hotel_Management_System
                 Connection.Close();
             }
         }
+
+
+        public void ExportFile()
+        {
+            StreamWriter writer = new StreamWriter(@"C:\Users\peterschubert\Documents\FilesTest\Occupancy.txt");
+            writer.WriteLine($"Occupancy Summary from {Start_date.ToShortDateString()} to {End_date.ToShortDateString()}");
+            writer.WriteLine($"Average Percentage of Occupied Rooms {((Total_rooms_Occupied/date_difference)/TotalRooms)*100}%");
+            writer.WriteLine($"Average Percentage of Unoccupied Rooms {((Total_rooms_Unoccupied / date_difference) / TotalRooms) * 100}%");
+            writer.WriteLine($"Average Percentage of Unoccupied Rooms due to maintenance {((Total_rooms_Unoccupied_maintenance/ date_difference) / TotalRooms) * 100}% ");
+        }
+
+    }
+
+    class CustomerSummary
+    {
+        private DateTime Start_date;
+        private DateTime End_date;
+
+        private SqlConnection Connection;
+
+        private int Repeat_customers;
+        private int Total_Num_Customers;
+        private int Num_Reservations;
+        private int Num_Cancellations;
+
+
+
+
+        CustomerSummary(DateTime start_date, DateTime end_date)
+        {
+            Start_date = start_date.Date;
+            End_date = end_date.Date;
+            Connection = new SqlConnection(@"Data Source=(localdb)\ProjectsV13;Initial Catalog=Hotel_Entity_Relationship_System;Integrated Security=True;Connect Timeout=60;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False");
+
+            Repeat_customers = 0;
+            Num_Reservations = 0;
+            Num_Cancellations = 0;
+        }
+        public void Caculate_Repeat_customer()
+        {
+            if (Connection.State == ConnectionState.Closed)
+            {
+                Connection.Open();
+            }
+            SqlCommand query1 = new SqlCommand("Select Count (Customer_Id) From Transactions Group BY Customer_Id Having Count(Id) >= @NUM_Id", Connection);
+            query1.Parameters.AddWithValue("@NUM_Id", 2);
+            Repeat_customers = Convert.ToInt32(query1.ExecuteScalar());
+
+            SqlCommand query2 = new SqlCommand("Select Count (*) From Customer", Connection);
+            Total_Num_Customers = Convert.ToInt32(query2.ExecuteScalar());
+
+            if (Connection.State == ConnectionState.Open)
+            {
+                Connection.Close();
+            }
+        }
+        public void Calculate_Reservations_made()
+        {
+            if (Connection.State == ConnectionState.Closed)
+            {
+                Connection.Open();
+            }
+            SqlCommand query1 = new SqlCommand("Select Count(*) From Logs Where Action_type Like @ActionType% AND Action_date BETWEEN @Start_date AND @End_date", Connection);
+            query1.Parameters.AddWithValue("@ActionType", "Made Reservation");
+            query1.Parameters.AddWithValue("@Start_date", Start_date.Date);
+            query1.Parameters.AddWithValue("@End_date", End_date.Date);
+            Num_Reservations = Convert.ToInt32(query1.ExecuteScalar());
+            {
+                Connection.Close();
+            }
+        }
+        public void Calculate_num_cancellations()
+        {
+            if (Connection.State == ConnectionState.Closed)
+            {
+                Connection.Open();
+            }
+            SqlCommand query1 = new SqlCommand("Select Count(*) From Logs Where Action_type Like @ActionType% AND Action_date BETWEEN @Start_date AND @End_date", Connection);
+            query1.Parameters.AddWithValue("@ActionType", "Cancelled");
+            query1.Parameters.AddWithValue("@Start_date", Start_date.Date);
+            query1.Parameters.AddWithValue("@End_date", End_date.Date);
+            Num_Cancellations = Convert.ToInt32(query1.ExecuteScalar());
+            if (Connection.State == ConnectionState.Open)
+            {
+                Connection.Close();
+            }
+        }
+        public void ExportFile()
+        {
+            StreamWriter writer = new StreamWriter(@"C:\Users\peterschubert\Documents\FilesTest\Customer.txt");
+            writer.WriteLine($"Customer Summary from {Start_date.ToShortDateString()} to {End_date.ToShortDateString()}");
+            writer.WriteLine($"Number of Repeat Customers : {Repeat_customers} repeat customers");
+            writer.WriteLine($"Perecentage of Repeat Customers : {Convert.ToInt32((Repeat_customers/ Convert.ToDouble(Total_Num_Customers))*100)} %");
+            writer.WriteLine($"Number of Reservations Made: {Num_Reservations} reservations");
+            writer.WriteLine($"Number of Cancellations: {Num_Cancellations} cancellations");
+        }
+
+
 
     }
 }

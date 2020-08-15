@@ -19,8 +19,7 @@ namespace Hotel_Management_System
             //comment out below lines to prevent a certain page from opening
             //Application.Run(new Metrics_Page());
             //reservation page will open after the metrics page closes
-            //Application.Run(new reservation_page());
-            Application.Run(new Display_Logs());
+
         }
     }
 }
