@@ -13,15 +13,103 @@ namespace Hotel_Management_System
 {
     public partial class reservation_page : Form
     {
+
+
         private int user_id { get; set; }
         private string user_type { get; set; }
 
+        // customer ID when the employee is the user
+        private int customer_id_employee { get; set; }
+
         Reservation res = new Reservation();
         private string reservationSearchID { get; set; }
+
+        // Fill Combo box
+
+        // Hotel Combo Box
+
+        private void Populate_hotel_combo_box()
+        {
+            using (SqlConnection Connection = new SqlConnection(@"Data Source=(localdb)\ProjectsV13;Initial Catalog=Hotel_Entity_Relationship_System;Integrated Security=True;Connect Timeout=60;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False"))
+            {
+                if (Connection.State == ConnectionState.Closed)
+                {
+                    Connection.Open();
+                }
+
+                using (SqlCommand query = new SqlCommand("Select * From Hotel", Connection))
+                {
+                    using (SqlDataReader x = query.ExecuteReader())
+                    {
+                        while (x.Read())
+                        {
+                            string hotel_id = x[0].ToString();
+                            string hotel_name = x[1].ToString();
+                            string hotel_location = x[2].ToString();
+
+                            string combined_data = $"{hotel_id} {hotel_name} {hotel_location}";
+                            hotelLocationBox.Items.Add(combined_data);
+                        }
+                    }
+                }
+
+                if (Connection.State == ConnectionState.Open)
+                {
+                    Connection.Close();
+                }
+            }
+
+        }
+
+        // Room type comBox
+
+        void populate_room_information()
+        {
+            using (SqlConnection Connection = new SqlConnection(@"Data Source=(localdb)\ProjectsV13;Initial Catalog=Hotel_Entity_Relationship_System;Integrated Security=True;Connect Timeout=60;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False"))
+            {
+                if (Connection.State == ConnectionState.Closed)
+                {
+                    Connection.Open();
+                }
+
+                using (SqlCommand query = new SqlCommand("Select Distinct Room_type From Room", Connection))
+                {
+                    using (SqlDataReader x = query.ExecuteReader())
+                    {
+                        while (x.Read())
+                        {
+                            string room_type = x[0].ToString();
+                          
+                            string combined_data = $"{room_type}";
+                            roomTypeBox.Items.Add(combined_data);
+                        }
+                    }
+                }
+
+                if (Connection.State == ConnectionState.Open)
+                {
+                    Connection.Close();
+                }
+            }
+        }
+
+
         public reservation_page()
         {
-            //default values
+            
             InitializeComponent();
+            Populate_hotel_combo_box();
+            populate_room_information();
+            user_id = 0;
+            user_type = "Employee";
+
+            if(user_type != "Employee")
+            {
+                Customer_Id_textbox.Visible = false;
+                customerIDLabel.Visible = false;
+            }
+            
+            // reservation object default values 
             res.startDate = startDatePicker.Value;
             res.endDate = endDatePicker.Value;
             res.hotel_id = 0;
@@ -30,21 +118,26 @@ namespace Hotel_Management_System
             res.cardNum = 0;
             res.Third_party_id = 0;
             reservationSearchID = "";
+
+
+
         }
 
         private void startDatePicker_ValueChanged(object sender, EventArgs e)
         {
-            res.startDate = startDatePicker.Value;
+            res.startDate = startDatePicker.Value.Date;
         }
 
         private void endDatePicker_ValueChanged(object sender, EventArgs e)
         {
-            res.endDate = endDatePicker.Value;
+            res.endDate = endDatePicker.Value.Date;
         }
 
         private void hotelLocationBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            res.hotel_id = Convert.ToInt32( hotelLocationBox.Text);
+
+            string[] getID = hotelLocationBox.Text.Split(' ');
+            res.hotel_id = Convert.ToInt32( getID[0]);
         }
 
         private void roomTypeBox_SelectedIndexChanged(object sender, EventArgs e)
@@ -78,7 +171,7 @@ namespace Hotel_Management_System
                     MessageBox.Show(res.startDate.ToString() + "\n" + res.endDate.ToString() + "\n" + res.hotel_id + "\n" + res.roomType + "\n" + res.numGuests + "\n" + res.cardNum);
                     //reward points dialogue box
                     //only show this if user has at least 50 reward points
-                    res.DetermineAvailability();
+                    //res.DetermineAvailability();
                     var confirmRewards = MessageBox.Show("Would you like to use 50 reward points to get a 10% discount?", "Reward Points", MessageBoxButtons.YesNo);
 
                     string useRewards = ""; ;
@@ -90,7 +183,7 @@ namespace Hotel_Management_System
                             res.book_reservation(useRewards,  user_id, false);
                             break;
                         default:
-                            res.book_reservation(useRewards, 0, false);
+                            res.book_reservation(useRewards, customer_id_employee, false);
                             break;
                     }//*****PlaceHolder NEED to come up with functionality to retrieve Customer ID if user is EMPLOYEE
 
@@ -166,10 +259,16 @@ namespace Hotel_Management_System
                 Connection.Close();
             }
         }
+
+        private void Customer_Id_textbox_TextChanged(object sender, EventArgs e)
+        {
+            customer_id_employee = Convert.ToInt32(Customer_Id_textbox.Text);
+        }
     }
 
     public class Reservation
     {
+        
         public DateTime startDate { get; set; }
         public DateTime endDate { get; set; }
         public int hotel_id { get; set; }
@@ -235,13 +334,13 @@ namespace Hotel_Management_System
         public void book_reservation(string result, int user_id, bool third_party)
         {
             string sqlString = third_party && Third_party_id >= 0
-                ? "Insert into Reservation(Room_type, Num_guests, Start_date, End_date, Hotel_location_Id, Points_earned, Third_party_Id) OUTPUT Inserted.ID Values(@UserID, @NumGuests, @Startdate, @EndDate, @HotelID, @PointsEarned, @ThirdPartyID)"
-                : "Insert into Reservation(Room_type, Num_guests, Start_date, End_date, Hotel_location_Id, Points_earned) OUTPUT Inserted.ID Values(@UserID, @NumGuests, @Startdate, @EndDate, @HotelID, @PointsEarned)";
+                ? "Insert into Reservation(Customer_Id, Room_type, Num_guests, Start_date, End_date, Hotel_location_Id, Points_earned, Third_party_Id) OUTPUT Inserted.ID Values(@UserID,@RoomType,@NumGuests, @Startdate, @EndDate, @HotelID, @PointsEarned, @ThirdPartyID)"
+                : "Insert into Reservation(Customer_Id, Room_type, Num_guests, Start_date, End_date, Hotel_location_Id, Points_earned) OUTPUT Inserted.ID Values(@UserID,@RoomType, @NumGuests, @Startdate, @EndDate, @HotelID, @PointsEarned)";
 
             // discount 1 =100%, 0.9 = 90% of the original
             double total_Room_Cost = 0,discount = 1;
             // get the number of nights 
-            int date_difference = Convert.ToInt32((startDate.Date - endDate.Date).TotalDays);
+            int date_difference = Convert.ToInt32((endDate.Date-startDate.Date).TotalDays);
 
             //25 points earned a night
             int total_points_earned = date_difference * 25;
@@ -263,7 +362,7 @@ namespace Hotel_Management_System
             query.Parameters.AddWithValue("@Type", roomType);
             total_Room_Cost = Convert.ToDouble(query.ExecuteScalar());
 
-            SqlCommand query1 = new SqlCommand("Update Customer  SET Reward_Points + @NumPoints Where Id =@CustomerId", Connection);
+            SqlCommand query1 = new SqlCommand("Update Customer  SET Reward_Points=(Reward_Points + @NumPoints) Where Id = @CustomerId", Connection);
             query1.Parameters.AddWithValue("@NumPoints", (result == "Yes" && enough_rewards) ? total_points_earned - 50 : total_points_earned);
             query1.Parameters.AddWithValue("@CustomerId", user_id);
             query1.ExecuteNonQuery();
@@ -271,7 +370,8 @@ namespace Hotel_Management_System
 
             // insert reservation information and return the reservation id to insert into transaction
             SqlCommand query2 = new SqlCommand(sqlString, Connection);
-            query2.Parameters.AddWithValue("@UserID", user_id);
+            query2.Parameters.AddWithValue("@UserID", user_id); 
+            query2.Parameters.AddWithValue("@RoomType", roomType);
             query2.Parameters.AddWithValue("@NumGuests", numGuests);
             query2.Parameters.AddWithValue("@Startdate", startDate);
             query2.Parameters.AddWithValue("@EndDate", endDate);
@@ -280,13 +380,16 @@ namespace Hotel_Management_System
             if (third_party &&Third_party_id >=0) { query2.Parameters.AddWithValue("@ThirdPartyID", Third_party_id); }
             int reservation_id = Convert.ToInt32(query2.ExecuteScalar());
 
-            SqlCommand query3 = new SqlCommand("Insert into Transactions (Reservation_Id, Customer_Id, Reward_points_spent, Money_spent, Activity_type, Reward_points_gained, Transaction_date) Values (@ReservationID, @CustomerID, @RewardsSpent, @MoneySpent, @ActivityType, @RewardsGained, @TransactionDate", Connection);
+
+            SqlCommand query3 = new SqlCommand("Insert into Transactions (Reservation_Id, Customer_Id, Reward_points_spent, Money_spent, Activity_type, Reward_points_gained, Transaction_date) Values (@ReservationID, @CustomerID, @RewardsSpent, @MoneySpent, @ActivityType, @RewardsGained, @TransactionDate)", Connection);
             query3.Parameters.AddWithValue("@ReservationID", reservation_id);
             query3.Parameters.AddWithValue("@CustomerID", user_id);
             query3.Parameters.AddWithValue("@RewardsSpent", (result == "Yes" && enough_rewards) ? 50: 0);
-            query3.Parameters.AddWithValue("@MoneySpent", total_Room_Cost *= discount);
+            query3.Parameters.AddWithValue("@MoneySpent", total_Room_Cost *= discount); 
+            query3.Parameters.AddWithValue("@ActivityType", "Creating Reservation");
             query3.Parameters.AddWithValue("@RewardsGained",total_points_earned);
             query3.Parameters.AddWithValue("@TransactionDate", DateTime.Now.Date);
+            query3.ExecuteNonQuery();
 
 
 
@@ -323,4 +426,11 @@ namespace Hotel_Management_System
         }
     }
 
+
+
+
+
 }
+
+
+

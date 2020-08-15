@@ -49,7 +49,7 @@
             this.numberOfGuestsBox = new System.Windows.Forms.NumericUpDown();
             this.ReservationDataGridView = new System.Windows.Forms.DataGridView();
             this.Customer_Id_textbox = new System.Windows.Forms.TextBox();
-            this.label1 = new System.Windows.Forms.Label();
+            this.customerIDLabel = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.numberOfGuestsBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ReservationDataGridView)).BeginInit();
             this.SuspendLayout();
@@ -57,9 +57,6 @@
             // hotelLocationBox
             // 
             this.hotelLocationBox.FormattingEnabled = true;
-            this.hotelLocationBox.Items.AddRange(new object[] {
-            "testItem",
-            "testItem_2"});
             this.hotelLocationBox.Location = new System.Drawing.Point(300, 350);
             this.hotelLocationBox.Margin = new System.Windows.Forms.Padding(6);
             this.hotelLocationBox.Name = "hotelLocationBox";
@@ -70,9 +67,6 @@
             // roomTypeBox
             // 
             this.roomTypeBox.FormattingEnabled = true;
-            this.roomTypeBox.Items.AddRange(new object[] {
-            "testItem",
-            "testItem2"});
             this.roomTypeBox.Location = new System.Drawing.Point(300, 413);
             this.roomTypeBox.Margin = new System.Windows.Forms.Padding(6);
             this.roomTypeBox.Name = "roomTypeBox";
@@ -270,23 +264,24 @@
             this.Customer_Id_textbox.Name = "Customer_Id_textbox";
             this.Customer_Id_textbox.Size = new System.Drawing.Size(354, 31);
             this.Customer_Id_textbox.TabIndex = 13;
+            this.Customer_Id_textbox.TextChanged += new System.EventHandler(this.Customer_Id_textbox_TextChanged);
             // 
-            // label1
+            // customerIDLabel
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(150, 151);
-            this.label1.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(130, 25);
-            this.label1.TabIndex = 14;
-            this.label1.Text = "Customer ID";
+            this.customerIDLabel.AutoSize = true;
+            this.customerIDLabel.Location = new System.Drawing.Point(150, 151);
+            this.customerIDLabel.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
+            this.customerIDLabel.Name = "customerIDLabel";
+            this.customerIDLabel.Size = new System.Drawing.Size(130, 25);
+            this.customerIDLabel.TabIndex = 14;
+            this.customerIDLabel.Text = "Customer ID";
             // 
             // reservation_page
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1552, 931);
-            this.Controls.Add(this.label1);
+            this.Controls.Add(this.customerIDLabel);
             this.Controls.Add(this.Customer_Id_textbox);
             this.Controls.Add(this.ReservationDataGridView);
             this.Controls.Add(this.numberOfGuestsBox);
@@ -340,6 +335,6 @@
         private System.Windows.Forms.NumericUpDown numberOfGuestsBox;
         private System.Windows.Forms.DataGridView ReservationDataGridView;
         private System.Windows.Forms.TextBox Customer_Id_textbox;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label customerIDLabel;
     }
 }
