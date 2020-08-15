@@ -13,10 +13,9 @@ namespace Hotel_Management_System
     public partial class reservation_page : Form
     {
         Reservation res = new Reservation();
-        private string reservationSearchID { get; set; }
+        string reservationSearchID = "";
         public reservation_page()
         {
-            //default values
             InitializeComponent();
             res.startDate = startDatePicker.Value;
             res.endDate = endDatePicker.Value;
@@ -24,7 +23,6 @@ namespace Hotel_Management_System
             res.roomType = "";
             res.numGuests = 0;
             res.cardNum = 0;
-            reservationSearchID = "";
         }
 
         private void startDatePicker_ValueChanged(object sender, EventArgs e)
@@ -47,9 +45,9 @@ namespace Hotel_Management_System
             res.roomType = roomTypeBox.Text;
         }
 
-        private void numberOfGuestsBox_ValueChanged(object sender, EventArgs e)
+        private void numberOfGuestsBox_TextChanged(object sender, EventArgs e)
         {
-            try { res.numGuests = numberOfGuestsBox.Value; }
+            try { res.numGuests = Int32.Parse(numberOfGuestsBox.Text); }
             catch (FormatException _e) { Console.WriteLine(_e.Message); }
         }
 
@@ -61,21 +59,13 @@ namespace Hotel_Management_System
 
         private void submitUpdateButton_Click(object sender, EventArgs e)
         {
-            if (startDatePicker.Value.Date > endDatePicker.Value.Date)
+            //test line to show values when submitted. delete before turning in
+            MessageBox.Show(res.startDate.ToString() + "\n" + res.endDate.ToString() + "\n" + res.hotel + "\n" + res.roomType + "\n" + res.numGuests + "\n" + res.cardNum);
+            //reward points dialogue box
+            var confirmRewards = MessageBox.Show("Would you like to use 50 reward points to get a 10% discount?", "Reward Points", MessageBoxButtons.YesNo);
+            if(confirmRewards == DialogResult.Yes)
             {
-                MessageBox.Show("Error - Start Date later than End Date");
-            }
-            else
-            {
-                //test line to show values when submitted. delete before turning in
-                MessageBox.Show(res.startDate.ToString() + "\n" + res.endDate.ToString() + "\n" + res.hotel + "\n" + res.roomType + "\n" + res.numGuests + "\n" + res.cardNum);
-                //reward points dialogue box
-                //only show this if user has at least 50 reward points
-                var confirmRewards = MessageBox.Show("Would you like to use 50 reward points to get a 10% discount?", "Reward Points", MessageBoxButtons.YesNo);
-                if (confirmRewards == DialogResult.Yes)
-                {
-                    //apply rewards
-                }
+                //apply rewards
             }
         }
 
@@ -108,7 +98,7 @@ namespace Hotel_Management_System
         public DateTime endDate { get; set; }
         public string hotel { get; set; }
         public string roomType { get; set; }
-        public decimal numGuests { get; set; }
+        public int numGuests { get; set; }
         public int cardNum { get; set; }
     }
 }

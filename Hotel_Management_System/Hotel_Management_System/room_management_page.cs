@@ -18,9 +18,9 @@ namespace Hotel_Management_System
             InitializeComponent();
         }
 
-        private void roomNumberBox_ValueChanged(object sender, EventArgs e)
+        private void roomNumberBox_TextChanged(object sender, EventArgs e)
         {
-            room.number = roomNumberBox.Value;
+            room.number = Int32.Parse(roomNumberBox.Text);
         }
 
         private void roomTypeBox_TextChanged(object sender, EventArgs e)
@@ -56,7 +56,7 @@ namespace Hotel_Management_System
 
     public struct roomType
     {
-        public decimal number { get; set; }
+        public int number { get; set; }
         public string type { get; set; }
         public string hotel { get; set; }
         public string status { get; set; }
