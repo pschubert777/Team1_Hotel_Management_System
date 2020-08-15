@@ -28,6 +28,7 @@ namespace Hotel_Management_System
             res.roomType = "";
             res.numGuests = 0;
             res.cardNum = 0;
+            res.Third_party_id = 0;
             reservationSearchID = "";
         }
 
@@ -86,10 +87,10 @@ namespace Hotel_Management_System
                     switch (user_type)
                     {
                         case "Customer":
-                            res.book_reservation(useRewards,  user_id);
+                            res.book_reservation(useRewards,  user_id, false);
                             break;
                         default:
-                            res.book_reservation(useRewards, 0);
+                            res.book_reservation(useRewards, 0, false);
                             break;
                     }//*****PlaceHolder NEED to come up with functionality to retrieve Customer ID if user is EMPLOYEE
 
@@ -176,9 +177,10 @@ namespace Hotel_Management_System
         public int numGuests { get; set; }
         public int cardNum { get; set; }
 
-        public int Third_party_id { get; set; } = -1;
+        public int Third_party_id { get; set; }
+        
 
-
+      
         public void DetermineAvailability()
         {
             SqlConnection Connection = new SqlConnection(@"Data Source=(localdb)\ProjectsV13;Initial Catalog=Hotel_Entity_Relationship_System;Integrated Security=True;Connect Timeout=60;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False");
@@ -230,8 +232,13 @@ namespace Hotel_Management_System
         }
 
 
-        public void book_reservation(string result, int user_id)
-        {   // discount 1 =100%, 0.9 = 90% of the original
+        public void book_reservation(string result, int user_id, bool third_party)
+        {
+            string sqlString = third_party && Third_party_id >= 0
+                ? "Insert into Reservation(Room_type, Num_guests, Start_date, End_date, Hotel_location_Id, Points_earned, Third_party_Id) OUTPUT Inserted.ID Values(@UserID, @NumGuests, @Startdate, @EndDate, @HotelID, @PointsEarned, @ThirdPartyID)"
+                : "Insert into Reservation(Room_type, Num_guests, Start_date, End_date, Hotel_location_Id, Points_earned) OUTPUT Inserted.ID Values(@UserID, @NumGuests, @Startdate, @EndDate, @HotelID, @PointsEarned)";
+
+            // discount 1 =100%, 0.9 = 90% of the original
             double total_Room_Cost = 0,discount = 1;
             // get the number of nights 
             int date_difference = Convert.ToInt32((startDate.Date - endDate.Date).TotalDays);
@@ -261,14 +268,16 @@ namespace Hotel_Management_System
             query1.Parameters.AddWithValue("@CustomerId", user_id);
             query1.ExecuteNonQuery();
 
+
             // insert reservation information and return the reservation id to insert into transaction
-            SqlCommand query2 = new SqlCommand("Insert into Reservation(Room_type, Num_guests, Start_date, End_date, Hotel_location_Id, Points_earned) OUTPUT Inserted.ID Values(@UserID, @NumGuests, @Startdate, @EndDate, @HotelID, @PointsEarned)", Connection);
+            SqlCommand query2 = new SqlCommand(sqlString, Connection);
             query2.Parameters.AddWithValue("@UserID", user_id);
             query2.Parameters.AddWithValue("@NumGuests", numGuests);
             query2.Parameters.AddWithValue("@Startdate", startDate);
             query2.Parameters.AddWithValue("@EndDate", endDate);
             query2.Parameters.AddWithValue("@HotelID", hotel_id);
             query2.Parameters.AddWithValue("@PointsEarned", total_points_earned);
+            if (third_party &&Third_party_id >=0) { query2.Parameters.AddWithValue("@ThirdPartyID", Third_party_id); }
             int reservation_id = Convert.ToInt32(query2.ExecuteScalar());
 
             SqlCommand query3 = new SqlCommand("Insert into Transactions (Reservation_Id, Customer_Id, Reward_points_spent, Money_spent, Activity_type, Reward_points_gained, Transaction_date) Values (@ReservationID, @CustomerID, @RewardsSpent, @MoneySpent, @ActivityType, @RewardsGained, @TransactionDate", Connection);
