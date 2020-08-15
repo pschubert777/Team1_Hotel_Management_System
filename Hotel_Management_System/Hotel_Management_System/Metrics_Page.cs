@@ -79,7 +79,9 @@ namespace Hotel_Management_System
                     {
                         Display_error_message();
                     }
-                
+
+
+                // ***JOHN** Put logs query here****
 
             }
         }

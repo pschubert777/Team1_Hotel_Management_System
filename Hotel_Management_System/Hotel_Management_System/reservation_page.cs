@@ -341,10 +341,14 @@ namespace Hotel_Management_System
             }
 
 
+             // ***JOHN** Put logs query here****
+
             for (var individual_date = startDate; individual_date <= endDate;  individual_date = individual_date.AddDays(1))
             {
                 try
                 {
+
+
                     SqlCommand query = new SqlCommand("Select Count(*) From Reservation where Reservation_status NOT LIKE @Status AND @Current_Date Between Start_date and End_date AND Room_type = @roomType AND Hotel_location_Id = @HotelID", Connection);
                     query.Parameters.AddWithValue("@Status", "Cancelled%");
                     query.Parameters.AddWithValue("@Current_Date", individual_date);
