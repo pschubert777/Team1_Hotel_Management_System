@@ -148,7 +148,6 @@
             this.roomNumberBox.Name = "roomNumberBox";
             this.roomNumberBox.Size = new System.Drawing.Size(100, 20);
             this.roomNumberBox.TabIndex = 18;
-            this.roomNumberBox.ValueChanged += new System.EventHandler(this.roomNumberBox_ValueChanged);
             // 
             // room_management_page
             // 
