@@ -38,6 +38,38 @@ namespace Hotel_Management_System
             startDatePicker.Value = DateTime.Now.Date;
             endDatePicker.Value = DateTime.Now.Date;
         }
+        // Fill datagridView
+
+        private void fill_data_grid_view()
+        {
+            DataTable x = new DataTable();
+            using (SqlConnection Connection = new SqlConnection(@"Data Source=(localdb)\ProjectsV13;Initial Catalog=Hotel_Entity_Relationship_System;Integrated Security=True;Connect Timeout=60;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False"))
+            {
+
+                if (Connection.State == ConnectionState.Closed)
+                {
+                    Connection.Open();
+                }
+
+                string query_string = user_type == "Employee" ? "Select * From Reservation" : "Select * From Reservation where Customer_Id = @UserID";
+
+                using(SqlDataAdapter query = new SqlDataAdapter(query_string, Connection))
+                {
+                    if(user_type == "Customer")
+                    {
+                        query.SelectCommand.Parameters.AddWithValue("@UserID", user_id);
+                    }
+
+                    query.Fill(x);
+                    ReservationDataGridView.DataSource = x;
+
+
+                }
+
+
+
+            }
+        }
 
         // Fill Combo box
 
@@ -66,11 +98,6 @@ namespace Hotel_Management_System
                             hotelLocationBox.Items.Add(combined_data);
                         }
                     }
-                }
-
-                if (Connection.State == ConnectionState.Open)
-                {
-                    Connection.Close();
                 }
             }
 
@@ -113,10 +140,15 @@ namespace Hotel_Management_System
         {
             
             InitializeComponent();
-            Populate_hotel_combo_box();
-            populate_room_information();
+
             user_id = 0;
             user_type = "Employee";
+
+            Populate_hotel_combo_box();
+            populate_room_information();
+
+           fill_data_grid_view();
+           
 
             if(user_type != "Employee")
             {
@@ -208,7 +240,7 @@ namespace Hotel_Management_System
                     MessageBox.Show(error.Message);
                 }
             }
-
+            fill_data_grid_view();
             clear();
         }
 

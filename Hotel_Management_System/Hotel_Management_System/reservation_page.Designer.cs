@@ -87,7 +87,7 @@
             // 
             this.currentReservationsLabel.AutoSize = true;
             this.currentReservationsLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 13F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.currentReservationsLabel.Location = new System.Drawing.Point(972, 79);
+            this.currentReservationsLabel.Location = new System.Drawing.Point(830, 87);
             this.currentReservationsLabel.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.currentReservationsLabel.Name = "currentReservationsLabel";
             this.currentReservationsLabel.Size = new System.Drawing.Size(366, 39);
@@ -98,7 +98,7 @@
             // 
             this.reservationSearchLabel.AutoSize = true;
             this.reservationSearchLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 13F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.reservationSearchLabel.Location = new System.Drawing.Point(948, 575);
+            this.reservationSearchLabel.Location = new System.Drawing.Point(983, 575);
             this.reservationSearchLabel.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.reservationSearchLabel.Name = "reservationSearchLabel";
             this.reservationSearchLabel.Size = new System.Drawing.Size(413, 39);
@@ -254,7 +254,7 @@
             this.ReservationDataGridView.ReadOnly = true;
             this.ReservationDataGridView.RowHeadersWidth = 82;
             this.ReservationDataGridView.RowTemplate.Height = 33;
-            this.ReservationDataGridView.Size = new System.Drawing.Size(657, 395);
+            this.ReservationDataGridView.Size = new System.Drawing.Size(1119, 395);
             this.ReservationDataGridView.TabIndex = 12;
             // 
             // Customer_Id_textbox
@@ -280,7 +280,8 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1552, 931);
+            this.AutoSize = true;
+            this.ClientSize = new System.Drawing.Size(1974, 931);
             this.Controls.Add(this.customerIDLabel);
             this.Controls.Add(this.Customer_Id_textbox);
             this.Controls.Add(this.ReservationDataGridView);
