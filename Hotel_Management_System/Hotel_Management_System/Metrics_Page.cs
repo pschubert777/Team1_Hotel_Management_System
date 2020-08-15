@@ -33,47 +33,20 @@ namespace Hotel_Management_System
                    
                     if (Rewards_summary_button.Checked)
                     {
-                        try
-                        {
-                        RewardsSummary summary = new RewardsSummary(start_date_picker.Value.Date, end_date_picker.Value.Date);
-                        summary.Calculate_rewards_outstanding();
-                        summary.Calculate_rewards_earned();
-                        summary.Calculate_rewards_redeemed();
-                        summary.Export_file();
-
-                        }  
-                        catch(Exception error)
-                        {
-                        MessageBox.Show(error.Message);
-                        }
+                    RewardsSummary summary = new RewardsSummary(start_date_picker.Value.Date, end_date_picker.Value.Date);
+                    summary.Calculate_rewards_outstanding();
+                    summary.Calculate_rewards_earned();
+                    summary.Calculate_rewards_redeemed();
+                    summary.Export_file();
 
                     }
                     else if (Occupancy_Summary_button.Checked)
                     {
-                    // SqlDataAdapter command = new SqlDataAdapter("CustomerDataManipulation", connection);
-                        try
-                        {
-                        OccupancySummary summary = new OccupancySummary(start_date_picker.Value.Date, end_date_picker.Value.Date);
-                        summary.calculateRoomsOccupied_Unoccupied();
-                        summary.calculateTotalRevenue();
-                        summary.ExportFile();
-                        }
-                        catch (Exception error)
-                        {
-                        MessageBox.Show(error.Message);
-                        }
+                        // SqlDataAdapter command = new SqlDataAdapter("CustomerDataManipulation", connection);
                     }
                     else if (Customer_Report_button.Checked)
                     {
-                    // SqlDataAdapter command = new SqlDataAdapter("CustomerDataManipulation", connection);
-                    try
-                    {
-
-                    }
-                    catch(Exception error)
-                    {
-                        MessageBox.Show(error.Message);
-                    }
+                        // SqlDataAdapter command = new SqlDataAdapter("CustomerDataManipulation", connection);
                     }
                     else
                     {
