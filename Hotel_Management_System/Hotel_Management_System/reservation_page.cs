@@ -14,16 +14,15 @@ namespace Hotel_Management_System
     public partial class reservation_page : Form
     {
 
-        
-     
+        private User user;
+        private int user_id { get; set; }
+        private string user_type { get; set; }
 
        
        
         // customer ID when the employee is the user
         private int customer_id_employee { get; set; }
-        // create user object
-        User person;
-        //create new reservation
+
         Reservation res = new Reservation();
 
         // reservation id for search bars
@@ -34,7 +33,7 @@ namespace Hotel_Management_System
         private bool update_reservation { get; set; }
         private void clear()
         {
-            if(person.User_type == "Employee")
+            if(user_type == "Employee")
             {
                 Customer_Id_textbox.Text = string.Empty;
             }
@@ -75,13 +74,13 @@ namespace Hotel_Management_System
                     Connection.Open();
                 }
 
-                string query_string = person.User_type == "Employee" ? "Select * From Reservation" : "Select * From Reservation where Customer_Id = @UserID and Reservation_status  NOT Like @Status";
+                string query_string = user_type == "Employee" ? "Select * From Reservation" : "Select * From Reservation where Customer_Id = @UserID and Reservation_status  NOT Like @Status";
 
                 using(SqlDataAdapter query = new SqlDataAdapter(query_string, Connection))
                 {
-                    if(person.User_type == "Customer")
+                    if(user_type == "Customer")
                     {
-                        query.SelectCommand.Parameters.AddWithValue("@UserID", person.id);
+                        query.SelectCommand.Parameters.AddWithValue("@UserID", user_id);
                         query.SelectCommand.Parameters.AddWithValue("@Status", "Cancelled%");
                     }
 
@@ -97,7 +96,7 @@ namespace Hotel_Management_System
         }
 
         // Fill Combo box
-        //herere
+
         // Hotel Combo Box
 
         private void Populate_hotel_combo_box()
@@ -166,10 +165,8 @@ namespace Hotel_Management_System
             
             InitializeComponent();
 
-            person = new User();
-            person.name = "Name";
-            person.User_type = "Customer";
-            person.id = 1;
+            user_id = 1;
+            user_type = "Customer";
             reservation_id = 0;
             update_reservation = false;
 
@@ -177,10 +174,9 @@ namespace Hotel_Management_System
             populate_room_information();
 
             fill_data_grid_view();
+           
 
-            
-
-            if(person.User_type != "Employee")
+            if(user_type != "Employee")
             {
                 Customer_Id_textbox.Visible = false;
                 customerIDLabel.Visible = false;
@@ -198,7 +194,44 @@ namespace Hotel_Management_System
             res.Third_party_id = 0;
             reservationSearchID = "";
 
+            user = new User("John", "E", 2); // test user
 
+        }
+        public reservation_page(User u)
+        {
+
+            InitializeComponent();
+
+            user_id = 1;
+            user_type = "Customer";
+            reservation_id = 0;
+            update_reservation = false;
+
+            Populate_hotel_combo_box();
+            populate_room_information();
+
+            fill_data_grid_view();
+
+
+            if (user_type != "Employee")
+            {
+                Customer_Id_textbox.Visible = false;
+                customerIDLabel.Visible = false;
+            }
+
+            cancelButton.Visible = false;
+
+            // reservation object default values 
+            res.startDate = startDatePicker.Value;
+            res.endDate = endDatePicker.Value;
+            res.hotel_id = 0;
+            res.roomType = "";
+            res.numGuests = 0;
+            res.cardNum = 0;
+            res.Third_party_id = 0;
+            reservationSearchID = "";
+
+            user = u;
 
         }
 
@@ -239,7 +272,7 @@ namespace Hotel_Management_System
         private void submitUpdateButton_Click(object sender, EventArgs e)
         {
 
-            if (update_reservation && person.User_type == "Employee")
+            if (update_reservation && user_type == "Employee")
             {
 
                 
@@ -256,6 +289,8 @@ namespace Hotel_Management_System
                         res.Modify_reservation(reservation_id);
 
                         //***JOHN  upgrade reservation
+                        Logging logging = new Logging();
+                        logging.upgradeLog(user);
 
                         fill_data_grid_view();
                         clear();
@@ -288,10 +323,10 @@ namespace Hotel_Management_System
                         string useRewards = ""; ;
                         useRewards = confirmRewards == DialogResult.Yes ? "Yes" : "No";
 
-                        switch (person.User_type)
+                        switch (user_type)
                         {
                             case "Customer":
-                                res.book_reservation(useRewards, person.id, false);
+                                res.book_reservation(useRewards, user_id, false);
                                 break;
                             default:
                                 res.book_reservation(useRewards, customer_id_employee, false);
@@ -300,7 +335,10 @@ namespace Hotel_Management_System
 
 
 
-                        //***JOHN Update reservation
+                        //***JOHN create reservation
+                        Logging logging = new Logging();
+                        logging.createResLog(user);
+
 
                         fill_data_grid_view();
                         clear();
@@ -319,7 +357,10 @@ namespace Hotel_Management_System
             //reset all fields. eventually this button will probably just return the user to the previous page though
             res.Cancel_Reservation(reservation_id);
 
-            //***JOHN Update reservation ------------ cancellation?
+            //***JOHN cancel reservation
+            Logging logging = new Logging();
+            logging.cancelResLog(user);
+
             fill_data_grid_view();
             clear();
 
@@ -345,7 +386,7 @@ namespace Hotel_Management_System
 
             try
             {
-                if (person.User_type == "Employee" && reservationSearchID != "")
+                if (user_type == "Employee" && reservationSearchID != "")
                 {
 
                     SqlDataAdapter query = new SqlDataAdapter("Select * From Reservation Where Id =@resID", Connection);
@@ -354,17 +395,17 @@ namespace Hotel_Management_System
                     ReservationDataGridView.DataSource = dataTable1;
 
                 }
-                else if (person.User_type == "Employee" && reservationSearchID == "")
+                else if (user_type == "Employee" && reservationSearchID == "")
                 {
 
                     SqlDataAdapter query = new SqlDataAdapter("Select * From Reservation", Connection);
                     query.Fill(dataTable1);
                     ReservationDataGridView.DataSource = dataTable1;
                 }
-                else if (person.User_type == "Customer" && reservationSearchID != "")
+                else if (user_type == "Customer" && reservationSearchID != "")
                 {
                     SqlDataAdapter query = new SqlDataAdapter("Select * From Reservation Where Id =@resID AND Customer_Id = @CustomerID", Connection);
-                    query.SelectCommand.Parameters.AddWithValue("@CustomerID", person.id);
+                    query.SelectCommand.Parameters.AddWithValue("@CustomerID", user_id);
                     query.SelectCommand.Parameters.AddWithValue("@resID", Convert.ToInt32(reservationSearchID));
                     query.Fill(dataTable1);
                     ReservationDataGridView.DataSource = dataTable1;
@@ -396,7 +437,7 @@ namespace Hotel_Management_System
         {
 
             // CHANGING UI
-            if(person.User_type == "Customer")
+            if(user_type == "Customer")
             {
                 submitUpdateButton.Visible = false;
 
@@ -415,7 +456,7 @@ namespace Hotel_Management_System
             if (ReservationDataGridView.CurrentRow.Index >= 0)
             {
                 
-                if(person.User_type == "Employee")
+                if( user_type == "Employee")
                 {
                     Customer_Id_textbox.Text= ReservationDataGridView.CurrentRow.Cells[1].Value.ToString();
                 }
