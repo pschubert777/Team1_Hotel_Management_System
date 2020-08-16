@@ -263,6 +263,7 @@
             this.Controls.Add(this.reservationIdBox);
             this.Name = "reservation_page";
             this.Text = "reservation_page";
+            this.Load += new System.EventHandler(this.reservation_page_Load);
             ((System.ComponentModel.ISupportInitialize)(this.numberOfGuestsBox)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
