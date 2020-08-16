@@ -76,7 +76,7 @@ namespace Hotel_Management_System
             }*/
 
 
-
+                /*
                 Logging logging = new Logging(start_date, end_date);
 
                 DataTable table = logging.displayLogs();
@@ -84,6 +84,7 @@ namespace Hotel_Management_System
                 logResults.DisplayMember = "user_id";
                 logResults.ValueMember = "user_id";
                 logResults.DataSource = table;
+                */
             }
         }
     }

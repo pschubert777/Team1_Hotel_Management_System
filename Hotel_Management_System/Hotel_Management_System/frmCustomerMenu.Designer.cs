@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.btnManageReservations = new System.Windows.Forms.Button();
@@ -36,18 +35,8 @@
             this.btnAccountInfo = new System.Windows.Forms.Button();
             this.btnActivityLog = new System.Windows.Forms.Button();
             this.btnCancel = new System.Windows.Forms.Button();
+            this.label4 = new System.Windows.Forms.Label();
             this.SuspendLayout();
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(12, 85);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(202, 17);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "Reservations and Rewards";
-            this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
             // label2
             // 
@@ -77,6 +66,7 @@
             this.btnManageReservations.TabIndex = 3;
             this.btnManageReservations.Text = "Manage Reservations";
             this.btnManageReservations.UseVisualStyleBackColor = true;
+            this.btnManageReservations.Click += new System.EventHandler(this.btnManageReservations_Click);
             // 
             // btnTransactionAndReward
             // 
@@ -86,6 +76,7 @@
             this.btnTransactionAndReward.TabIndex = 4;
             this.btnTransactionAndReward.Text = "Transactions and Reward Point Data";
             this.btnTransactionAndReward.UseVisualStyleBackColor = true;
+            this.btnTransactionAndReward.Click += new System.EventHandler(this.btnTransactionAndReward_Click);
             // 
             // btnAccountInfo
             // 
@@ -115,6 +106,16 @@
             this.btnCancel.UseVisualStyleBackColor = true;
             this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
             // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.Location = new System.Drawing.Point(12, 85);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(202, 17);
+            this.label4.TabIndex = 0;
+            this.label4.Text = "Reservations and Rewards";
+            // 
             // frmCustomerMenu
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -127,7 +128,7 @@
             this.Controls.Add(this.btnManageReservations);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
-            this.Controls.Add(this.label1);
+            this.Controls.Add(this.label4);
             this.Name = "frmCustomerMenu";
             this.Text = "Customer Menu";
             this.Load += new System.EventHandler(this.Form2_Load);
@@ -137,8 +138,6 @@
         }
 
         #endregion
-
-        private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Button btnManageReservations;
@@ -146,5 +145,6 @@
         private System.Windows.Forms.Button btnAccountInfo;
         private System.Windows.Forms.Button btnActivityLog;
         private System.Windows.Forms.Button btnCancel;
+        private System.Windows.Forms.Label label4;
     }
 }

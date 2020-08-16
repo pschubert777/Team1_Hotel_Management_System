@@ -58,6 +58,12 @@
     <Compile Include="Display_Logs.Designer.cs">
       <DependentUpon>Display_Logs.cs</DependentUpon>
     </Compile>
+    <Compile Include="frmAccountInfo.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmAccountInfo.Designer.cs">
+      <DependentUpon>frmAccountInfo.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmCreateAccount.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -81,6 +87,18 @@
     </Compile>
     <Compile Include="frmLogin.designer.cs">
       <DependentUpon>frmLogin.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmManageCustomerAccount.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmManageCustomerAccount.Designer.cs">
+      <DependentUpon>frmManageCustomerAccount.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmManageEmployeeAccount.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmManageEmployeeAccount.Designer.cs">
+      <DependentUpon>frmManageEmployeeAccount.cs</DependentUpon>
     </Compile>
     <Compile Include="MetricsClasses.cs" />
     <Compile Include="Metrics_Page.cs">
@@ -109,6 +127,9 @@
     <EmbeddedResource Include="Display_Logs.resx">
       <DependentUpon>Display_Logs.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="frmAccountInfo.resx">
+      <DependentUpon>frmAccountInfo.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmCreateAccount.resx">
       <DependentUpon>frmCreateAccount.cs</DependentUpon>
     </EmbeddedResource>
@@ -120,6 +141,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmLogin.resx">
       <DependentUpon>frmLogin.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmManageCustomerAccount.resx">
+      <DependentUpon>frmManageCustomerAccount.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmManageEmployeeAccount.resx">
+      <DependentUpon>frmManageEmployeeAccount.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Metrics_Page.resx">
       <DependentUpon>Metrics_Page.cs</DependentUpon>

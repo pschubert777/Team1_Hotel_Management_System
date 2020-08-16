@@ -13,7 +13,7 @@ namespace AccountManagementInterface
 {
     public partial class frmCreateAccount : Form
     {
-        SqlConnection sqlcon = new SqlConnection(@"Data Source = (localdb)\ProjectsV13; Initial Catalog = Database1_1; Integrated Security = True; Connect Timeout = 30; Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False");
+        SqlConnection sqlcon = new SqlConnection(@"Data Source=(localdb)\ProjectsV13;Initial Catalog=Hotel_Entity_Relationship_System2;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False");
 
 
         public frmCreateAccount()

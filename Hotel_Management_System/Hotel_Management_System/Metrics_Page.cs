@@ -101,7 +101,9 @@ namespace Hotel_Management_System
 
         private void back_menu_button_Click(object sender, EventArgs e)
         {
-
+            AccountManagementInterface.frmEmployeeMenu objFrmLogin = new AccountManagementInterface.frmEmployeeMenu();
+            this.Hide();
+            objFrmLogin.Show();
         }
 
         private void label1_Click(object sender, EventArgs e)

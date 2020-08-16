@@ -51,6 +51,7 @@
             this.btnManageReservation.TabIndex = 0;
             this.btnManageReservation.Text = "Manage Reservations";
             this.btnManageReservation.UseVisualStyleBackColor = true;
+            this.btnManageReservation.Click += new System.EventHandler(this.btnManageReservation_Click);
             // 
             // btnManageRooms
             // 
@@ -60,6 +61,7 @@
             this.btnManageRooms.TabIndex = 1;
             this.btnManageRooms.Text = "Manage Rooms";
             this.btnManageRooms.UseVisualStyleBackColor = true;
+            this.btnManageRooms.Click += new System.EventHandler(this.btnManageRooms_Click);
             // 
             // btnViewReward
             // 
@@ -87,6 +89,7 @@
             this.btnManageCustomerAccount.TabIndex = 4;
             this.btnManageCustomerAccount.Text = "Manage Customer Accounts";
             this.btnManageCustomerAccount.UseVisualStyleBackColor = true;
+            this.btnManageCustomerAccount.Click += new System.EventHandler(this.btnManageCustomerAccount_Click);
             // 
             // btnManageEmployeeAccount
             // 
@@ -96,6 +99,7 @@
             this.btnManageEmployeeAccount.TabIndex = 5;
             this.btnManageEmployeeAccount.Text = "Manage Employee Acounts";
             this.btnManageEmployeeAccount.UseVisualStyleBackColor = true;
+            this.btnManageEmployeeAccount.Click += new System.EventHandler(this.btnManageEmployeeAccount_Click);
             // 
             // btnMetricsPage
             // 
@@ -105,6 +109,7 @@
             this.btnMetricsPage.TabIndex = 6;
             this.btnMetricsPage.Text = "Metrics Page";
             this.btnMetricsPage.UseVisualStyleBackColor = true;
+            this.btnMetricsPage.Click += new System.EventHandler(this.btnMetricsPage_Click);
             // 
             // btnActivityLog
             // 
@@ -114,6 +119,7 @@
             this.btnActivityLog.TabIndex = 7;
             this.btnActivityLog.Text = "View Activity Log";
             this.btnActivityLog.UseVisualStyleBackColor = true;
+            this.btnActivityLog.Click += new System.EventHandler(this.btnActivityLog_Click);
             // 
             // label1
             // 
@@ -185,7 +191,7 @@
             this.Controls.Add(this.btnManageRooms);
             this.Controls.Add(this.btnManageReservation);
             this.Name = "frmEmployeeMenu";
-            this.Text = "Employee_Menu";
+            this.Text = "Employee Menu";
             this.ResumeLayout(false);
             this.PerformLayout();
 

@@ -22,16 +22,21 @@ namespace AccountManagementInterface
            
         }
 
-        private void label1_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void btnCancel_Click(object sender, EventArgs e)
         {
-            frmLogin objFrmLogin = new frmLogin();
+            this.Close();
+        }
+
+        private void btnManageReservations_Click(object sender, EventArgs e)
+        {
+            Hotel_Management_System.reservation_page objFrmLogin = new Hotel_Management_System.reservation_page();
             this.Hide();
             objFrmLogin.Show();
+        }
+
+        private void btnTransactionAndReward_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

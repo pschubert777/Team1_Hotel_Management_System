@@ -19,14 +19,54 @@ namespace AccountManagementInterface
 
         private void btnCancel_Click(object sender, EventArgs e)
         {
-            frmLogin objFrmLogin = new frmLogin();
-            this.Hide();
-            objFrmLogin.Show();
+            this.Close();
         }
 
         private void label3_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void btnActivityLog_Click(object sender, EventArgs e)
+        {
+            Hotel_Management_System.Display_Logs objDisplay_Logs = new Hotel_Management_System.Display_Logs();
+            this.Hide();
+            objDisplay_Logs.Show();
+        }
+
+        private void btnMetricsPage_Click(object sender, EventArgs e)
+        {
+            Hotel_Management_System.Metrics_Page objMetrics_Page = new Hotel_Management_System.Metrics_Page();
+            this.Hide();
+            objMetrics_Page.Show();
+        }
+
+        private void btnManageReservation_Click(object sender, EventArgs e)
+        {
+            Hotel_Management_System.reservation_page objreservation_page = new Hotel_Management_System.reservation_page();
+            this.Hide();
+            objreservation_page.Show();
+        }
+
+        private void btnManageRooms_Click(object sender, EventArgs e)
+        {
+            Hotel_Management_System.room_management_page objroom_management_page = new Hotel_Management_System.room_management_page();
+            this.Hide();
+            objroom_management_page.Show();
+        }
+
+        private void btnManageCustomerAccount_Click(object sender, EventArgs e)
+        {
+            Hotel_Management_System.frmManageCustomerAccount objfrmManageCustomerAccount = new Hotel_Management_System.frmManageCustomerAccount();
+            this.Hide();
+            objfrmManageCustomerAccount.Show();
+        }
+
+        private void btnManageEmployeeAccount_Click(object sender, EventArgs e)
+        {
+            Hotel_Management_System.frmManageEmployeeAccount objfrmManageEmployeeAccount = new Hotel_Management_System.frmManageEmployeeAccount();
+            this.Hide();
+            objfrmManageEmployeeAccount.Show();
         }
     }
 }
