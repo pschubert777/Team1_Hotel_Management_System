@@ -21,5 +21,11 @@ namespace Hotel_Management_System
         {
 
         }
+
+        private void frmAccountInfo_Load(object sender, EventArgs e)
+        {
+            //get user credentials here
+            // still need john user class to access info
+        }
     }
 }

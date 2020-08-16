@@ -59,6 +59,7 @@
             this.Controls.Add(this.lblName);
             this.Name = "frmAccountInfo";
             this.Text = "Account Info";
+            this.Load += new System.EventHandler(this.frmAccountInfo_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

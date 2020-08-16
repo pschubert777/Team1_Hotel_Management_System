@@ -82,6 +82,7 @@ namespace Hotel_Management_System
         private void cancelButton_Click(object sender, EventArgs e)
         {
             //reset all fields. eventually this button will probably just return the user to the previous page though
+            // waiting on user class to access user data do make sure we can return to correct menu.
             res = new Reservation(); //reset reservation object
             startDatePicker.ResetText();
             endDatePicker.ResetText();

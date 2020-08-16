@@ -68,5 +68,17 @@ namespace AccountManagementInterface
             this.Hide();
             objfrmManageEmployeeAccount.Show();
         }
+
+        private void btnAccountInfo_Click(object sender, EventArgs e)
+        {
+            Hotel_Management_System.frmAccountInfo objFrmAccountInfo = new Hotel_Management_System.frmAccountInfo();
+            this.Hide();
+            objFrmAccountInfo.Show();
+        }
+
+        private void frmEmployeeMenu_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

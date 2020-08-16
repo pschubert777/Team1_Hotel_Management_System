@@ -30,7 +30,6 @@
         {
             this.btnManageReservation = new System.Windows.Forms.Button();
             this.btnManageRooms = new System.Windows.Forms.Button();
-            this.btnViewReward = new System.Windows.Forms.Button();
             this.btnAccountInfo = new System.Windows.Forms.Button();
             this.btnManageCustomerAccount = new System.Windows.Forms.Button();
             this.btnManageEmployeeAccount = new System.Windows.Forms.Button();
@@ -63,15 +62,6 @@
             this.btnManageRooms.UseVisualStyleBackColor = true;
             this.btnManageRooms.Click += new System.EventHandler(this.btnManageRooms_Click);
             // 
-            // btnViewReward
-            // 
-            this.btnViewReward.Location = new System.Drawing.Point(110, 214);
-            this.btnViewReward.Name = "btnViewReward";
-            this.btnViewReward.Size = new System.Drawing.Size(83, 46);
-            this.btnViewReward.TabIndex = 2;
-            this.btnViewReward.Text = "View Reward Point Data";
-            this.btnViewReward.UseVisualStyleBackColor = true;
-            // 
             // btnAccountInfo
             // 
             this.btnAccountInfo.Location = new System.Drawing.Point(344, 105);
@@ -80,6 +70,7 @@
             this.btnAccountInfo.TabIndex = 3;
             this.btnAccountInfo.Text = "Account Information";
             this.btnAccountInfo.UseVisualStyleBackColor = true;
+            this.btnAccountInfo.Click += new System.EventHandler(this.btnAccountInfo_Click);
             // 
             // btnManageCustomerAccount
             // 
@@ -187,11 +178,11 @@
             this.Controls.Add(this.btnManageEmployeeAccount);
             this.Controls.Add(this.btnManageCustomerAccount);
             this.Controls.Add(this.btnAccountInfo);
-            this.Controls.Add(this.btnViewReward);
             this.Controls.Add(this.btnManageRooms);
             this.Controls.Add(this.btnManageReservation);
             this.Name = "frmEmployeeMenu";
             this.Text = "Employee Menu";
+            this.Load += new System.EventHandler(this.frmEmployeeMenu_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -201,7 +192,6 @@
 
         private System.Windows.Forms.Button btnManageReservation;
         private System.Windows.Forms.Button btnManageRooms;
-        private System.Windows.Forms.Button btnViewReward;
         private System.Windows.Forms.Button btnAccountInfo;
         private System.Windows.Forms.Button btnManageCustomerAccount;
         private System.Windows.Forms.Button btnManageEmployeeAccount;

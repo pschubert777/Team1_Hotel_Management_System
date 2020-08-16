@@ -46,6 +46,16 @@ namespace AccountManagementInterface
                     cmd.CommandType = CommandType.Text;
                     cmd.CommandText = "insert into customer (Name, Location, Password) values ('" + tboxUsername.Text + "', '" + tboxLocation.Text + "', '" + tboxPassword.Text + "')";
                     cmd.ExecuteNonQuery();
+
+                    /*
+                     * 
+                     * 
+                     * John log customer account creation here
+                     * 
+                     * 
+                     * 
+                     */
+
                     sqlcon.Close(); // close connection
 
                     MessageBox.Show("Account created successfully. Please login now.");
@@ -68,6 +78,17 @@ namespace AccountManagementInterface
 
                     cmd.CommandText = "insert into employee (Name, Location, Password) values ('" + tboxUsername.Text + "', '" + tboxLocation.Text + "', '" + tboxPassword.Text + "')";
                     cmd.ExecuteNonQuery();
+
+
+                    /*
+                     * 
+                     * 
+                     * John log employee account creation here
+                     * 
+                     * 
+                     * 
+                     */
+
                     sqlcon.Close(); // close connection
 
                     MessageBox.Show("Account created successfully. Please login now.");
@@ -81,6 +102,7 @@ namespace AccountManagementInterface
             {
                 MessageBox.Show("Please check a button for what kidn of account you are making.");
             }
+
         }
 
         private void btnCancel_Click(object sender, EventArgs e)

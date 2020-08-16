@@ -34,9 +34,13 @@ namespace AccountManagementInterface
             objFrmLogin.Show();
         }
 
-        private void btnTransactionAndReward_Click(object sender, EventArgs e)
-        {
+       
 
+        private void btnAccountInfo_Click(object sender, EventArgs e)
+        {
+            Hotel_Management_System.frmAccountInfo objFrmAccountInfo = new Hotel_Management_System.frmAccountInfo();
+            this.Hide();
+            objFrmAccountInfo.Show();
         }
     }
 }
