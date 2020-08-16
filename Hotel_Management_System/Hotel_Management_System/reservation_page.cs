@@ -237,6 +237,8 @@ namespace Hotel_Management_System
 
             if (update_reservation && user_type == "Employee")
             {
+
+                
                 if (startDatePicker.Value.Date > endDatePicker.Value.Date)
                 {
                     MessageBox.Show("Error - Start Date later than End Date");
@@ -245,6 +247,11 @@ namespace Hotel_Management_System
                 {
                     try
                     {
+
+
+                        //***JOHN Update reservation
+
+
                         res.DetermineAvailability();
                         res.Modify_reservation(reservation_id);
 
@@ -289,6 +296,10 @@ namespace Hotel_Management_System
                                 break;
                         }//*****PlaceHolder NEED to come up with functionality to retrieve Customer ID if user is EMPLOYEE
 
+
+
+                        //***JOHN Update reservation
+
                         fill_data_grid_view();
                         clear();
                     }
@@ -305,6 +316,8 @@ namespace Hotel_Management_System
         {
             //reset all fields. eventually this button will probably just return the user to the previous page though
             res.Cancel_Reservation(reservation_id);
+
+            //***JOHN Update reservation
             fill_data_grid_view();
             clear();
 
