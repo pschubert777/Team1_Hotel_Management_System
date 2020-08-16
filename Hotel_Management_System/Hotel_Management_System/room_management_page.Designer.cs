@@ -66,7 +66,7 @@
             // hotelLabel
             // 
             this.hotelLabel.AutoSize = true;
-            this.hotelLabel.Location = new System.Drawing.Point(123, 268);
+            this.hotelLabel.Location = new System.Drawing.Point(92, 268);
             this.hotelLabel.Name = "hotelLabel";
             this.hotelLabel.Size = new System.Drawing.Size(32, 13);
             this.hotelLabel.TabIndex = 9;
@@ -75,7 +75,7 @@
             // roomTypeLabel
             // 
             this.roomTypeLabel.AutoSize = true;
-            this.roomTypeLabel.Location = new System.Drawing.Point(93, 220);
+            this.roomTypeLabel.Location = new System.Drawing.Point(62, 220);
             this.roomTypeLabel.Name = "roomTypeLabel";
             this.roomTypeLabel.Size = new System.Drawing.Size(62, 13);
             this.roomTypeLabel.TabIndex = 10;
@@ -84,7 +84,7 @@
             // roomNumberLabel
             // 
             this.roomNumberLabel.AutoSize = true;
-            this.roomNumberLabel.Location = new System.Drawing.Point(110, 174);
+            this.roomNumberLabel.Location = new System.Drawing.Point(79, 174);
             this.roomNumberLabel.Name = "roomNumberLabel";
             this.roomNumberLabel.Size = new System.Drawing.Size(45, 13);
             this.roomNumberLabel.TabIndex = 11;
@@ -102,9 +102,9 @@
             // 
             // roomNumberBox
             // 
-            this.roomNumberBox.Location = new System.Drawing.Point(161, 172);
+            this.roomNumberBox.Location = new System.Drawing.Point(130, 172);
             this.roomNumberBox.Name = "roomNumberBox";
-            this.roomNumberBox.Size = new System.Drawing.Size(121, 20);
+            this.roomNumberBox.Size = new System.Drawing.Size(80, 20);
             this.roomNumberBox.TabIndex = 18;
             this.roomNumberBox.ValueChanged += new System.EventHandler(this.roomNumberBox_ValueChanged);
             // 
@@ -130,16 +130,16 @@
             // hotelBox
             // 
             this.hotelBox.FormattingEnabled = true;
-            this.hotelBox.Location = new System.Drawing.Point(161, 265);
+            this.hotelBox.Location = new System.Drawing.Point(130, 265);
             this.hotelBox.Name = "hotelBox";
-            this.hotelBox.Size = new System.Drawing.Size(121, 21);
+            this.hotelBox.Size = new System.Drawing.Size(165, 21);
             this.hotelBox.TabIndex = 21;
             this.hotelBox.SelectedIndexChanged += new System.EventHandler(this.hotelBox_SelectedIndexChanged);
             // 
             // roomTypeBox
             // 
             this.roomTypeBox.FormattingEnabled = true;
-            this.roomTypeBox.Location = new System.Drawing.Point(161, 217);
+            this.roomTypeBox.Location = new System.Drawing.Point(130, 217);
             this.roomTypeBox.Name = "roomTypeBox";
             this.roomTypeBox.Size = new System.Drawing.Size(121, 21);
             this.roomTypeBox.TabIndex = 22;
