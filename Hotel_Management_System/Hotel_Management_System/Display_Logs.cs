@@ -60,6 +60,8 @@ namespace Hotel_Management_System
             else
             {
 
+                logResults.Items.Clear();
+
                 DateTime start_date = start_date_picker.Value.Date;
                 DateTime end_date = end_date_picker.Value.Date;
 
