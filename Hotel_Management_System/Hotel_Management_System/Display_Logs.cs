@@ -19,16 +19,16 @@ namespace Hotel_Management_System
         public Display_Logs()
         {
             InitializeComponent();
-            user = new User("John", "C", 1);
+            user = new User("John", "Customer", 1); // test user
         }
         public Display_Logs(User u)
         {
             InitializeComponent();
             user = u;
 
-            if (user.User_type.Equals("C"))
+            if (user.User_type.Equals("Customer"))
                 userInfo.Text = "ID: " + user.id + "\nName: " + user.name + "\nUser Type: Customer";
-            else if (user.User_type.Equals("E"))
+            else if (user.User_type.Equals("Employee"))
                 userInfo.Text = "ID: " + user.id + "\nName: " + user.name + "\nUser Type: Employee";
         }
         private void label2_Click(object sender, EventArgs e)
@@ -39,10 +39,19 @@ namespace Hotel_Management_System
         private void back_menu_button_Click(object sender, EventArgs e)
         {
            
+            if(user.User_type.Equals("Customer")) {
 
-            frmCustomerMenu frmCustomerMenu = new frmCustomerMenu(user);
-            this.Hide();
-            frmCustomerMenu.Show();
+                frmCustomerMenu frmCustomerMenu = new frmCustomerMenu(user);
+                this.Hide();
+                frmCustomerMenu.Show();
+            }
+            else if (user.User_type.Equals("Employee")) {
+
+                frmEmployeeMenu frmEmployeeMenu = new frmEmployeeMenu(user);
+                this.Hide();
+                frmEmployeeMenu.Show();
+            }
+
         }
 
         private void listBox2_SelectedIndexChanged(object sender, EventArgs e)

@@ -114,6 +114,7 @@
             this.btnActivityLog.TabIndex = 7;
             this.btnActivityLog.Text = "View Activity Log";
             this.btnActivityLog.UseVisualStyleBackColor = true;
+            this.btnActivityLog.Click += new System.EventHandler(this.btnActivityLog_Click);
             // 
             // label1
             // 
