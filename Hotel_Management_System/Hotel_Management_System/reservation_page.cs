@@ -249,11 +249,10 @@ namespace Hotel_Management_System
                     {
 
 
-                        //***JOHN Update reservation
-
-
+                        
                         res.DetermineAvailability();
                         res.Modify_reservation(reservation_id);
+                        //***JOHN Update reservation
 
                         fill_data_grid_view();
                         clear();
@@ -498,7 +497,7 @@ namespace Hotel_Management_System
             }
 
 
-             // ***JOHN** Put logs query here****
+          
 
             for (var individual_date = startDate; individual_date <= endDate;  individual_date = individual_date.AddDays(1))
             {
