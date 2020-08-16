@@ -48,8 +48,6 @@
             this.startDatePicker = new System.Windows.Forms.DateTimePicker();
             this.numberOfGuestsBox = new System.Windows.Forms.NumericUpDown();
             this.ReservationDataGridView = new System.Windows.Forms.DataGridView();
-            this.Customer_Id_textbox = new System.Windows.Forms.TextBox();
-            this.customerIDLabel = new System.Windows.Forms.Label();
             this.Id = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Customer_Id = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Room_type = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -60,6 +58,8 @@
             this.Points_earned = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Third_party_Id = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Reservation_status = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Customer_Id_textbox = new System.Windows.Forms.TextBox();
+            this.customerIDLabel = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.numberOfGuestsBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ReservationDataGridView)).BeginInit();
             this.SuspendLayout();
@@ -150,7 +150,7 @@
             this.cancelButton.Location = new System.Drawing.Point(508, 617);
             this.cancelButton.Margin = new System.Windows.Forms.Padding(6);
             this.cancelButton.Name = "cancelButton";
-            this.cancelButton.Size = new System.Drawing.Size(150, 44);
+            this.cancelButton.Size = new System.Drawing.Size(232, 44);
             this.cancelButton.TabIndex = 8;
             this.cancelButton.Text = "Cancel";
             this.cancelButton.UseVisualStyleBackColor = true;
@@ -279,25 +279,6 @@
             this.ReservationDataGridView.TabIndex = 12;
             this.ReservationDataGridView.DoubleClick += new System.EventHandler(this.ReservationDataGridView_DoubleClick);
             // 
-            // Customer_Id_textbox
-            // 
-            this.Customer_Id_textbox.Location = new System.Drawing.Point(300, 145);
-            this.Customer_Id_textbox.Margin = new System.Windows.Forms.Padding(6);
-            this.Customer_Id_textbox.Name = "Customer_Id_textbox";
-            this.Customer_Id_textbox.Size = new System.Drawing.Size(354, 31);
-            this.Customer_Id_textbox.TabIndex = 13;
-            this.Customer_Id_textbox.TextChanged += new System.EventHandler(this.Customer_Id_textbox_TextChanged);
-            // 
-            // customerIDLabel
-            // 
-            this.customerIDLabel.AutoSize = true;
-            this.customerIDLabel.Location = new System.Drawing.Point(150, 151);
-            this.customerIDLabel.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
-            this.customerIDLabel.Name = "customerIDLabel";
-            this.customerIDLabel.Size = new System.Drawing.Size(130, 25);
-            this.customerIDLabel.TabIndex = 14;
-            this.customerIDLabel.Text = "Customer ID";
-            // 
             // Id
             // 
             this.Id.DataPropertyName = "Id";
@@ -387,6 +368,25 @@
             this.Reservation_status.Name = "Reservation_status";
             this.Reservation_status.ReadOnly = true;
             this.Reservation_status.Width = 200;
+            // 
+            // Customer_Id_textbox
+            // 
+            this.Customer_Id_textbox.Location = new System.Drawing.Point(300, 145);
+            this.Customer_Id_textbox.Margin = new System.Windows.Forms.Padding(6);
+            this.Customer_Id_textbox.Name = "Customer_Id_textbox";
+            this.Customer_Id_textbox.Size = new System.Drawing.Size(354, 31);
+            this.Customer_Id_textbox.TabIndex = 13;
+            this.Customer_Id_textbox.TextChanged += new System.EventHandler(this.Customer_Id_textbox_TextChanged);
+            // 
+            // customerIDLabel
+            // 
+            this.customerIDLabel.AutoSize = true;
+            this.customerIDLabel.Location = new System.Drawing.Point(150, 151);
+            this.customerIDLabel.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
+            this.customerIDLabel.Name = "customerIDLabel";
+            this.customerIDLabel.Size = new System.Drawing.Size(130, 25);
+            this.customerIDLabel.TabIndex = 14;
+            this.customerIDLabel.Text = "Customer ID";
             // 
             // reservation_page
             // 

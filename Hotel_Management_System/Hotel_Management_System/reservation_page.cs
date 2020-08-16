@@ -18,6 +18,8 @@ namespace Hotel_Management_System
         private int user_id { get; set; }
         private string user_type { get; set; }
 
+        // rservation id for modification and cancellation of reservation
+        private int reservation_id { get; set; }
         // customer ID when the employee is the user
         private int customer_id_employee { get; set; }
 
@@ -143,11 +145,12 @@ namespace Hotel_Management_System
 
             user_id = 0;
             user_type = "Employee";
+            reservation_id = 0;
 
             Populate_hotel_combo_box();
             populate_room_information();
 
-           fill_data_grid_view();
+            fill_data_grid_view();
            
 
             if(user_type != "Employee")
@@ -155,6 +158,8 @@ namespace Hotel_Management_System
                 Customer_Id_textbox.Visible = false;
                 customerIDLabel.Visible = false;
             }
+
+            cancelButton.Visible = false;
             
             // reservation object default values 
             res.startDate = startDatePicker.Value;
@@ -324,6 +329,9 @@ namespace Hotel_Management_System
                 {
                     Customer_Id_textbox.Text= ReservationDataGridView.CurrentRow.Cells[1].Value.ToString();
                 }
+
+                reservation_id = Convert.ToInt32(ReservationDataGridView.CurrentRow.Cells[0].Value);
+
                 startDatePicker.Value = Convert.ToDateTime(ReservationDataGridView.CurrentRow.Cells[4].Value);
                 endDatePicker.Value = Convert.ToDateTime(ReservationDataGridView.CurrentRow.Cells[5].Value);
                 numberOfGuestsBox.Value = Convert.ToInt32(ReservationDataGridView.CurrentRow.Cells[3].Value);
@@ -532,6 +540,18 @@ namespace Hotel_Management_System
                 throw new Exception(error.Message);
             }
 
+
+        }
+
+
+        public void Modify_Reservation()
+        {
+
+        }
+
+
+        public  void Cancel_Reservation()
+        {
 
         }
     }
