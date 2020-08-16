@@ -39,6 +39,10 @@
             this.backButton = new System.Windows.Forms.Button();
             this.hotelBox = new System.Windows.Forms.ComboBox();
             this.roomTypeBox = new System.Windows.Forms.ComboBox();
+            this.id = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.roomType = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.maxGuests = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.hotelID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.roomNumberBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.roomListBox)).BeginInit();
             this.SuspendLayout();
@@ -111,6 +115,11 @@
             // roomListBox
             // 
             this.roomListBox.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.roomListBox.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.id,
+            this.roomType,
+            this.maxGuests,
+            this.hotelID});
             this.roomListBox.Location = new System.Drawing.Point(352, 138);
             this.roomListBox.Name = "roomListBox";
             this.roomListBox.Size = new System.Drawing.Size(371, 207);
@@ -144,6 +153,26 @@
             this.roomTypeBox.Size = new System.Drawing.Size(121, 21);
             this.roomTypeBox.TabIndex = 22;
             this.roomTypeBox.SelectedIndexChanged += new System.EventHandler(this.roomTypeBox_SelectedIndexChanged);
+            // 
+            // id
+            // 
+            this.id.HeaderText = "Room ID";
+            this.id.Name = "id";
+            // 
+            // roomType
+            // 
+            this.roomType.HeaderText = "Room Type";
+            this.roomType.Name = "roomType";
+            // 
+            // maxGuests
+            // 
+            this.maxGuests.HeaderText = "Max Guests";
+            this.maxGuests.Name = "maxGuests";
+            // 
+            // hotelID
+            // 
+            this.hotelID.HeaderText = "Hotel ID";
+            this.hotelID.Name = "hotelID";
             // 
             // room_management_page
             // 
@@ -183,5 +212,9 @@
         private System.Windows.Forms.Button backButton;
         private System.Windows.Forms.ComboBox hotelBox;
         private System.Windows.Forms.ComboBox roomTypeBox;
+        private System.Windows.Forms.DataGridViewTextBoxColumn id;
+        private System.Windows.Forms.DataGridViewTextBoxColumn roomType;
+        private System.Windows.Forms.DataGridViewTextBoxColumn maxGuests;
+        private System.Windows.Forms.DataGridViewTextBoxColumn hotelID;
     }
 }

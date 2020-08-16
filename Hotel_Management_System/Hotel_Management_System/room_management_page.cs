@@ -33,6 +33,28 @@ namespace Hotel_Management_System
             }
         }
 
+        private void Populate_room_type_combo_box()
+        {
+            using (SqlConnection Connection = new SqlConnection(@"Data Source=(localdb)\ProjectsV13;Initial Catalog=Hotel_Entity_Relationship_System;Integrated Security=True;Connect Timeout=60;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False"))
+            {
+                if (Connection.State == ConnectionState.Closed)
+                {
+                    Connection.Open();
+                }
+
+                using (SqlCommand query = new SqlCommand("Select * From Room", Connection))
+                {
+                    using (SqlDataReader x = query.ExecuteReader())
+                    {
+                        while (x.Read())
+                        {
+                            hotelBox.Items.Add(x[1].ToString());
+                        }
+                    }
+                }
+            }
+        }
+
         private void Populate_hotel_combo_box()
         {
             using (SqlConnection Connection = new SqlConnection(@"Data Source=(localdb)\ProjectsV13;Initial Catalog=Hotel_Entity_Relationship_System;Integrated Security=True;Connect Timeout=60;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False"))
@@ -79,30 +101,36 @@ namespace Hotel_Management_System
 
         private void hotelBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            room.hotel = hotelBox.Text;
+            string[] getID = hotelBox.Text.Split(' ');
+            room.hotel = Convert.ToInt32(getID[0]);
         }
 
         private void submitButton_Click(object sender, EventArgs e)
         {
-            SqlConnection Connection = new SqlConnection(@"Data Source=(localdb)\ProjectsV13;Initial Catalog=Hotel_Entity_Relationship_System;Integrated Security=True;Connect Timeout=60;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False");
-            if (Connection.State == ConnectionState.Closed) { Connection.Open(); }
-
-            string customerID = roomListBox.CurrentRow.Cells[1].Value.ToString();
-
-            try
+            using (SqlConnection Connection = new SqlConnection(@"Data Source=(localdb)\ProjectsV13;Initial Catalog=Hotel_Entity_Relationship_System;Integrated Security=True;Connect Timeout=60;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False"))
             {
-                SqlDataAdapter query = new SqlDataAdapter("Select * from Room", Connection);
+                Connection.Open();
 
-                
+                try
+                {
+                    using (SqlCommand query = new SqlCommand("UPDATE Reservation SET Start_date = @Startdate, End_date=@Enddate, Hotel_location_Id = @hotelID, Room_type=@RoomType WHERE Id = @ResID", Connection))
+                    {
+                        //query.Parameters.AddWithValue("@Startdate", startDate);
+
+                        query.ExecuteNonQuery();
+                        MessageBox.Show("Rooms updated!");
+                    }
+                }
+                catch (Exception err)
+                {
+                    MessageBox.Show(err.Message);
+                }
+                finally
+                {
+                    Connection.Close();
+                }
             }
-            catch (Exception err)
-            {
-                MessageBox.Show(err.Message);
-            }
-            finally
-            {
-                Connection.Close();
-            }
+            
         }
 
         private void cancelButton_Click(object sender, EventArgs e)
@@ -127,7 +155,7 @@ namespace Hotel_Management_System
     {
         public decimal number { get; set; }
         public string type { get; set; }
-        public string hotel { get; set; }
+        public int hotel { get; set; }
         public string status { get; set; }
     }
 }
