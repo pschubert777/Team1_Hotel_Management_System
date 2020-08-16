@@ -64,10 +64,7 @@ namespace Hotel_Management_System
 
             try
             {
-                //need help here. ask about this later
                 SqlDataAdapter query = new SqlDataAdapter("Select * from Reservation", Connection);
-
-                //todo: finish this section
 
                 if (!checkedIn)
                 {
@@ -86,6 +83,7 @@ namespace Hotel_Management_System
             {
                 Connection.Close();
             }
+            fill_data_grid_view();
         }
 
         private void resultsBox_SelectedIndexChanged(object sender, EventArgs e)
@@ -132,11 +130,12 @@ namespace Hotel_Management_System
             {
                 Connection.Close();
             }
+            fill_data_grid_view();
         }
 
         private void returnButton_Click(object sender, EventArgs e)
         {
-
+            //return to menu
         }
     }
 }
