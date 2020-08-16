@@ -201,6 +201,46 @@ namespace Hotel_Management_System
 
 
         }
+        public reservation_page(User u)
+        {
+
+            InitializeComponent();
+
+            person = new User();
+            person.name = "Name";
+            person.User_type = "Customer";
+            person.id = 1;
+            reservation_id = 0;
+            update_reservation = false;
+
+            Populate_hotel_combo_box();
+            populate_room_information();
+
+            fill_data_grid_view();
+
+
+
+            if (person.User_type != "Employee")
+            {
+                Customer_Id_textbox.Visible = false;
+                customerIDLabel.Visible = false;
+            }
+
+            cancelButton.Visible = false;
+
+            // reservation object default values 
+            res.startDate = startDatePicker.Value;
+            res.endDate = endDatePicker.Value;
+            res.hotel_id = 0;
+            res.roomType = "";
+            res.numGuests = 0;
+            res.cardNum = 0;
+            res.Third_party_id = 0;
+            reservationSearchID = "";
+
+            person = u;
+
+        }
 
         private void startDatePicker_ValueChanged(object sender, EventArgs e)
         {
@@ -255,7 +295,9 @@ namespace Hotel_Management_System
                         res.DetermineAvailability();
                         res.Modify_reservation(reservation_id);
 
-                        //***JOHN  upgrade reservation
+                        //***JOHN  Upgrade reservation
+                        Logging logging = new Logging();
+                        logging.upgradeLog(person);
 
                         fill_data_grid_view();
                         clear();
@@ -300,7 +342,9 @@ namespace Hotel_Management_System
 
 
 
-                        //***JOHN Update reservation
+                        //***JOHN Create reservation
+                        Logging logging = new Logging();
+                        logging.createResLog(person);
 
                         fill_data_grid_view();
                         clear();
@@ -319,7 +363,10 @@ namespace Hotel_Management_System
             //reset all fields. eventually this button will probably just return the user to the previous page though
             res.Cancel_Reservation(reservation_id);
 
-            //***JOHN Update reservation ------------ cancellation?
+            //***JOHN Cancel reservation
+            Logging logging = new Logging();
+            logging.cancelResLog(person);
+
             fill_data_grid_view();
             clear();
 
