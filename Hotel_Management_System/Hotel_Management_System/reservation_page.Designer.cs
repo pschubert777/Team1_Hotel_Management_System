@@ -60,6 +60,7 @@
             this.Reservation_status = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Customer_Id_textbox = new System.Windows.Forms.TextBox();
             this.customerIDLabel = new System.Windows.Forms.Label();
+            this.clearButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.numberOfGuestsBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ReservationDataGridView)).BeginInit();
             this.SuspendLayout();
@@ -388,12 +389,25 @@
             this.customerIDLabel.TabIndex = 14;
             this.customerIDLabel.Text = "Customer ID";
             // 
+            // clearButton
+            // 
+            this.clearButton.BackColor = System.Drawing.Color.Red;
+            this.clearButton.Location = new System.Drawing.Point(32, 855);
+            this.clearButton.Margin = new System.Windows.Forms.Padding(6);
+            this.clearButton.Name = "clearButton";
+            this.clearButton.Size = new System.Drawing.Size(232, 44);
+            this.clearButton.TabIndex = 15;
+            this.clearButton.Text = "Clear Text";
+            this.clearButton.UseVisualStyleBackColor = false;
+            this.clearButton.Click += new System.EventHandler(this.clearButton_Click);
+            // 
             // reservation_page
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
             this.ClientSize = new System.Drawing.Size(1974, 931);
+            this.Controls.Add(this.clearButton);
             this.Controls.Add(this.customerIDLabel);
             this.Controls.Add(this.Customer_Id_textbox);
             this.Controls.Add(this.ReservationDataGridView);
@@ -459,5 +473,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Points_earned;
         private System.Windows.Forms.DataGridViewTextBoxColumn Third_party_Id;
         private System.Windows.Forms.DataGridViewTextBoxColumn Reservation_status;
+        private System.Windows.Forms.Button clearButton;
     }
 }

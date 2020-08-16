@@ -18,24 +18,45 @@ namespace Hotel_Management_System
         private int user_id { get; set; }
         private string user_type { get; set; }
 
-        // rservation id for modification and cancellation of reservation
-        private int reservation_id { get; set; }
+       
+       
         // customer ID when the employee is the user
         private int customer_id_employee { get; set; }
 
         Reservation res = new Reservation();
-        private string reservationSearchID { get; set; }
 
+        // reservation id for search bars
+        private string reservationSearchID { get; set; }
+        // rservation id for modification and cancellation of reservation
+        private int reservation_id { get; set; }
+
+        private bool update_reservation { get; set; }
         private void clear()
         {
             if(user_type == "Employee")
             {
                 Customer_Id_textbox.Text = string.Empty;
             }
+
+            reservation_id = 0;
+            update_reservation = false;
+            submitUpdateButton.Visible = true;
+            submitUpdateButton.Text = "Submit";
+            cancelButton.Visible = false;
+
             hotelLocationBox.Text = string.Empty;
             roomTypeBox.Text = string.Empty;
             numberOfGuestsBox.Value = 0;
             creditCardNumberBox.Text = string.Empty;
+
+            //reset reservation object
+            //res = new Reservation(); 
+            //startDatePicker.ResetText();
+            //endDatePicker.ResetText();
+            //hotelLocationBox.ResetText();
+            //roomTypeBox.ResetText();
+            //numberOfGuestsBox.ResetText();
+            //creditCardNumberBox.ResetText();
 
             startDatePicker.Value = DateTime.Now.Date;
             endDatePicker.Value = DateTime.Now.Date;
@@ -53,13 +74,14 @@ namespace Hotel_Management_System
                     Connection.Open();
                 }
 
-                string query_string = user_type == "Employee" ? "Select * From Reservation" : "Select * From Reservation where Customer_Id = @UserID";
+                string query_string = user_type == "Employee" ? "Select * From Reservation" : "Select * From Reservation where Customer_Id = @UserID and Reservation_status  NOT Like @Status";
 
                 using(SqlDataAdapter query = new SqlDataAdapter(query_string, Connection))
                 {
                     if(user_type == "Customer")
                     {
                         query.SelectCommand.Parameters.AddWithValue("@UserID", user_id);
+                        query.SelectCommand.Parameters.AddWithValue("@Status", "Cancelled%");
                     }
 
                     query.Fill(x);
@@ -143,9 +165,10 @@ namespace Hotel_Management_System
             
             InitializeComponent();
 
-            user_id = 0;
-            user_type = "Employee";
+            user_id = 1;
+            user_type = "Customer";
             reservation_id = 0;
+            update_reservation = false;
 
             Populate_hotel_combo_box();
             populate_room_information();
@@ -211,54 +234,82 @@ namespace Hotel_Management_System
 
         private void submitUpdateButton_Click(object sender, EventArgs e)
         {
-            if (startDatePicker.Value.Date > endDatePicker.Value.Date)
+
+            if (update_reservation && user_type == "Employee")
             {
-                MessageBox.Show("Error - Start Date later than End Date");
+                if (startDatePicker.Value.Date > endDatePicker.Value.Date)
+                {
+                    MessageBox.Show("Error - Start Date later than End Date");
+                }
+                else
+                {
+                    try
+                    {
+                        res.DetermineAvailability();
+                        res.Modify_reservation(reservation_id);
+
+                        fill_data_grid_view();
+                        clear();
+                    }
+                    catch (Exception error)
+                    {
+                        MessageBox.Show(error.Message);
+                    }
+
+
+                }
             }
             else
             {
-                try
+                if (startDatePicker.Value.Date > endDatePicker.Value.Date)
                 {
-                    
-                    
-                    //reward points dialogue box
-                    //only show this if user has at least 50 reward points
-                    res.DetermineAvailability();
-                    var confirmRewards = MessageBox.Show("Would you like to use 50 reward points to get a 10% discount?", "Reward Points", MessageBoxButtons.YesNo);
-
-                    string useRewards = ""; ;
-                    useRewards = confirmRewards == DialogResult.Yes ? "Yes" : "No";
-
-                    switch (user_type)
-                    {
-                        case "Customer":
-                            res.book_reservation(useRewards,  user_id, false);
-                            break;
-                        default:
-                            res.book_reservation(useRewards, customer_id_employee, false);
-                            break;
-                    }//*****PlaceHolder NEED to come up with functionality to retrieve Customer ID if user is EMPLOYEE
-
+                    MessageBox.Show("Error - Start Date later than End Date");
                 }
-                catch(Exception error)
+                else
                 {
-                    MessageBox.Show(error.Message);
+                    try
+                    {
+
+
+                        //reward points dialogue box
+                        //only show this if user has at least 50 reward points
+                        res.DetermineAvailability();
+                        var confirmRewards = MessageBox.Show("Would you like to use 50 reward points to get a 10% discount?", "Reward Points", MessageBoxButtons.YesNo);
+
+                        string useRewards = ""; ;
+                        useRewards = confirmRewards == DialogResult.Yes ? "Yes" : "No";
+
+                        switch (user_type)
+                        {
+                            case "Customer":
+                                res.book_reservation(useRewards, user_id, false);
+                                break;
+                            default:
+                                res.book_reservation(useRewards, customer_id_employee, false);
+                                break;
+                        }//*****PlaceHolder NEED to come up with functionality to retrieve Customer ID if user is EMPLOYEE
+
+                        fill_data_grid_view();
+                        clear();
+                    }
+                    catch (Exception error)
+                    {
+                        MessageBox.Show(error.Message);
+                    }
                 }
             }
-            fill_data_grid_view();
-            clear();
+            
         }
 
         private void cancelButton_Click(object sender, EventArgs e)
         {
             //reset all fields. eventually this button will probably just return the user to the previous page though
-            res = new Reservation(); //reset reservation object
-            startDatePicker.ResetText();
-            endDatePicker.ResetText();
-            hotelLocationBox.ResetText();
-            roomTypeBox.ResetText();
-            numberOfGuestsBox.ResetText();
-            creditCardNumberBox.ResetText();
+            res.Cancel_Reservation(reservation_id);
+            fill_data_grid_view();
+            clear();
+
+
+            
         }
 
         private void reservationIdBox_TextChanged(object sender, EventArgs e)
@@ -303,6 +354,12 @@ namespace Hotel_Management_System
                     query.Fill(dataTable1);
                     ReservationDataGridView.DataSource = dataTable1;
                 }
+                else
+                {
+                    SqlDataAdapter query = new SqlDataAdapter("Select * From Reservation", Connection);
+                    query.Fill(dataTable1);
+                    ReservationDataGridView.DataSource = dataTable1;
+                }
             }
             catch(Exception error)
             {
@@ -322,7 +379,25 @@ namespace Hotel_Management_System
 
         private void ReservationDataGridView_DoubleClick(object sender, EventArgs e)
         {
-            if(ReservationDataGridView.CurrentRow.Index >= 0)
+
+            // CHANGING UI
+            if(user_type == "Customer")
+            {
+                submitUpdateButton.Visible = false;
+
+            }
+            else
+            {
+                submitUpdateButton.Text = "Update";
+                update_reservation = true;
+
+            }
+            cancelButton.Visible = true;
+            // CHANGING UI
+
+
+            // Transferring Data from Data grid view to textbox
+            if (ReservationDataGridView.CurrentRow.Index >= 0)
             {
                 
                 if( user_type == "Employee")
@@ -377,6 +452,11 @@ namespace Hotel_Management_System
             {
                 MessageBox.Show("Index out of range");
             }
+        }
+
+        private void clearButton_Click(object sender, EventArgs e)
+        {
+            clear();
         }
     }
 
@@ -448,7 +528,30 @@ namespace Hotel_Management_System
             if (!enough_rooms){throw new Exception("There are not enough rooms!");}
         }
 
+        public void Modify_reservation(int reservation_id)
+        {
+            using (SqlConnection Connection = new SqlConnection(@"Data Source=(localdb)\ProjectsV13;Initial Catalog=Hotel_Entity_Relationship_System;Integrated Security=True;Connect Timeout=60;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False"))
+            {
+                Connection.Open();
 
+
+                using(SqlCommand query = new SqlCommand("UPDATE Reservation SET Start_date = @Startdate, End_date=@Enddate, Hotel_location_Id = @hotelID, Room_type=@RoomType WHERE Id = @ResID", Connection))
+                {
+                    query.Parameters.AddWithValue("@Startdate", startDate);
+                    query.Parameters.AddWithValue("@Enddate", endDate);
+                    query.Parameters.AddWithValue("@hotelID", hotel_id);
+                    query.Parameters.AddWithValue("@RoomType", roomType);
+                    query.Parameters.AddWithValue("@ResID", reservation_id);
+                    query.ExecuteNonQuery();
+
+                    MessageBox.Show("Updates to Reservation Made!");
+
+
+                }
+            }
+    
+
+        }
         public void book_reservation(string result, int user_id, bool third_party)
         {
             string sqlString = third_party && Third_party_id >= 0
@@ -544,15 +647,28 @@ namespace Hotel_Management_System
         }
 
 
-        public void Modify_Reservation()
+   
+
+
+        public  void Cancel_Reservation(int reservation_id)
         {
+            using (SqlConnection Connection = new SqlConnection(@"Data Source=(localdb)\ProjectsV13;Initial Catalog=Hotel_Entity_Relationship_System;Integrated Security=True;Connect Timeout=60;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False"))
+            {
+                Connection.Open();
 
-        }
+
+                using (SqlCommand query = new SqlCommand("UPDATE Reservation SET Reservation_status = @Status WHERE Id = @ResID", Connection))
+                {
+                    query.Parameters.AddWithValue("@Status", "Cancelled");
+                    query.Parameters.AddWithValue("@ResID", reservation_id);
+                    query.ExecuteNonQuery();
+
+                    MessageBox.Show("Reservation Cancelled");
 
 
-        public  void Cancel_Reservation()
-        {
-
+                }
+            }
+           
         }
     }
 
