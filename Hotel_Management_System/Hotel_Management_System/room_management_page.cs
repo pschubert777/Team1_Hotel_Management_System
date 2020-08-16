@@ -32,6 +32,34 @@ namespace Hotel_Management_System
                 }
             }
         }
+
+        private void Populate_hotel_combo_box()
+        {
+            using (SqlConnection Connection = new SqlConnection(@"Data Source=(localdb)\ProjectsV13;Initial Catalog=Hotel_Entity_Relationship_System;Integrated Security=True;Connect Timeout=60;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False"))
+            {
+                if (Connection.State == ConnectionState.Closed)
+                {
+                    Connection.Open();
+                }
+
+                using (SqlCommand query = new SqlCommand("Select * From Hotel", Connection))
+                {
+                    using (SqlDataReader x = query.ExecuteReader())
+                    {
+                        while (x.Read())
+                        {
+                            string hotel_id = x[0].ToString();
+                            string hotel_name = x[1].ToString();
+                            string hotel_location = x[2].ToString();
+
+                            string combined_data = $"{hotel_id} {hotel_name} {hotel_location}";
+                            hotelBox.Items.Add(combined_data);
+                        }
+                    }
+                }
+            }
+        }
+
         public room_management_page()
         {
             InitializeComponent();
@@ -93,8 +121,6 @@ namespace Hotel_Management_System
         {
             //populate fields with data
         }
-
-        
     }
 
     public struct roomType
