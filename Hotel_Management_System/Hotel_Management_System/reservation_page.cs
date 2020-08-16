@@ -248,12 +248,10 @@ namespace Hotel_Management_System
                     try
                     {
 
-
-                        //***JOHN Update reservation
-
-
                         res.DetermineAvailability();
                         res.Modify_reservation(reservation_id);
+
+                        //***JOHN  upgrade reservation
 
                         fill_data_grid_view();
                         clear();
@@ -317,7 +315,7 @@ namespace Hotel_Management_System
             //reset all fields. eventually this button will probably just return the user to the previous page though
             res.Cancel_Reservation(reservation_id);
 
-            //***JOHN Update reservation
+            //***JOHN Update reservation ------------ cancellation?
             fill_data_grid_view();
             clear();
 
@@ -496,9 +494,6 @@ namespace Hotel_Management_System
             {
                 Connection.Open();
             }
-
-
-             // ***JOHN** Put logs query here****
 
             for (var individual_date = startDate; individual_date <= endDate;  individual_date = individual_date.AddDays(1))
             {

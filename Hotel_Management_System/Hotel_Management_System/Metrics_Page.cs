@@ -82,7 +82,15 @@ namespace Hotel_Management_System
 
 
                 // ***JOHN** Put logs query here****
+                SqlConnection connection = new SqlConnection(@"Data Source=(localdb)\ProjectsV13;Initial Catalog=Hotel_Entity_Relationship_System;Integrated Security=True;Connect Timeout=60;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False");
 
+                if (connection.State == System.Data.ConnectionState.Closed)
+                {
+
+                    connection.Open();
+                }
+
+                SqlDataAdapter query = new SqlDataAdapter("INSERT INTO Logs (User_id, Action_date, User_type, Action_type) VALUES (" + user_id + ", " + user_type + ", " + DateTime.Today + ")", connection);
             }
         }
 

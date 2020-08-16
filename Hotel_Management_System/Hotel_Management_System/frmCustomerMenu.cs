@@ -47,5 +47,10 @@ namespace AccountManagementInterface
             this.Hide();
             dl.Show();
         }
+
+        private void btnAccountInfo_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

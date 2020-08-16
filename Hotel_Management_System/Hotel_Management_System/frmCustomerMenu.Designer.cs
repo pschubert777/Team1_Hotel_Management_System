@@ -95,6 +95,7 @@
             this.btnAccountInfo.TabIndex = 5;
             this.btnAccountInfo.Text = "Account Information";
             this.btnAccountInfo.UseVisualStyleBackColor = true;
+            this.btnAccountInfo.Click += new System.EventHandler(this.btnAccountInfo_Click);
             // 
             // btnActivityLog
             // 
