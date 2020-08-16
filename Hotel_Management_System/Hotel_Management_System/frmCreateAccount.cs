@@ -8,12 +8,13 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Data.SqlClient;
+using Hotel_Management_System;
 
 namespace AccountManagementInterface
 {
     public partial class frmCreateAccount : Form
     {
-        SqlConnection sqlcon = new SqlConnection(@"Data Source = (localdb)\ProjectsV13; Initial Catalog = Database1_1; Integrated Security = True; Connect Timeout = 30; Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False");
+        SqlConnection sqlcon = new SqlConnection(@"Data Source=(localdb)\ProjectsV13;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False");
 
 
         public frmCreateAccount()
@@ -46,7 +47,16 @@ namespace AccountManagementInterface
                     cmd.CommandType = CommandType.Text;
                     cmd.CommandText = "insert into customer (Name, Location, Password) values ('" + tboxUsername.Text + "', '" + tboxLocation.Text + "', '" + tboxPassword.Text + "')";
                     cmd.ExecuteNonQuery();
+
+                    cmd.CommandText = "SELECT TOP 1 * FROM Customer ORDER BY ID DESC";
+                    Int32 newId = (Int32)cmd.ExecuteScalar();
+
                     sqlcon.Close(); // close connection
+
+                    User user = new User ( tboxUsername.Text, "C", newId );
+
+                    Logging logging = new Logging();
+                    logging.createAccountLog(user);
 
                     MessageBox.Show("Account created successfully. Please login now.");
                     frmLogin objFrmLogin = new frmLogin();
@@ -68,7 +78,16 @@ namespace AccountManagementInterface
 
                     cmd.CommandText = "insert into employee (Name, Location, Password) values ('" + tboxUsername.Text + "', '" + tboxLocation.Text + "', '" + tboxPassword.Text + "')";
                     cmd.ExecuteNonQuery();
+
+                    cmd.CommandText = "SELECT TOP 1 * FROM employee ORDER BY ID DESC";
+                    Int32 newId = (Int32)cmd.ExecuteScalar();
+
                     sqlcon.Close(); // close connection
+
+                    User user = new User(tboxUsername.Text, "E", newId);
+
+                    Logging logging = new Logging();
+                    logging.createAccountLog(user);
 
                     MessageBox.Show("Account created successfully. Please login now.");
                     frmLogin objFrmLogin = new frmLogin();

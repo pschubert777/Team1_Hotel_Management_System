@@ -89,6 +89,108 @@ namespace Hotel_Management_System
 
             return table;
         }   
+
+        public void metricsLog (User user)
+        {
+
+            SqlConnection connection = new SqlConnection(@"Data Source=(localdb)\ProjectsV13;Initial Catalog=Hotel_Entity_Relationship_System;Integrated Security=True;Connect Timeout=60;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False");
+
+            if (connection.State == System.Data.ConnectionState.Closed)
+            {
+
+                connection.Open();
+            }
+            
+            SqlCommand command = connection.CreateCommand();
+            command.CommandType = CommandType.Text;
+            command.CommandText = "INSERT INTO Logs (User_id, Action_date, User_type, Action_type) VALUES ("
+                                                    + user.id + ", \'" + DateTime.Today + "\', \'" + user.User_type + "\', \'MC - Metrics Report Created\')";
+            command.ExecuteNonQuery();
+
+            connection.Close();
+        }
+        public void upgradeLog(User user)
+        {
+
+            SqlConnection connection = new SqlConnection(@"Data Source=(localdb)\ProjectsV13;Initial Catalog=Hotel_Entity_Relationship_System;Integrated Security=True;Connect Timeout=60;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False");
+
+            if (connection.State == System.Data.ConnectionState.Closed)
+            {
+
+                connection.Open();
+            }
+
+            SqlCommand command = connection.CreateCommand();
+            command.CommandType = CommandType.Text;
+            command.CommandText = "INSERT INTO Logs (User_id, Action_date, User_type, Action_type) VALUES ("
+                                                    + user.id + ", \'" + DateTime.Today + "\', \'" + user.User_type + "\', \'RU - Reservation upgraded\')";
+            command.ExecuteNonQuery();
+
+            connection.Close();
+        }
+        public void createResLog(User user)
+        {
+
+            SqlConnection connection = new SqlConnection(@"Data Source=(localdb)\ProjectsV13;Initial Catalog=Hotel_Entity_Relationship_System;Integrated Security=True;Connect Timeout=60;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False");
+
+            if (connection.State == System.Data.ConnectionState.Closed)
+            {
+
+                connection.Open();
+            }
+
+            SqlCommand command = connection.CreateCommand();
+            command.CommandType = CommandType.Text;
+            command.CommandText = "INSERT INTO Logs (User_id, Action_date, User_type, Action_type) VALUES ("
+                                                    + user.id + ", \'" + DateTime.Today + "\', \'" + user.User_type + "\', \'RC - Reservation created\')";
+            command.ExecuteNonQuery();
+
+            connection.Close();
+        }
+        public void cancelResLog(User user)
+        {
+
+            SqlConnection connection = new SqlConnection(@"Data Source=(localdb)\ProjectsV13;Initial Catalog=Hotel_Entity_Relationship_System;Integrated Security=True;Connect Timeout=60;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False");
+
+            if (connection.State == System.Data.ConnectionState.Closed)
+            {
+
+                connection.Open();
+            }
+
+            SqlCommand command = connection.CreateCommand();
+            command.CommandType = CommandType.Text;
+            command.CommandText = "INSERT INTO Logs (User_id, Action_date, User_type, Action_type) VALUES ("
+                                                    + user.id + ", \'" + DateTime.Today + "\', \'" + user.User_type + "\', \'RD - Reservation cancelled\')";
+            command.ExecuteNonQuery();
+
+            connection.Close();
+        }
+        public void createAccountLog(User user)
+        {
+
+            SqlConnection connection = new SqlConnection(@"Data Source=(localdb)\ProjectsV13;Initial Catalog=Hotel_Entity_Relationship_System;Integrated Security=True;Connect Timeout=60;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False");
+
+            if (connection.State == System.Data.ConnectionState.Closed)
+            {
+
+                connection.Open();
+            }
+
+            SqlCommand command = connection.CreateCommand();
+            command.CommandType = CommandType.Text;
+
+            if (user.User_type.Equals("C"))
+                command.CommandText = "INSERT INTO Logs (User_id, Action_date, User_type, Action_type) VALUES ("
+                                                    + user.id + ", \'" + DateTime.Today + "\', \'" + user.User_type + "\', \'CC - Customer created\')";
+            else
+                command.CommandText = "INSERT INTO Logs (User_id, Action_date, User_type, Action_type) VALUES ("
+                                                    + user.id + ", \'" + DateTime.Today + "\', \'" + user.User_type + "\', \'EC - Employee created\')";
+
+            command.ExecuteNonQuery();
+
+            connection.Close();
+        }
     }
 }
 
