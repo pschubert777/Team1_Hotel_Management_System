@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Data.SqlClient;
+using Hotel_Management_System;
 
 namespace AccountManagementInterface
 {
@@ -81,6 +82,11 @@ namespace AccountManagementInterface
             frmCreateAccount objFrmCreateAccount = new frmCreateAccount();
             this.Hide();
             objFrmCreateAccount.Show();
+        }
+
+        private void frmLogin_Load(object sender, EventArgs e)
+        {
+           
         }
     }
 }

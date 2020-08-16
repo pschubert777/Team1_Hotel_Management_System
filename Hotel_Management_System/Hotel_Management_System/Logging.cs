@@ -14,14 +14,20 @@ namespace Hotel_Management_System
         private DateTime startDate, endDate, todayDate;
         private SqlConnection connection;
 
+        public Logging()
+        {
+            
+        }
         public Logging(DateTime start_date, DateTime end_date)
         {
 
             startDate = start_date;
             endDate = end_date;
         }
-        public DataTable displayLogs() {
 
+        public DataTable displayLogs(User user) {
+
+            
             connection = new SqlConnection(@"Data Source=(localdb)\ProjectsV13;Initial Catalog=Hotel_Entity_Relationship_System;Integrated Security=True;Connect Timeout=60;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False");
 
             if (connection.State == System.Data.ConnectionState.Closed) {
@@ -30,7 +36,7 @@ namespace Hotel_Management_System
             }
 
 
-            SqlDataAdapter query = new SqlDataAdapter("SELECT * FROM Logs", connection);
+            SqlDataAdapter query = new SqlDataAdapter("SELECT * FROM Logs WHERE User_id=" + user.id, connection);
 
             var table = new DataTable();
             query.Fill(table);

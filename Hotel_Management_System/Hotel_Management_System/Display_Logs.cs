@@ -15,11 +15,22 @@ namespace Hotel_Management_System
 {
     public partial class Display_Logs : Form
     {
+        private User user;
         public Display_Logs()
         {
             InitializeComponent();
+            user = new User("John", "C", 1);
         }
+        public Display_Logs(User u)
+        {
+            InitializeComponent();
+            user = u;
 
+            if (user.User_type.Equals("C"))
+                userInfo.Text = "ID: " + user.id + "\nName: " + user.name + "\nUser Type: Customer";
+            else if (user.User_type.Equals("E"))
+                userInfo.Text = "ID: " + user.id + "\nName: " + user.name + "\nUser Type: Employee";
+        }
         private void label2_Click(object sender, EventArgs e)
         {
 
@@ -27,9 +38,9 @@ namespace Hotel_Management_System
 
         private void back_menu_button_Click(object sender, EventArgs e)
         {
+           
 
-
-            frmCustomerMenu frmCustomerMenu = new frmCustomerMenu();
+            frmCustomerMenu frmCustomerMenu = new frmCustomerMenu(user);
             this.Hide();
             frmCustomerMenu.Show();
         }
@@ -52,52 +63,9 @@ namespace Hotel_Management_System
                 DateTime start_date = start_date_picker.Value.Date;
                 DateTime end_date = end_date_picker.Value.Date;
 
-
-                /*SqlConnection connection = new SqlConnection(@"Data Source=(localdb)\MSSQLLocalDB;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False");
-
-                if (connection.State == System.Data.ConnectionState.Closed)
-                {
-                    connection.Open();
-                }
-
-
-                SqlCommand query = new SqlCommand("SELECT * FROM Logs", connection);
-
-                SqlDataReader sqlReader = query.ExecuteReader();
-
-                while (sqlReader.Read())
-                {
-
-                    string userId = (string)sqlReader["user_id"];
-                    string actionDate = (string)sqlReader["Action_date"];
-                    string userType = (string)sqlReader["user_type"];
-                    string actionType = (string)sqlReader["action_type"];
-
-                    string item = string.Format(userId + actionDate + userType + actionType);
-
-                    logResults.Items.Add(item);
-                }
-
-                connection.Close();
-            }*/
-
-
-
                 Logging logging = new Logging(start_date, end_date);
 
-                DataTable table = logging.displayLogs();
-
-                DataGridView dgv = new DataGridView();
-
-               
-
-                /* logResults.DataSource = dgv
-
-
-                 logResults.Items.Add(dgv);*/
-
-                
-                
+                DataTable table = logging.displayLogs(user);
 
                 DataRow tempRow = null;
 
@@ -105,17 +73,18 @@ namespace Hotel_Management_System
                 {
 
                     tempRow = temp;
-
                    
                     ListViewItem item = new ListViewItem(tempRow["Action_date"].ToString());
                     item.SubItems.Add(tempRow["Action_type"].ToString());
 
-
-                    logResults.Items.Add(item);
-                    
-                    
+                    logResults.Items.Add(item); 
                 }
             }
+        }
+
+        private void Display_Logs_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }
