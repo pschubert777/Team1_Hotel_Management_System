@@ -166,7 +166,10 @@ namespace Hotel_Management_System
             
             InitializeComponent();
 
-            
+            person = new User();
+            person.name = "Name";
+            person.User_type = "Customer";
+            person.id = 1;
             reservation_id = 0;
             update_reservation = false;
 
@@ -175,10 +178,7 @@ namespace Hotel_Management_System
 
             fill_data_grid_view();
 
-            person = new User();
-            person.name = "Name";
-            person.User_type = "Customer";
-            person.id = 1;
+            
 
             if(person.User_type != "Employee")
             {
