@@ -37,12 +37,12 @@
             this.statusSubmitButton = new System.Windows.Forms.Button();
             this.returnButton = new System.Windows.Forms.Button();
             this.resultsBox = new System.Windows.Forms.DataGridView();
-            this.searchButton = new System.Windows.Forms.Button();
             this.reservationID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.startDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.endDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.checked_in = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.checkedOut = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.searchButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.resultsBox)).BeginInit();
             this.SuspendLayout();
             // 
@@ -117,11 +117,11 @@
             // 
             // returnButton
             // 
-            this.returnButton.Location = new System.Drawing.Point(654, 424);
+            this.returnButton.Location = new System.Drawing.Point(12, 12);
             this.returnButton.Name = "returnButton";
             this.returnButton.Size = new System.Drawing.Size(110, 48);
             this.returnButton.TabIndex = 5;
-            this.returnButton.Text = "Employee Menu";
+            this.returnButton.Text = "Return to Menu";
             this.returnButton.UseVisualStyleBackColor = true;
             this.returnButton.Click += new System.EventHandler(this.returnButton_Click);
             // 
@@ -138,16 +138,6 @@
             this.resultsBox.Name = "resultsBox";
             this.resultsBox.Size = new System.Drawing.Size(371, 177);
             this.resultsBox.TabIndex = 6;
-            // 
-            // searchButton
-            // 
-            this.searchButton.Location = new System.Drawing.Point(548, 371);
-            this.searchButton.Name = "searchButton";
-            this.searchButton.Size = new System.Drawing.Size(75, 23);
-            this.searchButton.TabIndex = 7;
-            this.searchButton.Text = "Search";
-            this.searchButton.UseVisualStyleBackColor = true;
-            this.searchButton.Click += new System.EventHandler(this.searchButton_Click);
             // 
             // reservationID
             // 
@@ -173,6 +163,16 @@
             // 
             this.checkedOut.HeaderText = "Checked Out";
             this.checkedOut.Name = "checkedOut";
+            // 
+            // searchButton
+            // 
+            this.searchButton.Location = new System.Drawing.Point(548, 371);
+            this.searchButton.Name = "searchButton";
+            this.searchButton.Size = new System.Drawing.Size(75, 23);
+            this.searchButton.TabIndex = 7;
+            this.searchButton.Text = "Search";
+            this.searchButton.UseVisualStyleBackColor = true;
+            this.searchButton.Click += new System.EventHandler(this.searchButton_Click);
             // 
             // check_in_out_page
             // 

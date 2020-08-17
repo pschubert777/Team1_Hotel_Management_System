@@ -36,13 +36,13 @@
             this.roomListLabel = new System.Windows.Forms.Label();
             this.roomNumberBox = new System.Windows.Forms.NumericUpDown();
             this.roomListBox = new System.Windows.Forms.DataGridView();
-            this.backButton = new System.Windows.Forms.Button();
-            this.hotelBox = new System.Windows.Forms.ComboBox();
-            this.roomTypeBox = new System.Windows.Forms.ComboBox();
             this.id = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.roomType = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.maxGuests = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.hotelID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.backButton = new System.Windows.Forms.Button();
+            this.hotelBox = new System.Windows.Forms.ComboBox();
+            this.roomTypeBox = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.roomNumberBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.roomListBox)).BeginInit();
             this.SuspendLayout();
@@ -126,13 +126,33 @@
             this.roomListBox.TabIndex = 19;
             this.roomListBox.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.roomListBox_CellContentClick);
             // 
+            // id
+            // 
+            this.id.HeaderText = "Room ID";
+            this.id.Name = "id";
+            // 
+            // roomType
+            // 
+            this.roomType.HeaderText = "Room Type";
+            this.roomType.Name = "roomType";
+            // 
+            // maxGuests
+            // 
+            this.maxGuests.HeaderText = "Max Guests";
+            this.maxGuests.Name = "maxGuests";
+            // 
+            // hotelID
+            // 
+            this.hotelID.HeaderText = "Hotel ID";
+            this.hotelID.Name = "hotelID";
+            // 
             // backButton
             // 
-            this.backButton.Location = new System.Drawing.Point(649, 424);
+            this.backButton.Location = new System.Drawing.Point(12, 12);
             this.backButton.Name = "backButton";
             this.backButton.Size = new System.Drawing.Size(115, 48);
             this.backButton.TabIndex = 20;
-            this.backButton.Text = "Back to Menu";
+            this.backButton.Text = "Return to Menu";
             this.backButton.UseVisualStyleBackColor = true;
             this.backButton.Click += new System.EventHandler(this.backButton_Click);
             // 
@@ -153,26 +173,6 @@
             this.roomTypeBox.Size = new System.Drawing.Size(121, 21);
             this.roomTypeBox.TabIndex = 22;
             this.roomTypeBox.SelectedIndexChanged += new System.EventHandler(this.roomTypeBox_SelectedIndexChanged);
-            // 
-            // id
-            // 
-            this.id.HeaderText = "Room ID";
-            this.id.Name = "id";
-            // 
-            // roomType
-            // 
-            this.roomType.HeaderText = "Room Type";
-            this.roomType.Name = "roomType";
-            // 
-            // maxGuests
-            // 
-            this.maxGuests.HeaderText = "Max Guests";
-            this.maxGuests.Name = "maxGuests";
-            // 
-            // hotelID
-            // 
-            this.hotelID.HeaderText = "Hotel ID";
-            this.hotelID.Name = "hotelID";
             // 
             // room_management_page
             // 
