@@ -34,9 +34,16 @@
             this.reservationIdLabel = new System.Windows.Forms.Label();
             this.reservationIdBox = new System.Windows.Forms.TextBox();
             this.checkInOutStatusBox = new System.Windows.Forms.ComboBox();
-            this.resultsBox = new System.Windows.Forms.ListBox();
             this.statusSubmitButton = new System.Windows.Forms.Button();
             this.returnButton = new System.Windows.Forms.Button();
+            this.resultsBox = new System.Windows.Forms.DataGridView();
+            this.searchButton = new System.Windows.Forms.Button();
+            this.reservationID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.startDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.endDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.checked_in = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.checkedOut = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            ((System.ComponentModel.ISupportInitialize)(this.resultsBox)).BeginInit();
             this.SuspendLayout();
             // 
             // searchReservationLabel
@@ -98,15 +105,6 @@
             this.checkInOutStatusBox.TabIndex = 3;
             this.checkInOutStatusBox.SelectedIndexChanged += new System.EventHandler(this.checkInOutStatusBox_SelectedIndexChanged);
             // 
-            // resultsBox
-            // 
-            this.resultsBox.FormattingEnabled = true;
-            this.resultsBox.Location = new System.Drawing.Point(413, 103);
-            this.resultsBox.Name = "resultsBox";
-            this.resultsBox.Size = new System.Drawing.Size(288, 160);
-            this.resultsBox.TabIndex = 4;
-            this.resultsBox.SelectedIndexChanged += new System.EventHandler(this.resultsBox_SelectedIndexChanged);
-            // 
             // statusSubmitButton
             // 
             this.statusSubmitButton.Location = new System.Drawing.Point(149, 220);
@@ -127,14 +125,64 @@
             this.returnButton.UseVisualStyleBackColor = true;
             this.returnButton.Click += new System.EventHandler(this.returnButton_Click);
             // 
+            // resultsBox
+            // 
+            this.resultsBox.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.resultsBox.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.reservationID,
+            this.startDate,
+            this.endDate,
+            this.checked_in,
+            this.checkedOut});
+            this.resultsBox.Location = new System.Drawing.Point(366, 103);
+            this.resultsBox.Name = "resultsBox";
+            this.resultsBox.Size = new System.Drawing.Size(371, 177);
+            this.resultsBox.TabIndex = 6;
+            // 
+            // searchButton
+            // 
+            this.searchButton.Location = new System.Drawing.Point(548, 371);
+            this.searchButton.Name = "searchButton";
+            this.searchButton.Size = new System.Drawing.Size(75, 23);
+            this.searchButton.TabIndex = 7;
+            this.searchButton.Text = "Search";
+            this.searchButton.UseVisualStyleBackColor = true;
+            this.searchButton.Click += new System.EventHandler(this.searchButton_Click);
+            // 
+            // reservationID
+            // 
+            this.reservationID.HeaderText = "Reservation ID";
+            this.reservationID.Name = "reservationID";
+            // 
+            // startDate
+            // 
+            this.startDate.HeaderText = "Start Date";
+            this.startDate.Name = "startDate";
+            // 
+            // endDate
+            // 
+            this.endDate.HeaderText = "End Date";
+            this.endDate.Name = "endDate";
+            // 
+            // checked_in
+            // 
+            this.checked_in.HeaderText = "Checked In";
+            this.checked_in.Name = "checked_in";
+            // 
+            // checkedOut
+            // 
+            this.checkedOut.HeaderText = "Checked Out";
+            this.checkedOut.Name = "checkedOut";
+            // 
             // check_in_out_page
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(776, 484);
+            this.Controls.Add(this.searchButton);
+            this.Controls.Add(this.resultsBox);
             this.Controls.Add(this.returnButton);
             this.Controls.Add(this.statusSubmitButton);
-            this.Controls.Add(this.resultsBox);
             this.Controls.Add(this.checkInOutStatusBox);
             this.Controls.Add(this.reservationIdBox);
             this.Controls.Add(this.reservationIdLabel);
@@ -143,6 +191,7 @@
             this.Controls.Add(this.searchReservationLabel);
             this.Name = "check_in_out_page";
             this.Text = "check_in_out_page";
+            ((System.ComponentModel.ISupportInitialize)(this.resultsBox)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -156,8 +205,14 @@
         private System.Windows.Forms.Label reservationIdLabel;
         private System.Windows.Forms.TextBox reservationIdBox;
         private System.Windows.Forms.ComboBox checkInOutStatusBox;
-        private System.Windows.Forms.ListBox resultsBox;
         private System.Windows.Forms.Button statusSubmitButton;
         private System.Windows.Forms.Button returnButton;
+        private System.Windows.Forms.DataGridView resultsBox;
+        private System.Windows.Forms.Button searchButton;
+        private System.Windows.Forms.DataGridViewTextBoxColumn reservationID;
+        private System.Windows.Forms.DataGridViewTextBoxColumn startDate;
+        private System.Windows.Forms.DataGridViewTextBoxColumn endDate;
+        private System.Windows.Forms.DataGridViewTextBoxColumn checked_in;
+        private System.Windows.Forms.DataGridViewTextBoxColumn checkedOut;
     }
 }
