@@ -238,7 +238,7 @@ namespace Hotel_Management_System
             res.Third_party_id = 0;
             reservationSearchID = "";
 
-            person = u;
+            person = u; // passing user object from previous form
 
         }
 

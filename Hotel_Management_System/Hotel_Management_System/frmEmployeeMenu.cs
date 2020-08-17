@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Hotel_Management_System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -12,11 +13,17 @@ namespace AccountManagementInterface
 {
     public partial class frmEmployeeMenu : Form
     {
+
+        private User user;
         public frmEmployeeMenu()
         {
             InitializeComponent();
         }
-
+        public frmEmployeeMenu(User u)
+        {
+            InitializeComponent();
+            user = u;
+        }
         private void btnCancel_Click(object sender, EventArgs e)
         {
             frmLogin objFrmLogin = new frmLogin();
@@ -64,9 +71,13 @@ namespace AccountManagementInterface
             objRoom_management_page.Show();
         }
 
+        
+
         private void btnActivityLog_Click(object sender, EventArgs e)
         {
-
+            Display_Logs dl = new Display_Logs(user);
+            this.Hide();
+            dl.Show();
         }
-    }
+    
 }
