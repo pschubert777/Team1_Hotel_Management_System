@@ -68,7 +68,7 @@
             this.Generate_Report_Button.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
             this.Generate_Report_Button.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Generate_Report_Button.Location = new System.Drawing.Point(630, 357);
-            this.Generate_Report_Button.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Generate_Report_Button.Margin = new System.Windows.Forms.Padding(2);
             this.Generate_Report_Button.Name = "Generate_Report_Button";
             this.Generate_Report_Button.Size = new System.Drawing.Size(130, 65);
             this.Generate_Report_Button.TabIndex = 4;
@@ -81,7 +81,7 @@
             this.Rewards_summary_button.AutoSize = true;
             this.Rewards_summary_button.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Rewards_summary_button.Location = new System.Drawing.Point(553, 152);
-            this.Rewards_summary_button.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Rewards_summary_button.Margin = new System.Windows.Forms.Padding(2);
             this.Rewards_summary_button.Name = "Rewards_summary_button";
             this.Rewards_summary_button.Size = new System.Drawing.Size(176, 24);
             this.Rewards_summary_button.TabIndex = 5;
@@ -94,7 +94,7 @@
             this.Customer_Report_button.AutoSize = true;
             this.Customer_Report_button.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Customer_Report_button.Location = new System.Drawing.Point(553, 242);
-            this.Customer_Report_button.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Customer_Report_button.Margin = new System.Windows.Forms.Padding(2);
             this.Customer_Report_button.Name = "Customer_Report_button";
             this.Customer_Report_button.Size = new System.Drawing.Size(164, 24);
             this.Customer_Report_button.TabIndex = 6;
@@ -107,7 +107,7 @@
             this.Occupancy_Summary_button.AutoSize = true;
             this.Occupancy_Summary_button.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Occupancy_Summary_button.Location = new System.Drawing.Point(553, 200);
-            this.Occupancy_Summary_button.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Occupancy_Summary_button.Margin = new System.Windows.Forms.Padding(2);
             this.Occupancy_Summary_button.Name = "Occupancy_Summary_button";
             this.Occupancy_Summary_button.Size = new System.Drawing.Size(194, 24);
             this.Occupancy_Summary_button.TabIndex = 7;
@@ -119,7 +119,7 @@
             // 
             this.back_menu_button.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.back_menu_button.Location = new System.Drawing.Point(6, 6);
-            this.back_menu_button.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.back_menu_button.Margin = new System.Windows.Forms.Padding(2);
             this.back_menu_button.Name = "back_menu_button";
             this.back_menu_button.Size = new System.Drawing.Size(118, 55);
             this.back_menu_button.TabIndex = 10;
@@ -132,7 +132,7 @@
             this.end_date_picker.CustomFormat = "yyyy-MM-dd";
             this.end_date_picker.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.end_date_picker.Location = new System.Drawing.Point(332, 120);
-            this.end_date_picker.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.end_date_picker.Margin = new System.Windows.Forms.Padding(2);
             this.end_date_picker.Name = "end_date_picker";
             this.end_date_picker.Size = new System.Drawing.Size(177, 20);
             this.end_date_picker.TabIndex = 11;
@@ -143,7 +143,7 @@
             this.start_date_picker.CustomFormat = "yyyy-MM-dd";
             this.start_date_picker.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.start_date_picker.Location = new System.Drawing.Point(120, 120);
-            this.start_date_picker.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.start_date_picker.Margin = new System.Windows.Forms.Padding(2);
             this.start_date_picker.Name = "start_date_picker";
             this.start_date_picker.Size = new System.Drawing.Size(177, 20);
             this.start_date_picker.TabIndex = 12;
@@ -164,9 +164,9 @@
             this.Controls.Add(this.Generate_Report_Button);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.Start_date_label);
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "Metrics_Page";
-            this.Text = "Metrics";
+            this.Text = "B";
             this.Load += new System.EventHandler(this.Metrics_Page_Load);
             this.ResumeLayout(false);
             this.PerformLayout();

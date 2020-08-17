@@ -50,5 +50,10 @@ namespace Hotel_Management_System
             this.Hide();
             objEmployeeMenu.Show();
         }
+
+        private void frmManageCustomerAccount_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }
