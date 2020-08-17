@@ -530,7 +530,7 @@ namespace Hotel_Management_System
         {
             if(person.User_type == "Employee")
             {
-                AccountManagementInterface.frmEmployeeMenu objEmployeeMenu = new AccountManagementInterface.frmEmployeeMenu();
+                AccountManagementInterface.frmEmployeeMenu objEmployeeMenu = new AccountManagementInterface.frmEmployeeMenu(person);
                 this.Hide();
                 objEmployeeMenu.Show();
             }
