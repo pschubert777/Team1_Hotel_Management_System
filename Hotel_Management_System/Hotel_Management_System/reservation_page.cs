@@ -300,7 +300,7 @@ namespace Hotel_Management_System
 
 
 
-                        //***JOHN Create Reservation
+                        //***JOHN Update reservation
 
                         fill_data_grid_view();
                         clear();
@@ -319,7 +319,7 @@ namespace Hotel_Management_System
             //reset all fields. eventually this button will probably just return the user to the previous page though
             res.Cancel_Reservation(reservation_id);
 
-            //***JOHN cancellation
+            //***JOHN Update reservation ------------ cancellation?
             fill_data_grid_view();
             clear();
 
