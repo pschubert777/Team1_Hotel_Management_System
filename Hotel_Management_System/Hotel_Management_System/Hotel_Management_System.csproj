@@ -109,6 +109,7 @@
     <Compile Include="room_management_page.Designer.cs">
       <DependentUpon>room_management_page.cs</DependentUpon>
     </Compile>
+    <Compile Include="ThirdPartyFile.cs" />
     <Compile Include="User.cs" />
     <EmbeddedResource Include="check_in_out_page.resx">
       <DependentUpon>check_in_out_page.cs</DependentUpon>

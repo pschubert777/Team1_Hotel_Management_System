@@ -133,15 +133,18 @@ namespace Hotel_Management_System
         public void Export_file()
         {
 
-            StreamWriter writer = new StreamWriter(@"C:\Users\peterschubert\Documents\FilesTest\RewardsSummary.txt");
-            writer.WriteLine($"Rewards Summary from {Start_date.ToShortDateString()} to {End_date.ToShortDateString()}");
-            writer.WriteLine($"Rewards as of {Start_date}: {Rewards_outstanding_start_date}");
-            writer.WriteLine($"Rewards as of {End_date}: {Rewards_outstanding_end_date}");
-            writer.WriteLine($"Total Rewards Earned: {Rewards_earned}");
-            writer.WriteLine($"Total Rewards Spent: {Rewards_redeemed}");
-            writer.Close();
-         
+            using (StreamWriter writer = File.CreateText(@"C:\Users\peterschubert\Documents\FilesTest\RewardsSummary.txt"))
+            {
 
+
+                writer.WriteLine($"Rewards Summary from {Start_date.ToShortDateString()} to {End_date.ToShortDateString()}");
+                writer.WriteLine($"Rewards as of {Start_date}: {Rewards_outstanding_start_date}");
+                writer.WriteLine($"Rewards as of {End_date}: {Rewards_outstanding_end_date}");
+                writer.WriteLine($"Total Rewards Earned: {Rewards_earned}");
+                writer.WriteLine($"Total Rewards Spent: {Rewards_redeemed}");
+                writer.Close();
+
+            }
 
         }
       
@@ -253,11 +256,16 @@ namespace Hotel_Management_System
 
         public void ExportFile()
         {
-            StreamWriter writer = new StreamWriter(@"C:\Users\peterschubert\Documents\FilesTest\Occupancy.txt");
-            writer.WriteLine($"Occupancy Summary from {Start_date.ToShortDateString()} to {End_date.ToShortDateString()}");
-            writer.WriteLine($"Average Percentage of Occupied Rooms {((Total_rooms_Occupied/date_difference)/TotalRooms)*100}%");
-            writer.WriteLine($"Average Percentage of Unoccupied Rooms {((Total_rooms_Unoccupied / date_difference) / TotalRooms) * 100}%");
-            writer.WriteLine($"Average Percentage of Unoccupied Rooms due to maintenance {((Total_rooms_Unoccupied_maintenance/ date_difference) / TotalRooms) * 100}% ");
+            using (StreamWriter writer = File.CreateText(@"C:\Users\peterschubert\Documents\FilesTest\Occupancy.txt"))
+            {
+
+
+                writer.WriteLine($"Occupancy Summary from {Start_date.ToShortDateString()} to {End_date.ToShortDateString()}");
+                writer.WriteLine($"Average Percentage of Occupied Rooms {((Total_rooms_Occupied / date_difference) / TotalRooms) * 100}%");
+                writer.WriteLine($"Average Percentage of Unoccupied Rooms {((Total_rooms_Unoccupied / date_difference) / TotalRooms) * 100}%");
+                writer.WriteLine($"Average Percentage of Unoccupied Rooms due to maintenance {((Total_rooms_Unoccupied_maintenance / date_difference) / TotalRooms) * 100}% ");
+                writer.Close();
+            }
         }
 
     }
@@ -338,12 +346,15 @@ namespace Hotel_Management_System
         }
         public void ExportFile()
         {
-            StreamWriter writer = new StreamWriter(@"C:\Users\peterschubert\Documents\FilesTest\Customer.txt");
-            writer.WriteLine($"Customer Summary from {Start_date.ToShortDateString()} to {End_date.ToShortDateString()}");
-            writer.WriteLine($"Number of Repeat Customers : {Repeat_customers} repeat customers");
-            writer.WriteLine($"Perecentage of Repeat Customers : {Convert.ToInt32((Repeat_customers/ Convert.ToDouble(Total_Num_Customers))*100)} %");
-            writer.WriteLine($"Number of Reservations Made: {Num_Reservations} reservations");
-            writer.WriteLine($"Number of Cancellations: {Num_Cancellations} cancellations");
+            using (StreamWriter writer = File.CreateText(@"C:\Users\peterschubert\Documents\FilesTest\Customer.txt"))
+            {
+                writer.WriteLine($"Customer Summary from {Start_date.ToShortDateString()} to {End_date.ToShortDateString()}");
+                writer.WriteLine($"Number of Repeat Customers : {Repeat_customers} repeat customers");
+                writer.WriteLine($"Perecentage of Repeat Customers : {Convert.ToInt32((Repeat_customers / Convert.ToDouble(Total_Num_Customers)) * 100)} %");
+                writer.WriteLine($"Number of Reservations Made: {Num_Reservations} reservations");
+                writer.WriteLine($"Number of Cancellations: {Num_Cancellations} cancellations");
+                writer.Close();
+            }
         }
 
 

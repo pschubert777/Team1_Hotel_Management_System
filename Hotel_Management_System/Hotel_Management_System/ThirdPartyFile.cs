@@ -28,9 +28,11 @@ namespace Hotel_Management_System
 
         public int customer_id { get; set; }
 
+        public string credit_card { get; set; }
+
         public string room_package_type { get; set; }
 
-        public int charge_amount_deposit { get; set; }
+        public double charge_amount_deposit { get; set; }
 
 
 
@@ -43,24 +45,65 @@ namespace Hotel_Management_System
 
        public void read_in_data()
         {
-            using (StreamReader readFile = new StreamReader("ThirdPartyRequest.txt"))
+            try
             {
-                string request = "";
-                while( (request =readFile.ReadLine()) != null)
+                using (StreamReader readFile = new StreamReader(@"C:\Users\peterschubert\Documents\FilesTest\ThirdPartyRequest.txt"))
                 {
-                    string[] individual_details= request.Split(' ');
-                    parse_and_filter_data(individual_details);
+                    string request = "";
+                    int count = 0;
+                    while ((request = readFile.ReadLine()) != null)
+                    {
 
-                    Reservation res = new Reservation();
-                    res.Third_party_id = third_party_id;
-                    res.startDate = start_date;
-                    res.endDate = end_date;
-                    res.numGuests = num_occupants;
-                    res.hotel_id = hotel_id;
-                    res.roomType = room_package_type;
+                        if (count == 0)
+                        {
+                            string[] data = request.Split(' ');
+                            
+                            today_date = DateTime.ParseExact(data[1], "yyyyMMdd", CultureInfo.InvariantCulture);
 
+                        }
+                        else
+                        {
+                            string[] individual_details = request.Split(' ');
+                            parse_and_filter_data(individual_details);
 
+                            Reservation res = new Reservation();
+                            res.Third_party_id = third_party_id;
+                            res.startDate = start_date;
+                            res.endDate = end_date;
+                            res.numGuests = num_occupants;
+                            res.hotel_id = hotel_id;
+                            res.roomType = room_package_type;
+                            res.cardNum = credit_card;
+                            try
+                            {
+                                res.DetermineAvailability();
+                                res.book_reservation(use_rewards, customer_id, true, today_date);
+                            }
+                            catch (Exception error)
+                            {
+                                using (StreamWriter writer = File.AppendText(@"C:\Users\peterschubert\Documents\FilesTest\BookingErrors.txt"))
+                                {
+                             
+                                    writer.WriteLine($" {error.Message} {DateTime.Now}");
+                                    writer.Close();
+                                }
+                                continue;
+                            }
+                        }
+                        count++;
+                    }
+                    
                 }
+            }
+            catch (Exception error)
+            {
+                using (StreamWriter writer = File.AppendText(@"C:\Users\peterschubert\Documents\FilesTest\Errors.txt"))
+                {
+                    writer.WriteLine($"Cannot Read File ! {DateTime.Now}");
+                    writer.WriteLine(error.Message);
+                    writer.Close();
+                }
+                    
             }
         }
 
@@ -76,13 +119,15 @@ namespace Hotel_Management_System
             if (data.Length == 20)
             {
                 room_package_type = data[13];
-                charge_amount_deposit = Convert.ToInt32(data[17]);
+                credit_card = data[15];
+                charge_amount_deposit = Convert.ToDouble(data[17]);
                 use_rewards = data[19];
             }
             else
             {
                 room_package_type = $"{data[13]}{data[14]}";
-                charge_amount_deposit = Convert.ToInt32(data[18]);
+                credit_card = data[16];
+                charge_amount_deposit = Convert.ToDouble(data[18]);
                 use_rewards = data[20];
 
             }
