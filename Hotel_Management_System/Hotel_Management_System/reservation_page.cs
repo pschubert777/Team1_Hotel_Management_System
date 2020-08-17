@@ -525,6 +525,22 @@ namespace Hotel_Management_System
         {
 
         }
+
+        private void btnMenuReturn_Click(object sender, EventArgs e)
+        {
+            if(person.User_type == "Employee")
+            {
+                AccountManagementInterface.frmEmployeeMenu objEmployeeMenu = new AccountManagementInterface.frmEmployeeMenu();
+                this.Hide();
+                objEmployeeMenu.Show();
+            }
+            else
+            {
+                AccountManagementInterface.frmCustomerMenu objReturnCustomerMenu = new AccountManagementInterface.frmCustomerMenu();
+                this.Hide();
+                objReturnCustomerMenu.Show();
+            }
+        }
     }
 
     public class Reservation

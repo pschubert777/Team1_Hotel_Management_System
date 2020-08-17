@@ -22,8 +22,9 @@ namespace Hotel_Management_System
             //reservation page will open after the metrics page closes
 
             //Application.Run(new Metrics_Page());
-            Application.Run(new reservation_page());
+            //Application.Run(new reservation_page());
             //Application.Run(new Display_Logs());
+            Application.Run(new frmLogin());
         }
     }
 }

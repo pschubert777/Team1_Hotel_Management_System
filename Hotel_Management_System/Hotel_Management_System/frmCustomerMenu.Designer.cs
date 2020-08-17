@@ -32,7 +32,6 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.btnManageReservations = new System.Windows.Forms.Button();
-            this.btnTransactionAndReward = new System.Windows.Forms.Button();
             this.btnAccountInfo = new System.Windows.Forms.Button();
             this.btnActivityLog = new System.Windows.Forms.Button();
             this.btnCancel = new System.Windows.Forms.Button();
@@ -77,15 +76,7 @@
             this.btnManageReservations.TabIndex = 3;
             this.btnManageReservations.Text = "Manage Reservations";
             this.btnManageReservations.UseVisualStyleBackColor = true;
-            // 
-            // btnTransactionAndReward
-            // 
-            this.btnTransactionAndReward.Location = new System.Drawing.Point(59, 169);
-            this.btnTransactionAndReward.Name = "btnTransactionAndReward";
-            this.btnTransactionAndReward.Size = new System.Drawing.Size(94, 49);
-            this.btnTransactionAndReward.TabIndex = 4;
-            this.btnTransactionAndReward.Text = "Transactions and Reward Point Data";
-            this.btnTransactionAndReward.UseVisualStyleBackColor = true;
+            this.btnManageReservations.Click += new System.EventHandler(this.btnManageReservations_Click);
             // 
             // btnAccountInfo
             // 
@@ -125,7 +116,6 @@
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.btnActivityLog);
             this.Controls.Add(this.btnAccountInfo);
-            this.Controls.Add(this.btnTransactionAndReward);
             this.Controls.Add(this.btnManageReservations);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
@@ -144,7 +134,6 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Button btnManageReservations;
-        private System.Windows.Forms.Button btnTransactionAndReward;
         private System.Windows.Forms.Button btnAccountInfo;
         private System.Windows.Forms.Button btnActivityLog;
         private System.Windows.Forms.Button btnCancel;
