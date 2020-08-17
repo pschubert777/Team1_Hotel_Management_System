@@ -139,7 +139,9 @@ namespace Hotel_Management_System
 
         private void backButton_Click(object sender, EventArgs e)
         {
-            //return to menu
+            AccountManagementInterface.frmEmployeeMenu objReturnEmployeeMenu = new AccountManagementInterface.frmEmployeeMenu();
+            this.Hide();
+            objReturnEmployeeMenu.Show();
         }
 
         private void roomListBox_CellContentClick(object sender, DataGridViewCellEventArgs e)
@@ -147,12 +149,7 @@ namespace Hotel_Management_System
             //populate fields with data
         }
 
-        private void button1_Click(object sender, EventArgs e)
-        {
-            AccountManagementInterface.frmEmployeeMenu objReturnEmployeeMenu = new AccountManagementInterface.frmEmployeeMenu();
-            this.Hide();
-            objReturnEmployeeMenu.Show();
-        }
+        
     }
 
     public struct roomType
