@@ -234,7 +234,7 @@ namespace Hotel_Management_System
             res.hotel_id = 0;
             res.roomType = "";
             res.numGuests = 0;
-            res.cardNum = 0;
+            res.cardNum = "0";
             res.Third_party_id = 0;
             reservationSearchID = "";
 
