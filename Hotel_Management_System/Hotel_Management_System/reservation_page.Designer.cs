@@ -253,7 +253,7 @@
             this.Third_party_Id,
             this.Reservation_status});
             this.ReservationDataGridView.Location = new System.Drawing.Point(414, 75);
-            this.ReservationDataGridView.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.ReservationDataGridView.Margin = new System.Windows.Forms.Padding(2);
             this.ReservationDataGridView.Name = "ReservationDataGridView";
             this.ReservationDataGridView.ReadOnly = true;
             this.ReservationDataGridView.RowHeadersWidth = 82;
@@ -411,6 +411,7 @@
             this.Controls.Add(this.reservationIdBox);
             this.Name = "reservation_page";
             this.Text = "reservation_page";
+            this.Load += new System.EventHandler(this.reservation_page_Load);
             ((System.ComponentModel.ISupportInitialize)(this.numberOfGuestsBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ReservationDataGridView)).EndInit();
             this.ResumeLayout(false);
