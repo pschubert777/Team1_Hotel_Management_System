@@ -92,6 +92,7 @@
             this.Controls.Add(this.label1);
             this.Name = "frmManageCustomerAccount";
             this.Text = "Manage Customer account";
+            this.Load += new System.EventHandler(this.frmManageCustomerAccount_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

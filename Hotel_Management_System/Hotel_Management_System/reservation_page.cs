@@ -520,6 +520,11 @@ namespace Hotel_Management_System
         {
             clear();
         }
+
+        private void reservation_page_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 
     public class Reservation
