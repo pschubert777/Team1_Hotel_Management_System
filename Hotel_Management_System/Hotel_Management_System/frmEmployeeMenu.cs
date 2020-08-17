@@ -71,7 +71,7 @@ namespace AccountManagementInterface
             objRoom_management_page.Show();
         }
 
-        
+
 
         private void btnActivityLog_Click(object sender, EventArgs e)
         {
@@ -79,5 +79,6 @@ namespace AccountManagementInterface
             this.Hide();
             dl.Show();
         }
-    
+
+    }
 }

@@ -156,13 +156,13 @@ namespace Hotel_Management_System
 
 
                         // sql statement to insert to hotels
-                        /*command.CommandText = "INSERT INTO Package (Package_number, Package_name, Cost, Description_amenities)" +
+                        command.CommandText = "INSERT INTO Package (Package_number, Package_name, Cost, Description_amenities)" +
                                             " VALUES ( " +
                                             Package_number + ", '" +
                                             Package_name + "', " +
                                             Cost + ", '" +
                                             amenities + "')";
-                        command.ExecuteNonQuery();*/
+                        command.ExecuteNonQuery();
 
                         Package_number = Convert.ToInt32(words[++i]);
                         Package_name = words[++i];
@@ -188,13 +188,13 @@ namespace Hotel_Management_System
             if (Package_number == 0 && !amenities.Equals(""))
             {
                 // sql statement to insert to hotels
-                /*command.CommandText = "INSERT INTO Package (Package_number, Package_name, Cost, Description_amenities)" +
+                command.CommandText = "INSERT INTO Package (Package_number, Package_name, Cost, Description_amenities)" +
                                     " VALUES ( " +
                                     Package_number + ", '" +
                                     Package_name + "', " +
                                     Cost + ", '" +
                                     amenities + "')";
-                command.ExecuteNonQuery();*/
+                command.ExecuteNonQuery();
             }
         }
     }
