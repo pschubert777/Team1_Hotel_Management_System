@@ -121,9 +121,9 @@ namespace Hotel_Management_System
         }
         public void readPromotions()
         {
-            int Package_number, i = 0;
-            string Package_name, amenities = "";
-            float Cost;
+            int Package_number = 0, i = 0;
+            string Package_name = "", amenities = "";
+            float Cost = 0;
 
             var lines = File.ReadLines(@"../Promotions.txt");
 
@@ -140,16 +140,19 @@ namespace Hotel_Management_System
 
             foreach (var line in lines)
             {
-                string[] words = line.Split(' '); // split where spaces are
 
+                string[] words = line.Split(' '); // split where spaces are
+                    
                 if (words[i].Equals("P"))
                 {
-                    
-                    if (words[i].Equals("P"))
+                    if (amenities.Equals(""))
                     {
                         Package_number = Convert.ToInt32(words[++i]);
                         Package_name = words[++i];
                         float.TryParse(words[++i].Substring(1), out Cost);
+                    }
+                    else
+                    {
 
 
                         // sql statement to insert to hotels
@@ -160,16 +163,17 @@ namespace Hotel_Management_System
                                             Cost + ", '" +
                                             amenities + "')";
                         command.ExecuteNonQuery();*/
+
+                        Package_number = Convert.ToInt32(words[++i]);
+                        Package_name = words[++i];
+                        float.TryParse(words[++i].Substring(1), out Cost);
+                        amenities = "";
                     }
                     
-
-                    Package_number = 0;
-                    Package_name = amenities = "";
-                    Cost = 0;
                 }
-                else if (words[0].Equals("A")) 
+                else if (words[i].Equals("A")) 
                 {
-                    
+                    amenities += words[++i] + " ";
                 }
                 else // first line holding date leads here, possibly add logging here
                 {
@@ -177,6 +181,20 @@ namespace Hotel_Management_System
                 }
 
                 i = 0;
+
+                
+            }
+
+            if (Package_number == 0 && !amenities.Equals(""))
+            {
+                // sql statement to insert to hotels
+                /*command.CommandText = "INSERT INTO Package (Package_number, Package_name, Cost, Description_amenities)" +
+                                    " VALUES ( " +
+                                    Package_number + ", '" +
+                                    Package_name + "', " +
+                                    Cost + ", '" +
+                                    amenities + "')";
+                command.ExecuteNonQuery();*/
             }
         }
     }
