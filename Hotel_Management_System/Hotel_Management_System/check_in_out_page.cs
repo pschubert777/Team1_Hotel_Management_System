@@ -14,6 +14,7 @@ namespace Hotel_Management_System
     public partial class check_in_out_page : Form
     {
         public bool checkedIn { get; set; }
+        public bool CheckedOut { get; set; }
         private int user_id { get; set; }
 
         private string reservationSearchID { get; set; }
@@ -57,32 +58,36 @@ namespace Hotel_Management_System
 
         private void statusSubmitButton_Click(object sender, EventArgs e)
         {
-            SqlConnection Connection = new SqlConnection(@"Data Source=(localdb)\ProjectsV13;Initial Catalog=Hotel_Entity_Relationship_System;Integrated Security=True;Connect Timeout=60;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False");
-            if (Connection.State == ConnectionState.Closed) { Connection.Open(); }
 
-            string customerID = resultsBox.CurrentRow.Cells[1].Value.ToString();
+            string reservationID = resultsBox.CurrentRow.Cells[0].Value.ToString();
 
-            try
+            using (SqlConnection Connection = new SqlConnection(@"Data Source=(localdb)\ProjectsV13;Initial Catalog=Hotel_Entity_Relationship_System;Integrated Security=True;Connect Timeout=60;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False"))
             {
-                SqlDataAdapter query = new SqlDataAdapter("Select * from Reservation", Connection);
+                Connection.Open();
 
-                if (!checkedIn)
+                try
                 {
-                    //check in
+                    using (SqlCommand query = new SqlCommand("UPDATE Reservation SET Check_in = @checkedIn, Check_out = @checkedOut WHERE Id = @ResID", Connection))
+                    {
+                        //query.Parameters.AddWithValue("@Startdate", startDate);
+                        query.Parameters.AddWithValue("@checkedIn", checkedIn);
+                        query.Parameters.AddWithValue("@checkedOut", checkedOut);
+                        query.Parameters.AddWithValue("@ResID", reservationID);
+                        query.ExecuteNonQuery();
+
+                        MessageBox.Show("Updates completed!");
+                    }
                 }
-                else
+                catch (Exception err)
                 {
-                    //check out
+                    MessageBox.Show(err.Message);
+                }
+                finally
+                {
+                    Connection.Close();
                 }
             }
-            catch(Exception err)
-            {
-                MessageBox.Show(err.Message);
-            }
-            finally
-            {
-                Connection.Close();
-            }
+
             fill_data_grid_view();
         }
 
@@ -138,6 +143,19 @@ namespace Hotel_Management_System
             AccountManagementInterface.frmEmployeeMenu objReturnEmployeeMenu = new AccountManagementInterface.frmEmployeeMenu();
             this.Hide();
             objReturnEmployeeMenu.Show();
+        }
+
+        private void getStatus()
+        {
+            SqlConnection Connection = new SqlConnection(@"Data Source=(localdb)\ProjectsV13;Initial Catalog=Hotel_Entity_Relationship_System;Integrated Security=True;Connect Timeout=60;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False");
+            if (Connection.State == ConnectionState.Closed) { Connection.Open(); }
+
+            SqlCommand query = new SqlCommand("Select Count(*) from Reservation where Check_in = @checkedIn, Check_out = @checkedOut WHERE Id = @ResID");
+            query.Parameters.AddWithValue("@checkedIn", checkedIn);
+            query.Parameters.AddWithValue("@checkedOut", checkedOut);
+            //TODO: not sure if this bit actually works correctly ^
+
+            Connection.Close();
         }
     }
 }
