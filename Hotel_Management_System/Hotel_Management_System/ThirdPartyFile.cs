@@ -80,6 +80,11 @@ namespace Hotel_Management_System
                                 res.book_reservation(use_rewards, customer_id, true, today_date);
 
                                 //JOHN use customer_id for user_id when creating logs for Create Reservation for Third party
+
+                                User person = new User("", "Customer", customer_id);
+
+                                Logging logging = new Logging();
+                                logging.createThirdPartyResLog(person);
                             }
                             catch (Exception error)
                             {

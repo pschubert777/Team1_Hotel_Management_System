@@ -45,7 +45,7 @@ namespace Hotel_Management_System
 
             var lines = File.ReadLines(@"../Hotels.txt");
 
-            SqlConnection connection = new SqlConnection(@"Data Source=(localdb)\ProjectsV13;Initial Catalog=Hotel_Entity_Relationship_System;Integrated Security=True;Connect Timeout=60;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False");
+            SqlConnection connection = new SqlConnection(@"Data Source=(localdb)\ProjectsV13;Initial Catalog=Hotel_Entity_Relationship_System;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False");
 
             if (connection.State == System.Data.ConnectionState.Closed)
             {
@@ -99,8 +99,9 @@ namespace Hotel_Management_System
 
                         // sql statement to insert to Rooms
                         command.CommandText = "INSERT INTO Room " +
-                                        " (Room_type, Num_guests_max, Monetary_cost, Hotel_id, Package_types) " +
+                                        " (Room_type, Room_number, Num_guests_max, Monetary_cost, Hotel_id, Package_types) " +
                                         "VALUES (" +
+                                        "'standard', " + 
                                         roomNumber + ", " +
                                         occupancy + ", " +
                                         cost + ", " +
@@ -127,7 +128,7 @@ namespace Hotel_Management_System
 
             var lines = File.ReadLines(@"../Promotions.txt");
 
-            SqlConnection connection = new SqlConnection(@"Data Source=(localdb)\ProjectsV13;Initial Catalog=Hotel_Entity_Relationship_System;Integrated Security=True;Connect Timeout=60;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False");
+            SqlConnection connection = new SqlConnection(@"Data Source=(localdb)\ProjectsV13;Initial Catalog=Hotel_Entity_Relationship_System;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False");
 
             if (connection.State == System.Data.ConnectionState.Closed)
             {
@@ -185,7 +186,7 @@ namespace Hotel_Management_System
                 
             }
 
-            if (Package_number == 0 && !amenities.Equals(""))
+            if (Package_number != 0 && !amenities.Equals(""))
             {
                 // sql statement to insert to hotels
                 command.CommandText = "INSERT INTO Package (Package_number, Package_name, Cost, Description_amenities)" +
@@ -196,6 +197,8 @@ namespace Hotel_Management_System
                                     amenities + "')";
                 command.ExecuteNonQuery();
             }
+
+            connection.Close();
         }
     }
 }
