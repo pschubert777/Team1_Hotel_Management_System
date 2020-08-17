@@ -15,6 +15,11 @@ namespace Hotel_Management_System
         [STAThread]
         static void Main()
         {
+
+            Config config = new Config();
+            config.readHotel();
+            config.readPromotions();
+
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             //comment out below lines to prevent a certain page from opening
