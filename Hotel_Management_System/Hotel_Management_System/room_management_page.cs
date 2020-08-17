@@ -113,13 +113,10 @@ namespace Hotel_Management_System
 
                 try
                 {
-                    using (SqlCommand query = new SqlCommand("UPDATE Reservation SET Start_date = @Startdate, End_date=@Enddate, Hotel_location_Id = @hotelID, Room_type=@RoomType WHERE Id = @ResID", Connection))
-                    {
-                        //query.Parameters.AddWithValue("@Startdate", startDate);
-
-                        query.ExecuteNonQuery();
-                        MessageBox.Show("Rooms updated!");
-                    }
+                    //using (SqlCommand query = new SqlCommand("UPDATE Room SET  WHERE Id = ", Connection))
+                    //{
+                    //    
+                    //}
                 }
                 catch (Exception err)
                 {
