@@ -234,7 +234,7 @@ namespace Hotel_Management_System
             res.hotel_id = 0;
             res.roomType = "";
             res.numGuests = 0;
-            res.cardNum = "0";
+            res.cardNum = "";
             res.Third_party_id = 0;
             reservationSearchID = "";
 
@@ -536,7 +536,7 @@ namespace Hotel_Management_System
             }
             else
             {
-                AccountManagementInterface.frmCustomerMenu objReturnCustomerMenu = new AccountManagementInterface.frmCustomerMenu(person);
+                AccountManagementInterface.frmCustomerMenu objReturnCustomerMenu = new AccountManagementInterface.frmCustomerMenu();
                 this.Hide();
                 objReturnCustomerMenu.Show();
             }
