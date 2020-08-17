@@ -536,7 +536,7 @@ namespace Hotel_Management_System
             }
             else
             {
-                AccountManagementInterface.frmCustomerMenu objReturnCustomerMenu = new AccountManagementInterface.frmCustomerMenu();
+                AccountManagementInterface.frmCustomerMenu objReturnCustomerMenu = new AccountManagementInterface.frmCustomerMenu(person);
                 this.Hide();
                 objReturnCustomerMenu.Show();
             }

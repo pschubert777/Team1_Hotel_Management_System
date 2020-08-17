@@ -57,7 +57,7 @@ namespace AccountManagementInterface
 
         private void btnManageReservations_Click(object sender, EventArgs e)
         {
-            Hotel_Management_System.reservation_page objReservation_Page = new Hotel_Management_System.reservation_page();
+            Hotel_Management_System.reservation_page objReservation_Page = new Hotel_Management_System.reservation_page(user);
             this.Hide();
             objReservation_Page.Show();
         }
