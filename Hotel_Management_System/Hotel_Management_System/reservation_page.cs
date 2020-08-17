@@ -194,7 +194,7 @@ namespace Hotel_Management_System
             res.hotel_id = 0;
             res.roomType = "";
             res.numGuests = 0;
-            res.cardNum = 0;
+            res.cardNum = "";
             res.Third_party_id = 0;
             reservationSearchID = "";
 
@@ -272,7 +272,7 @@ namespace Hotel_Management_System
 
         private void creditCardNumberBox_TextChanged(object sender, EventArgs e)
         {
-            try { res.cardNum = Int32.Parse(creditCardNumberBox.Text); }
+            try { res.cardNum = creditCardNumberBox.Text; }
             catch (FormatException _e) { Console.WriteLine(_e.Message); }
         }
 
@@ -333,10 +333,10 @@ namespace Hotel_Management_System
                         switch (person.User_type)
                         {
                             case "Customer":
-                                res.book_reservation(useRewards, person.id, false);
+                                res.book_reservation(useRewards, person.id, false, DateTime.Now.Date);
                                 break;
                             default:
-                                res.book_reservation(useRewards, customer_id_employee, false);
+                                res.book_reservation(useRewards, customer_id_employee, false, DateTime.Now.Date);
                                 break;
                         }//*****PlaceHolder NEED to come up with functionality to retrieve Customer ID if user is EMPLOYEE
 
@@ -551,7 +551,7 @@ namespace Hotel_Management_System
         public int hotel_id { get; set; }
         public string roomType { get; set; }
         public int numGuests { get; set; }
-        public int cardNum { get; set; }
+        public string cardNum { get; set; }
 
         public int Third_party_id { get; set; }
         
@@ -632,7 +632,7 @@ namespace Hotel_Management_System
     
 
         }
-        public void book_reservation(string result, int user_id, bool third_party)
+        public void book_reservation(string result, int user_id, bool third_party, DateTime today, double deposit =0)
         {
             string sqlString = third_party && Third_party_id >= 0
                 ? "Insert into Reservation(Customer_Id, Room_type, Num_guests, Start_date, End_date, Hotel_location_Id, Points_earned, Third_party_Id) OUTPUT Inserted.ID Values(@UserID,@RoomType,@NumGuests, @Startdate, @EndDate, @HotelID, @PointsEarned, @ThirdPartyID)"
@@ -686,10 +686,10 @@ namespace Hotel_Management_System
             query3.Parameters.AddWithValue("@ReservationID", reservation_id);
             query3.Parameters.AddWithValue("@CustomerID", user_id);
             query3.Parameters.AddWithValue("@RewardsSpent", (result == "Yes" && enough_rewards) ? 50: 0);
-            query3.Parameters.AddWithValue("@MoneySpent", total_Room_Cost *= discount); 
+            query3.Parameters.AddWithValue("@MoneySpent", third_party == false? total_Room_Cost *= discount: deposit); 
             query3.Parameters.AddWithValue("@ActivityType", "Creating Reservation");
             query3.Parameters.AddWithValue("@RewardsGained",total_points_earned);
-            query3.Parameters.AddWithValue("@TransactionDate", DateTime.Now.Date);
+            query3.Parameters.AddWithValue("@TransactionDate", today.Date);
             query3.ExecuteNonQuery();
 
 
