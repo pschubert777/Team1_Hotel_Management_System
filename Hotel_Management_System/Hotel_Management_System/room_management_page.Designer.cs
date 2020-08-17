@@ -40,6 +40,7 @@
             this.roomListBox = new System.Windows.Forms.ListBox();
             this.roomListLabel = new System.Windows.Forms.Label();
             this.roomNumberBox = new System.Windows.Forms.NumericUpDown();
+            this.btnReturnMenu = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.roomNumberBox)).BeginInit();
             this.SuspendLayout();
             // 
@@ -150,11 +151,22 @@
             this.roomNumberBox.TabIndex = 18;
             this.roomNumberBox.ValueChanged += new System.EventHandler(this.roomNumberBox_ValueChanged);
             // 
+            // btnReturnMenu
+            // 
+            this.btnReturnMenu.Location = new System.Drawing.Point(12, 12);
+            this.btnReturnMenu.Name = "btnReturnMenu";
+            this.btnReturnMenu.Size = new System.Drawing.Size(78, 46);
+            this.btnReturnMenu.TabIndex = 19;
+            this.btnReturnMenu.Text = "Return to Menu";
+            this.btnReturnMenu.UseVisualStyleBackColor = true;
+            this.btnReturnMenu.Click += new System.EventHandler(this.button1_Click);
+            // 
             // room_management_page
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(776, 484);
+            this.Controls.Add(this.btnReturnMenu);
             this.Controls.Add(this.roomNumberBox);
             this.Controls.Add(this.cancelButton);
             this.Controls.Add(this.submitButton);
@@ -189,5 +201,6 @@
         private System.Windows.Forms.ListBox roomListBox;
         private System.Windows.Forms.Label roomListLabel;
         private System.Windows.Forms.NumericUpDown roomNumberBox;
+        private System.Windows.Forms.Button btnReturnMenu;
     }
 }
