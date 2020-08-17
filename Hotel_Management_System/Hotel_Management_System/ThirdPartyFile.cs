@@ -78,6 +78,8 @@ namespace Hotel_Management_System
                             {
                                 res.DetermineAvailability();
                                 res.book_reservation(use_rewards, customer_id, true, today_date);
+
+                                //JOHN use customer_id for user_id when creating logs for Create Reservation for Third party
                             }
                             catch (Exception error)
                             {
