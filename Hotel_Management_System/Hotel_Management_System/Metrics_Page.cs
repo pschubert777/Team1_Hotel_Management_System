@@ -75,7 +75,11 @@ namespace Hotel_Management_System
                     // SqlDataAdapter command = new SqlDataAdapter("CustomerDataManipulation", connection);
                     try
                     {
-
+                        CustomerSummary summary = new CustomerSummary(start_date_picker.Value.Date, end_date_picker.Value.Date);
+                        summary.Caculate_Repeat_customer();
+                        summary.Calculate_Reservations_made();
+                        summary.Calculate_num_cancellations();
+                        summary.ExportFile();
                     }
                     catch(Exception error)
                     {

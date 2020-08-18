@@ -290,7 +290,7 @@ namespace Hotel_Management_System
 
 
 
-        CustomerSummary(DateTime start_date, DateTime end_date)
+        public CustomerSummary(DateTime start_date, DateTime end_date)
         {
             Start_date = start_date.Date;
             End_date = end_date.Date;
