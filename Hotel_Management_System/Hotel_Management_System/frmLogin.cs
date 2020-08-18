@@ -32,7 +32,7 @@ namespace AccountManagementInterface
             if (rdiobtnCustomer.Checked){ //if user checked customer box
                 sdaCustomer.Fill(dtblCustomer);
 
-                if (dtblCustomer.Rows.Count == 1) // search in customer table
+                if (dtblCustomer.Rows.Count == 1) // search in customer table, return == 1 if account exists
                 {
                     frmCustomerMenu objFrmCustomerMenu = new frmCustomerMenu();
                     this.Hide();
