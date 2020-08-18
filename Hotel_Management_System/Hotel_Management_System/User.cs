@@ -11,6 +11,7 @@ namespace Hotel_Management_System
         public string name { get; set; }
         public string User_type { get; set; }
         public int id { get; set; }
+        
 
         public User()
         {

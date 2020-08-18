@@ -14,27 +14,42 @@ namespace AccountManagementInterface
 {
     public partial class frmLogin : Form
     {
+        private User person = new User();
         public frmLogin()
         {
             InitializeComponent();
         }
+        
 
-        private void btnLogin_Click(object sender, EventArgs e)
+            private void btnLogin_Click(object sender, EventArgs e)
         {
             SqlConnection sqlcon = new SqlConnection(@"Data Source=(localdb)\ProjectsV13;Initial Catalog=Hotel_Entity_Relationship_System3;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False");
             string queryCustomer = "Select * from Customer Where name = '" + tboxUsername.Text.Trim() + "' and Password = '" + tboxPassword.Text.Trim() + "'";
             string queryEmployee = "Select * from Employee Where name = '" + tboxUsername.Text.Trim() + "' and Password = '" + tboxPassword.Text.Trim() + "'";
+            string customerInfo = "SELECT * Name from Customer";
+            string employeeInfo = "select * Name from Employee";
             SqlDataAdapter sdaCustomer = new SqlDataAdapter(queryCustomer, sqlcon);
             SqlDataAdapter sdaEmployee = new SqlDataAdapter(queryEmployee, sqlcon);
             DataTable dtblCustomer = new DataTable();
             DataTable dtblEmployee = new DataTable();
-
+            SqlDataReader rdr;
+            
             if (rdiobtnCustomer.Checked){ //if user checked customer box
                 sdaCustomer.Fill(dtblCustomer);
 
                 if (dtblCustomer.Rows.Count == 1) // search in customer table, return == 1 if account exists
                 {
-                    frmCustomerMenu objFrmCustomerMenu = new frmCustomerMenu();
+                    sqlcon.Open();
+                    SqlCommand cmd = new SqlCommand(customerInfo);
+                    cmd.Connection = sqlcon;
+                    rdr = cmd.ExecuteReader();
+                    while (rdr.Read())
+                    {
+                        person.name = rdr["Name"].ToString();
+                    }
+                    person.User_type = "Customer";
+
+                    frmCustomerMenu objFrmCustomerMenu = new frmCustomerMenu(person);
                     this.Hide();
                     objFrmCustomerMenu.Show();
 
@@ -49,6 +64,18 @@ namespace AccountManagementInterface
 
                 if (dtblEmployee.Rows.Count == 1) // search in employee table
                 {
+                    sqlcon.Open();
+                    SqlCommand cmd = new SqlCommand(employeeInfo, sqlcon);
+                    cmd.CommandType = CommandType.Text;
+                    cmd.CommandText = customerInfo;
+                    rdr = cmd.ExecuteReader();
+                    while (rdr.Read())
+                    {
+                        person.name = rdr["name"].ToString();
+                    }
+                    person.User_type = "Employee";
+
+
                     frmEmployeeMenu objFrmEmployeeMenu = new frmEmployeeMenu();
                     this.Hide();
                     objFrmEmployeeMenu.Show();
