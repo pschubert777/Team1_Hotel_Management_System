@@ -1,4 +1,5 @@
 ﻿using System;
+using Hotel_Management_System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -12,10 +13,15 @@ namespace Hotel_Management_System
 {
     public partial class frmAccountInfo : Form
     {
-        public frmAccountInfo()
+        
+
+        public frmAccountInfo(User u)
         {
             InitializeComponent();
+            
         }
+        
+        
 
         private void lblID_Click(object sender, EventArgs e)
         {
@@ -25,7 +31,8 @@ namespace Hotel_Management_System
         private void frmAccountInfo_Load(object sender, EventArgs e)
         {
             //get user credentials here
-            // still need john user class to access info
+            
+            
         }
     }
 }

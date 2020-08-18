@@ -31,7 +31,8 @@ namespace Hotel_Management_System
             //Application.Run(new Metrics_Page());
             //Application.Run(new reservation_page());
             //Application.Run(new Display_Logs());
-            Application.Run(new reservation_page());
+            //Application.Run(new reservation_page());
+            Application.Run(new frmLogin());
         }
     }
 }

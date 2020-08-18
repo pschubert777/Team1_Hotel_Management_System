@@ -14,7 +14,7 @@ namespace AccountManagementInterface
 {
     public partial class frmCreateAccount : Form
     {
-        SqlConnection sqlcon = new SqlConnection(@"Data Source=(localdb)\ProjectsV13;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False");
+        SqlConnection sqlcon = new SqlConnection(@"Data Source=(localdb)\ProjectsV13;Initial Catalog=Hotel_Entity_Relationship_System2;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False");
 
 
         public frmCreateAccount()
@@ -23,7 +23,7 @@ namespace AccountManagementInterface
         }
 
         private void frmCreateAccount_Load(object sender, EventArgs e)
-        {
+        { 
 
         }
 
@@ -34,9 +34,22 @@ namespace AccountManagementInterface
 
         private void btnCreate_Click(object sender, EventArgs e)
         {
+            string cmdCustomer = "Select * from Customer Where name = '" + tboxUsername.Text.Trim() + "'";
+            string cmdEmployee = "Select * from Employee Where name = '" + tboxUsername.Text.Trim() + "'";
+            SqlDataAdapter sdaCustomer = new SqlDataAdapter(cmdCustomer, sqlcon);
+            SqlDataAdapter sdaEmployee = new SqlDataAdapter(cmdEmployee, sqlcon);
+            DataTable dtblCustomer = new DataTable();
+            DataTable dtblEmployee = new DataTable();
+
+
             if (rdiobtnCustomer.Checked) // customer account creation
             {
-                if (tboxPassword.Text != tboxConfirmPassword.Text) // password validation
+                sdaCustomer.Fill(dtblCustomer); //search customer table
+                if(dtblCustomer.Rows.Count == 1)// an account returned with the same name
+                {
+                    MessageBox.Show("An account already exists with that name. Please choose a new one.");
+                }
+                else if (tboxPassword.Text != tboxConfirmPassword.Text) // password validation
                 {
                     MessageBox.Show("Passwords do not match.");
                 }
@@ -45,7 +58,7 @@ namespace AccountManagementInterface
                     sqlcon.Open();
                     SqlCommand cmd = sqlcon.CreateCommand();
                     cmd.CommandType = CommandType.Text;
-                    cmd.CommandText = "insert into customer (Name, Location, Password) values ('" + tboxUsername.Text + "', '" + tboxLocation.Text + "', '" + tboxPassword.Text + "')";
+                    cmd.CommandText = "insert into Customer (Name, Location, Password) values ('" + tboxUsername.Text + "', '" + tboxLocation.Text + "', '" + tboxPassword.Text + "')";
                     cmd.ExecuteNonQuery();
 
                     cmd.CommandText = "SELECT TOP 1 * FROM Customer ORDER BY ID DESC";
@@ -66,7 +79,12 @@ namespace AccountManagementInterface
             }
             else if (rdiobtnEmployee.Checked) // employee account creation
             {
-                if (tboxPassword.Text != tboxConfirmPassword.Text) // password validation
+                sdaEmployee.Fill(dtblEmployee); //search customer table
+                if (dtblEmployee.Rows.Count == 1)// an account returned with the same name
+                {
+                    MessageBox.Show("An account already exists with that name. Please choose a new one.");
+                }
+                else if(tboxPassword.Text != tboxConfirmPassword.Text) // password validation
                 {
                     MessageBox.Show("Passwords do not match.");
                 }

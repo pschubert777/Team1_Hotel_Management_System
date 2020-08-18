@@ -50,7 +50,7 @@ namespace AccountManagementInterface
 
         private void btnAccountInfo_Click(object sender, EventArgs e)
         {
-            Hotel_Management_System.frmAccountInfo objAccountInfo = new Hotel_Management_System.frmAccountInfo();
+            frmAccountInfo objAccountInfo = new frmAccountInfo(user);
             this.Hide();
             objAccountInfo.Show();
         }
