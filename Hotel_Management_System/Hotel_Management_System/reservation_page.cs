@@ -31,6 +31,8 @@ namespace Hotel_Management_System
         // rservation id for modification and cancellation of reservation
         private int reservation_id { get; set; }
 
+        private string connectionString { get; set; } = @"Data Source=(localdb)\ProjectsV13;Initial Catalog=master_base;Integrated Security=True;Connect Timeout=60;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
+
         private bool update_reservation { get; set; }
         private void clear()
         {
@@ -67,7 +69,7 @@ namespace Hotel_Management_System
         private void fill_data_grid_view()
         {
             DataTable x = new DataTable();
-            using (SqlConnection Connection = new SqlConnection(@"Data Source=(localdb)\ProjectsV13;Initial Catalog=Hotel_Entity_Relationship_System;Integrated Security=True;Connect Timeout=60;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False"))
+            using (SqlConnection Connection = new SqlConnection(connectionString))
             {
 
                 if (Connection.State == ConnectionState.Closed)
@@ -102,7 +104,7 @@ namespace Hotel_Management_System
 
         private void Populate_hotel_combo_box()
         {
-            using (SqlConnection Connection = new SqlConnection(@"Data Source=(localdb)\ProjectsV13;Initial Catalog=Hotel_Entity_Relationship_System;Integrated Security=True;Connect Timeout=60;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False"))
+            using (SqlConnection Connection = new SqlConnection(connectionString))
             {
                 if (Connection.State == ConnectionState.Closed)
                 {
@@ -132,7 +134,7 @@ namespace Hotel_Management_System
 
         void populate_room_information()
         {
-            using (SqlConnection Connection = new SqlConnection(@"Data Source=(localdb)\ProjectsV13;Initial Catalog=Hotel_Entity_Relationship_System;Integrated Security=True;Connect Timeout=60;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False"))
+            using (SqlConnection Connection = new SqlConnection(connectionString))
             {
                 if (Connection.State == ConnectionState.Closed)
                 {
@@ -167,7 +169,7 @@ namespace Hotel_Management_System
             InitializeComponent();
 
             person = new User();
-            person.name = "Name";
+            person.name = "John";
             person.User_type = "Customer";
             person.id = 1;
             reservation_id = 0;
@@ -197,7 +199,7 @@ namespace Hotel_Management_System
             res.cardNum = "";
             res.Third_party_id = 0;
             reservationSearchID = "";
-
+            res.connectionString = connectionString;
 
 
         }
@@ -237,6 +239,7 @@ namespace Hotel_Management_System
             res.cardNum = "";
             res.Third_party_id = 0;
             reservationSearchID = "";
+            res.connectionString = connectionString;
 
             person = u; // passing user object from previous form
 
@@ -382,7 +385,7 @@ namespace Hotel_Management_System
         private void reservationSearchButton_Click(object sender, EventArgs e)
         {
 
-            SqlConnection Connection = new SqlConnection(@"Data Source=(localdb)\ProjectsV13;Initial Catalog=Hotel_Entity_Relationship_System;Integrated Security=True;Connect Timeout=60;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False");
+            SqlConnection Connection = new SqlConnection(connectionString);
             DataTable dataTable1 = new DataTable();
 
             if(Connection.State == ConnectionState.Closed)
@@ -554,12 +557,14 @@ namespace Hotel_Management_System
         public string cardNum { get; set; }
 
         public int Third_party_id { get; set; }
+
+        public string connectionString { get; set; }
         
 
       
         public void DetermineAvailability()
         {
-            SqlConnection Connection = new SqlConnection(@"Data Source=(localdb)\ProjectsV13;Initial Catalog=Hotel_Entity_Relationship_System;Integrated Security=True;Connect Timeout=60;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False");
+            SqlConnection Connection = new SqlConnection(connectionString);
             bool enough_rooms = true;
 
             if (Connection.State == ConnectionState.Closed)
@@ -572,16 +577,18 @@ namespace Hotel_Management_System
                 try
                 {
 
-
+                    
                     SqlCommand query = new SqlCommand("Select Count(*) From Reservation where Reservation_status NOT LIKE @Status AND @Current_Date Between Start_date and End_date AND Room_type = @roomType AND Hotel_location_Id = @HotelID", Connection);
                     query.Parameters.AddWithValue("@Status", "Cancelled%");
-                    query.Parameters.AddWithValue("@Current_Date", individual_date);
+                    query.Parameters.AddWithValue("@Current_Date", individual_date.Date);
                     query.Parameters.AddWithValue("@roomType", roomType);
                     query.Parameters.AddWithValue("@HotelID", hotel_id);
                     int num_occupied = Convert.ToInt32(query.ExecuteScalar());
 
-                    SqlCommand query2 = new SqlCommand("Select Count(*) From Maintenance Where Date_maintenance = @Current_Date", Connection);
-                    query2.Parameters.AddWithValue("@Current_Date", individual_date);
+                    SqlCommand query2 = new SqlCommand("Select Count(*) From Maintenance LEFT JOIN Room ON Maintenance.Room_Id = Room.Id Where Room.Room_type = @RoomType AND Room.Hotel_id = @HotelID AND Maintenance.Date_maintenance = @Current_Date", Connection);
+                    query2.Parameters.AddWithValue("@RoomType", roomType);
+                    query2.Parameters.AddWithValue("@HotelID", hotel_id);
+                    query2.Parameters.AddWithValue("@Current_Date", individual_date.Date);
                     int num_maintenance = Convert.ToInt32(query2.ExecuteScalar());
 
                     SqlCommand query3 = new SqlCommand("Select Count(*) From Room where Room_type = @Type AND Hotel_id = @HotelID ", Connection);
@@ -610,7 +617,7 @@ namespace Hotel_Management_System
 
         public void Modify_reservation(int reservation_id)
         {
-            using (SqlConnection Connection = new SqlConnection(@"Data Source=(localdb)\ProjectsV13;Initial Catalog=Hotel_Entity_Relationship_System;Integrated Security=True;Connect Timeout=60;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False"))
+            using (SqlConnection Connection = new SqlConnection(connectionString))
             {
                 Connection.Open();
 
@@ -648,7 +655,7 @@ namespace Hotel_Management_System
 
             // check if user has enough points 
             bool enough_rewards = Check_rewards_enough(user_id);
-            SqlConnection Connection = new SqlConnection(@"Data Source=(localdb)\ProjectsV13;Initial Catalog=Hotel_Entity_Relationship_System;Integrated Security=True;Connect Timeout=60;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False");
+            SqlConnection Connection = new SqlConnection(connectionString);
 
             // 10% of the original price  is total price *.9
             if (result == "Yes" && enough_rewards) { discount = 0.9; }
@@ -704,7 +711,7 @@ namespace Hotel_Management_System
 
         public bool Check_rewards_enough(int user_id)
         {
-            SqlConnection Connection = new SqlConnection(@"Data Source=(localdb)\ProjectsV13;Initial Catalog=Hotel_Entity_Relationship_System;Integrated Security=True;Connect Timeout=60;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False");
+            SqlConnection Connection = new SqlConnection(connectionString);
            
             try
             {
@@ -732,7 +739,7 @@ namespace Hotel_Management_System
 
         public  void Cancel_Reservation(int reservation_id)
         {
-            using (SqlConnection Connection = new SqlConnection(@"Data Source=(localdb)\ProjectsV13;Initial Catalog=Hotel_Entity_Relationship_System;Integrated Security=True;Connect Timeout=60;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False"))
+            using (SqlConnection Connection = new SqlConnection(connectionString))
             {
                 Connection.Open();
 
