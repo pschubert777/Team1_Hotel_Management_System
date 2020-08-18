@@ -113,10 +113,12 @@ namespace Hotel_Management_System
 
                 try
                 {
-                    //using (SqlCommand query = new SqlCommand("UPDATE Room SET  WHERE Id = ", Connection))
+                    /* Justin, just need to add the query.Parameters.AddwithValue for each parameter beginning with @ in the updat query*/ 
+                    //using (SqlCommand query = new SqlCommand("UPDATE Room SET Maintenance_status =@MaintStatus WHERE Room_number =@RoomNum AND Hotel_id ", Connection))
                     //{
                     //    
                     //}
+                    
                 }
                 catch (Exception err)
                 {
@@ -135,6 +137,7 @@ namespace Hotel_Management_System
             roomNumberBox.ResetText();
             roomTypeBox.ResetText();
             hotelBox.ResetText();
+            maintenance_combo_box.ResetText();
         }
 
         private void backButton_Click(object sender, EventArgs e)
@@ -149,7 +152,10 @@ namespace Hotel_Management_System
             //populate fields with data
         }
 
-        
+        private void maintenance_combo_box_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            room.status = maintenance_combo_box.Text;
+        }
     }
 
     public struct roomType
