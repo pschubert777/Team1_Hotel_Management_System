@@ -16,9 +16,9 @@ namespace Hotel_Management_System
         static void Main()
         {
 
-            Config config = new Config();
-            config.readHotel();
-            config.readPromotions();
+            //Config config = new Config();
+            //config.readHotel();
+            //config.readPromotions();
 
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
@@ -31,7 +31,7 @@ namespace Hotel_Management_System
             //Application.Run(new Metrics_Page());
             //Application.Run(new reservation_page());
             //Application.Run(new Display_Logs());
-            Application.Run(new frmLogin());
+           // Application.Run(new frmLogin());
 
             Maintenance clean = new Maintenance();
             clean.read_file();

@@ -1,6 +1,7 @@
 ﻿CREATE TABLE [dbo].[Maintenance]
 (
-	[Id] INT NOT NULL , 
+	[Id] INT NOT NULL IDENTITY , 
     [Date_maintenance] DATE NOT NULL, 
-    CONSTRAINT [Room_ID] FOREIGN KEY ([Id]) REFERENCES [Room]([Id])
+    [Room_Id] INT NOT NULL, 
+    CONSTRAINT [PK_Maintenance] PRIMARY KEY ([Id]) 
 )

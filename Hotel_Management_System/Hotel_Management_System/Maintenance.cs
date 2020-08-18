@@ -12,7 +12,7 @@ namespace Hotel_Management_System
 {
     class Maintenance
     {
-
+        private string sqlString = @"Data Source=(localdb)\ProjectsV13;Initial Catalog=Hotel_Entity_Relationship_System3;Integrated Security=True;Connect Timeout=60;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
         public Maintenance()
         {
 
@@ -36,7 +36,7 @@ namespace Hotel_Management_System
                         }
                         else if(string.Equals(maint_input[0], "M"))
                         {
-                            date =DateTime.ParseExact(maint_input[9], "yyyyMMdd", CultureInfo.InvariantCulture);
+                            date =DateTime.ParseExact(maint_input[2], "yyyyMMdd", CultureInfo.InvariantCulture);
                         }
                         else if( string.Equals(maint_input[0], "H")){
 
@@ -78,7 +78,7 @@ namespace Hotel_Management_System
         private int search_room_id(int room_number, int hotel_id)
         {
             int room_id = 0;
-            using (SqlConnection Connection= new SqlConnection(@"Data Source=(localdb)\ProjectsV13;Initial Catalog=Hotel_Entity_Relationship_System;Integrated Security=True;Connect Timeout=60;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False"))
+            using (SqlConnection Connection= new SqlConnection(sqlString))
             {
                 Connection.Open();
 
@@ -100,11 +100,11 @@ namespace Hotel_Management_System
         private bool check_duplicates(int room_id, DateTime date)
         {
             bool are_duplicates = false;
-            using (SqlConnection Connection = new SqlConnection(@"Data Source=(localdb)\ProjectsV13;Initial Catalog=Hotel_Entity_Relationship_System;Integrated Security=True;Connect Timeout=60;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False"))
+            using (SqlConnection Connection = new SqlConnection(sqlString))
             {
                 Connection.Open();
 
-                using (SqlCommand query = new SqlCommand("Select Count(*) from Maintenance Where Id=@RoomId and Date_maintenance =@DateMaintenance", Connection))
+                using (SqlCommand query = new SqlCommand("Select Count(*) from Maintenance Where Room_Id=@RoomId and Date_maintenance =@DateMaintenance", Connection))
                 {
                     int count = 0;
                     query.Parameters.AddWithValue("@RoomId ", room_id);
@@ -120,11 +120,11 @@ namespace Hotel_Management_System
         }
         private void insert_into_maintenance(int room_id, DateTime date)
         {
-            using (SqlConnection Connection = new SqlConnection(@"Data Source=(localdb)\ProjectsV13;Initial Catalog=Hotel_Entity_Relationship_System;Integrated Security=True;Connect Timeout=60;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False"))
+            using (SqlConnection Connection = new SqlConnection(sqlString))
             {
                 Connection.Open();
 
-                using (SqlCommand query = new SqlCommand("Insert into Maintenance (Id, Date_maintenance) Values (@RoomId, @DateMaintenance)  ", Connection))
+                using (SqlCommand query = new SqlCommand("Insert into Maintenance (Room_Id, Date_maintenance) Values (@RoomId, @DateMaintenance)  ", Connection))
                 {
                     query.Parameters.AddWithValue("@RoomId ", room_id);
                     query.Parameters.AddWithValue("@DateMaintenance", date);
