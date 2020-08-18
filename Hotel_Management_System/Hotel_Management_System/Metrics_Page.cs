@@ -86,12 +86,14 @@ namespace Hotel_Management_System
                     {
                         Display_error_message();
                     }
-
+                
 
                 // ***JOHN** Put logs query here****
                 Logging logging = new Logging();
                 logging.metricsLog(user);
-                 }
+
+                clear();
+            }
         }
 
         private void Display_error_message()
@@ -128,6 +130,17 @@ namespace Hotel_Management_System
 
         private void end_date_picker_ValueChanged(object sender, EventArgs e)
         {
+
+        }
+
+
+        public void clear()
+        {
+            Rewards_summary_button.Checked = false;
+            Occupancy_Summary_button.Checked = false;
+            Customer_Report_button.Checked = false;
+            end_date_picker.Value = DateTime.Now.Date;
+            start_date_picker.Value = DateTime.Now.Date;
 
         }
     }

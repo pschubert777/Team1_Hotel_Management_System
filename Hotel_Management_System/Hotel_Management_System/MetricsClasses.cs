@@ -170,10 +170,11 @@ namespace Hotel_Management_System
         {
             Start_date = start_date.Date;
             End_date = end_date.Date;
-            date_difference = (Start_date - End_date).Days;
+            date_difference = (start_date-End_date).Days == 0 ? 1 : (Start_date - End_date).Days;
+
 
             //today_date = DateTime.Now.Date;
-            Connection = new SqlConnection(@"Data Source=(localdb)\ProjectsV13;Initial Catalog=Hotel_Entity_Relationship_System;Integrated Security=True;Connect Timeout=60;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False");
+            Connection = new SqlConnection(@"Data Source=(localdb)\ProjectsV13;Initial Catalog=master_base;Integrated Security=True;Connect Timeout=60;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False");
             Total_rooms_Occupied = 0;
             Total_rooms_Unoccupied = 0;
             Total_rooms_Unoccupied_maintenance = 0;
@@ -210,11 +211,11 @@ namespace Hotel_Management_System
             //query1.Parameters.AddWithValue("@EndDate", End_date);
             //Rooms_Occupied = Convert.ToInt32(query1.ExecuteScalar());
 
-            for (var individual_date = Start_date; individual_date <= End_date; individual_date.AddDays(1))
+            for (var individual_date = Start_date; individual_date <= End_date; individual_date =individual_date.AddDays(1))
             {
                 SqlCommand query2 = new SqlCommand("Select Count(*) From Reservation where Reservation_status NOT LIKE @Status AND @selectedDate Between Start_date and End_date", Connection);
                 query2.Parameters.AddWithValue("@Status", "Cancelled%");
-                query2.Parameters.AddWithValue("@selectedDate", individual_date);
+                query2.Parameters.AddWithValue("@selectedDate", individual_date.Date);
 
                 int Rooms_Occupied = Convert.ToInt32(query2.ExecuteScalar());
 
@@ -222,8 +223,8 @@ namespace Hotel_Management_System
                 Total_rooms_Occupied += Convert.ToDouble(Rooms_Occupied);
             }
             SqlCommand query3 = new SqlCommand("Select Count(*) From Maintenance where Date_maintenance BETWEEN @StartDate AND @Enddate", Connection);
-            query3.Parameters.AddWithValue("@StartDate", Start_date);
-            query3.Parameters.AddWithValue("@EndDate", End_date);
+            query3.Parameters.AddWithValue("@StartDate", Start_date.Date);
+            query3.Parameters.AddWithValue("@EndDate", End_date.Date);
             Total_rooms_Unoccupied_maintenance += Convert.ToDouble(query3.ExecuteScalar());
 
 
@@ -242,10 +243,13 @@ namespace Hotel_Management_System
             }
 
             SqlCommand query1 = new SqlCommand("Select SUM(Transactions.Money_Spent)FROM Transactions INNER JOIN Reservation ON Transactions.Reservation_Id = Reservation.Id WHERE Reservation.Check_out = @value AND Transactions.Transaction_date Between @StartDate AND @EndDate", Connection);
+            query1.Parameters.AddWithValue("@value", "true");
             query1.Parameters.AddWithValue("@StartDate", Start_date);
             query1.Parameters.AddWithValue("@EndDate", End_date);
-            query1.Parameters.AddWithValue("@ID", "true");
-            TotalRevenue = Convert.ToInt32(query1.ExecuteScalar());
+            //query1.Parameters.AddWithValue("@ID", "true");
+            var result = query1.ExecuteScalar();
+            TotalRevenue = result != DBNull.Value ? Convert.ToInt32(query1.ExecuteScalar()) : 0;
+
 
             if (Connection.State == ConnectionState.Open)
             {
@@ -261,9 +265,10 @@ namespace Hotel_Management_System
 
 
                 writer.WriteLine($"Occupancy Summary from {Start_date.ToShortDateString()} to {End_date.ToShortDateString()}");
-                writer.WriteLine($"Average Percentage of Occupied Rooms {((Total_rooms_Occupied / date_difference) / TotalRooms) * 100}%");
-                writer.WriteLine($"Average Percentage of Unoccupied Rooms {((Total_rooms_Unoccupied / date_difference) / TotalRooms) * 100}%");
-                writer.WriteLine($"Average Percentage of Unoccupied Rooms due to maintenance {((Total_rooms_Unoccupied_maintenance / date_difference) / TotalRooms) * 100}% ");
+                writer.WriteLine($"Average Percentage of Occupied Rooms {Math.Round(((Total_rooms_Occupied / date_difference) / TotalRooms) * 100, 2)}%");
+                writer.WriteLine($"Average Percentage of Unoccupied Rooms {Math.Round(((Total_rooms_Unoccupied / date_difference) / TotalRooms) * 100, 2)}%");
+                writer.WriteLine($"Average Percentage of Unoccupied Rooms due to maintenance {Math.Round(((Total_rooms_Unoccupied_maintenance / date_difference) / TotalRooms) * 100, 2)}% ");
+                writer.WriteLine($"Total Revenue based on check out status: ${TotalRevenue}");
                 writer.Close();
             }
         }
