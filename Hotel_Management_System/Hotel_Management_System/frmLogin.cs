@@ -23,7 +23,7 @@ namespace AccountManagementInterface
 
             private void btnLogin_Click(object sender, EventArgs e)
         {
-            SqlConnection sqlcon = new SqlConnection(@"Data Source=(localdb)\ProjectsV13;Initial Catalog=Hotel_Entity_Relationship_System3;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False");
+            SqlConnection sqlcon = new SqlConnection(@"Data Source=(localdb)\ProjectsV13;Initial Catalog=Hotel_Entity_Relationship_System;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False");
             string queryCustomer = "Select * from Customer Where name = '" + tboxUsername.Text.Trim() + "' and Password = '" + tboxPassword.Text.Trim() + "'";
             string queryEmployee = "Select * from Employee Where name = '" + tboxUsername.Text.Trim() + "' and Password = '" + tboxPassword.Text.Trim() + "'";
             SqlDataAdapter sdaCustomer = new SqlDataAdapter(queryCustomer, sqlcon);
@@ -42,6 +42,9 @@ namespace AccountManagementInterface
                     person.id = (int)dtblCustomer.Rows[0]["id"];
                     person.name = tboxUsername.Text.Trim();
                     person.User_type = "Customer";
+
+                    Logging logging = new Logging();
+                    logging.loginLog(person);
 
                     frmCustomerMenu objFrmCustomerMenu = new frmCustomerMenu(person);
                     this.Hide();

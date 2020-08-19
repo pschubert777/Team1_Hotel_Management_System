@@ -27,7 +27,7 @@ namespace Hotel_Management_System
             InitializeComponent();
             user = u;
 
-            SqlConnection sqlcon = new SqlConnection(@"Data Source=(localdb)\ProjectsV13;Initial Catalog=Hotel_Entity_Relationship_System3;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False");
+            SqlConnection sqlcon = new SqlConnection(@"Data Source=(localdb)\ProjectsV13;Initial Catalog=Hotel_Entity_Relationship_System;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False");
             string queryCustomer = "Select * from Customer Where name = '" + user.name + "'";
             string queryEmployee = "Select * from Employee Where name = '" + user.name + "'";
             SqlDataAdapter sdaCustomer = new SqlDataAdapter(queryCustomer, sqlcon);
