@@ -60,7 +60,7 @@ namespace AccountManagementInterface
                 {
                     //give user object data
                     //manually set works because at this point user has verified that their account exists. All names are unique
-                    person.id = (int)dtblCustomer.Rows[0]["id"];
+                    person.id = (int)dtblEmployee.Rows[0]["id"];
                     person.name = tboxUsername.Text.Trim();
                     person.User_type = "Employee";
 

@@ -40,6 +40,7 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.btnCancel = new System.Windows.Forms.Button();
+            this.btnCheckinOut = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // btnManageReservation
@@ -163,11 +164,22 @@
             this.btnCancel.UseVisualStyleBackColor = true;
             this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
             // 
+            // btnCheckinOut
+            // 
+            this.btnCheckinOut.Location = new System.Drawing.Point(110, 227);
+            this.btnCheckinOut.Name = "btnCheckinOut";
+            this.btnCheckinOut.Size = new System.Drawing.Size(83, 46);
+            this.btnCheckinOut.TabIndex = 13;
+            this.btnCheckinOut.Text = "Check In/ Check Out";
+            this.btnCheckinOut.UseVisualStyleBackColor = true;
+            this.btnCheckinOut.Click += new System.EventHandler(this.btnCheckinOut_Click);
+            // 
             // frmEmployeeMenu
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(727, 367);
+            this.Controls.Add(this.btnCheckinOut);
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
@@ -201,5 +213,6 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Button btnCancel;
+        private System.Windows.Forms.Button btnCheckinOut;
     }
 }

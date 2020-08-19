@@ -13,9 +13,15 @@ namespace Hotel_Management_System
 {
     public partial class frmManageEmployeeAccount : Form
     {
+        private User user;
         public frmManageEmployeeAccount()
         {
             InitializeComponent();
+        }
+        public frmManageEmployeeAccount(User u)
+        {
+            InitializeComponent();
+            user = u;
         }
 
         private void label1_Click(object sender, EventArgs e)
@@ -45,7 +51,7 @@ namespace Hotel_Management_System
 
         private void btnCancel_Click(object sender, EventArgs e)
         {
-            AccountManagementInterface.frmEmployeeMenu objEmployeeMenu = new AccountManagementInterface.frmEmployeeMenu();
+            AccountManagementInterface.frmEmployeeMenu objEmployeeMenu = new AccountManagementInterface.frmEmployeeMenu(user);
             this.Hide();
             objEmployeeMenu.Show();
         }
