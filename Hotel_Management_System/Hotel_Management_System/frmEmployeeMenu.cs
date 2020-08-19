@@ -38,21 +38,21 @@ namespace AccountManagementInterface
 
         private void btnManageCustomerAccount_Click(object sender, EventArgs e)
         {
-            Hotel_Management_System.frmManageCustomerAccount objManageCustomerAccount = new Hotel_Management_System.frmManageCustomerAccount();
+            Hotel_Management_System.frmManageCustomerAccount objManageCustomerAccount = new Hotel_Management_System.frmManageCustomerAccount(user);
             this.Hide();
             objManageCustomerAccount.Show();
         }
 
         private void btnManageEmployeeAccount_Click(object sender, EventArgs e)
         {
-            Hotel_Management_System.frmManageEmployeeAccount objManageEmployeeAccount = new Hotel_Management_System.frmManageEmployeeAccount();
+            Hotel_Management_System.frmManageEmployeeAccount objManageEmployeeAccount = new Hotel_Management_System.frmManageEmployeeAccount(user);
             this.Hide();
             objManageEmployeeAccount.Show();
         }
 
         private void btnMetricsPage_Click(object sender, EventArgs e)
         {
-            Hotel_Management_System.Metrics_Page objMetrics_Page = new Hotel_Management_System.Metrics_Page();
+            Hotel_Management_System.Metrics_Page objMetrics_Page = new Hotel_Management_System.Metrics_Page(user);
             this.Hide();
             objMetrics_Page.Show();
         }
@@ -85,6 +85,13 @@ namespace AccountManagementInterface
             frmAccountInfo objAccountInfo = new frmAccountInfo(user);
             this.Hide();
             objAccountInfo.Show();
+        }
+
+        private void btnCheckinOut_Click(object sender, EventArgs e)
+        {
+            check_in_out_page objCheckInOut = new check_in_out_page();
+            this.Hide();
+            objCheckInOut.Show();
         }
     }
 }

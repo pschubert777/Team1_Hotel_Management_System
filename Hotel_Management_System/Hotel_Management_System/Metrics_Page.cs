@@ -117,7 +117,7 @@ namespace Hotel_Management_System
 
         private void back_menu_button_Click(object sender, EventArgs e)
         {
-            AccountManagementInterface.frmEmployeeMenu objEmployeeMenuReturn = new AccountManagementInterface.frmEmployeeMenu();
+            AccountManagementInterface.frmEmployeeMenu objEmployeeMenuReturn = new AccountManagementInterface.frmEmployeeMenu(user);
             this.Hide();
             objEmployeeMenuReturn.Show();
         }
