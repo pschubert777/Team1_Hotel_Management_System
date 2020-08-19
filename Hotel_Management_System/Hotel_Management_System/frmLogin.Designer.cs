@@ -45,7 +45,7 @@
             this.btnLogin.Location = new System.Drawing.Point(101, 195);
             this.btnLogin.Name = "btnLogin";
             this.btnLogin.Size = new System.Drawing.Size(75, 23);
-            this.btnLogin.TabIndex = 0;
+            this.btnLogin.TabIndex = 4;
             this.btnLogin.Text = "Login";
             this.btnLogin.UseVisualStyleBackColor = true;
             this.btnLogin.Click += new System.EventHandler(this.btnLogin_Click);
@@ -64,7 +64,7 @@
             this.tboxUsername.Location = new System.Drawing.Point(106, 23);
             this.tboxUsername.Name = "tboxUsername";
             this.tboxUsername.Size = new System.Drawing.Size(100, 20);
-            this.tboxUsername.TabIndex = 3;
+            this.tboxUsername.TabIndex = 0;
             // 
             // lblPassword
             // 
@@ -88,15 +88,17 @@
             // 
             this.tboxPassword.Location = new System.Drawing.Point(106, 74);
             this.tboxPassword.Name = "tboxPassword";
+            this.tboxPassword.PasswordChar = '*';
             this.tboxPassword.Size = new System.Drawing.Size(100, 20);
-            this.tboxPassword.TabIndex = 3;
+            this.tboxPassword.TabIndex = 1;
+            this.tboxPassword.UseSystemPasswordChar = true;
             // 
             // btnNewUser
             // 
             this.btnNewUser.Location = new System.Drawing.Point(256, 61);
             this.btnNewUser.Name = "btnNewUser";
             this.btnNewUser.Size = new System.Drawing.Size(76, 47);
-            this.btnNewUser.TabIndex = 0;
+            this.btnNewUser.TabIndex = 6;
             this.btnNewUser.Text = "Create Account";
             this.btnNewUser.UseVisualStyleBackColor = true;
             this.btnNewUser.Click += new System.EventHandler(this.btnNewUser_Click);
@@ -106,7 +108,7 @@
             this.btnCancel.Location = new System.Drawing.Point(238, 195);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(75, 23);
-            this.btnCancel.TabIndex = 0;
+            this.btnCancel.TabIndex = 5;
             this.btnCancel.Text = "Cancel";
             this.btnCancel.UseVisualStyleBackColor = true;
             this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
@@ -117,7 +119,7 @@
             this.rdiobtnCustomer.Location = new System.Drawing.Point(101, 115);
             this.rdiobtnCustomer.Name = "rdiobtnCustomer";
             this.rdiobtnCustomer.Size = new System.Drawing.Size(69, 17);
-            this.rdiobtnCustomer.TabIndex = 4;
+            this.rdiobtnCustomer.TabIndex = 2;
             this.rdiobtnCustomer.TabStop = true;
             this.rdiobtnCustomer.Text = "Customer";
             this.rdiobtnCustomer.UseVisualStyleBackColor = true;
@@ -128,7 +130,7 @@
             this.rdiobtnEmployee.Location = new System.Drawing.Point(101, 138);
             this.rdiobtnEmployee.Name = "rdiobtnEmployee";
             this.rdiobtnEmployee.Size = new System.Drawing.Size(71, 17);
-            this.rdiobtnEmployee.TabIndex = 4;
+            this.rdiobtnEmployee.TabIndex = 3;
             this.rdiobtnEmployee.TabStop = true;
             this.rdiobtnEmployee.Text = "Employee";
             this.rdiobtnEmployee.UseVisualStyleBackColor = true;
