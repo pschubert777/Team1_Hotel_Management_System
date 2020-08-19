@@ -37,12 +37,12 @@
             this.statusSubmitButton = new System.Windows.Forms.Button();
             this.returnButton = new System.Windows.Forms.Button();
             this.resultsBox = new System.Windows.Forms.DataGridView();
+            this.searchButton = new System.Windows.Forms.Button();
             this.reservationID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.startDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.endDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.checked_in = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.checkedOut = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.searchButton = new System.Windows.Forms.Button();
+            this.checked_out = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.resultsBox)).BeginInit();
             this.SuspendLayout();
             // 
@@ -133,11 +133,22 @@
             this.startDate,
             this.endDate,
             this.checked_in,
-            this.checkedOut});
+            this.checked_out});
             this.resultsBox.Location = new System.Drawing.Point(366, 103);
             this.resultsBox.Name = "resultsBox";
             this.resultsBox.Size = new System.Drawing.Size(371, 177);
             this.resultsBox.TabIndex = 6;
+            this.resultsBox.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.resultsBox_CellContentClick);
+            // 
+            // searchButton
+            // 
+            this.searchButton.Location = new System.Drawing.Point(548, 371);
+            this.searchButton.Name = "searchButton";
+            this.searchButton.Size = new System.Drawing.Size(75, 23);
+            this.searchButton.TabIndex = 7;
+            this.searchButton.Text = "Search";
+            this.searchButton.UseVisualStyleBackColor = true;
+            this.searchButton.Click += new System.EventHandler(this.searchButton_Click);
             // 
             // reservationID
             // 
@@ -159,20 +170,10 @@
             this.checked_in.HeaderText = "Checked In";
             this.checked_in.Name = "checked_in";
             // 
-            // checkedOut
+            // checked_out
             // 
-            this.checkedOut.HeaderText = "Checked Out";
-            this.checkedOut.Name = "checkedOut";
-            // 
-            // searchButton
-            // 
-            this.searchButton.Location = new System.Drawing.Point(548, 371);
-            this.searchButton.Name = "searchButton";
-            this.searchButton.Size = new System.Drawing.Size(75, 23);
-            this.searchButton.TabIndex = 7;
-            this.searchButton.Text = "Search";
-            this.searchButton.UseVisualStyleBackColor = true;
-            this.searchButton.Click += new System.EventHandler(this.searchButton_Click);
+            this.checked_out.HeaderText = "Checked Out";
+            this.checked_out.Name = "checked_out";
             // 
             // check_in_out_page
             // 
@@ -213,6 +214,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn startDate;
         private System.Windows.Forms.DataGridViewTextBoxColumn endDate;
         private System.Windows.Forms.DataGridViewTextBoxColumn checked_in;
-        private System.Windows.Forms.DataGridViewTextBoxColumn checkedOut;
+        private System.Windows.Forms.DataGridViewTextBoxColumn checked_out;
     }
 }

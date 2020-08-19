@@ -14,7 +14,7 @@ namespace Hotel_Management_System
     public partial class check_in_out_page : Form
     {
         public bool checkedIn { get; set; }
-        public bool CheckedOut { get; set; }
+        public bool checkedOut { get; set; }
         private int user_id { get; set; }
 
         private string reservationSearchID { get; set; }
@@ -37,23 +37,32 @@ namespace Hotel_Management_System
             }
         }
 
+        private void Populate_check_in_combo_box()
+        {
+            getStatus();
+
+            if (checkedIn)
+                checkInOutStatusBox.SelectedIndex = 0;
+            if (checkedOut)
+                checkInOutStatusBox.SelectedIndex = 1;
+        }
+
         public check_in_out_page()
         {
             InitializeComponent();
 
             checkedIn = false;
+            checkedOut = false;
             user_id = 0;
             reservationSearchID = "";
 
             fill_data_grid_view();
+            getStatus();
         }
 
         private void checkInOutStatusBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (checkInOutStatusBox.SelectedIndex == 0)
-                checkedIn = true;
-            else if (checkInOutStatusBox.SelectedIndex == 1)
-                checkedIn = false;
+            
         }
 
         private void statusSubmitButton_Click(object sender, EventArgs e)
@@ -89,11 +98,6 @@ namespace Hotel_Management_System
             }
 
             fill_data_grid_view();
-        }
-
-        private void resultsBox_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
         }
 
         private void reservationIdBox_TextChanged(object sender, EventArgs e)
@@ -145,6 +149,7 @@ namespace Hotel_Management_System
             objReturnEmployeeMenu.Show();
         }
 
+        //update checkedIn and checkedOut from database
         private void getStatus()
         {
             SqlConnection Connection = new SqlConnection(@"Data Source=(localdb)\ProjectsV13;Initial Catalog=Hotel_Entity_Relationship_System;Integrated Security=True;Connect Timeout=60;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False");
@@ -156,6 +161,32 @@ namespace Hotel_Management_System
             //TODO: not sure if this bit actually works correctly ^
 
             Connection.Close();
+        }
+
+        private void resultsBox_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            // Transferring Data from Data grid view to textbox
+            if (resultsBox.CurrentRow.Index >= 0)
+            {
+                //update checkedIn and checkedOut
+                checkedIn = Convert.ToBoolean(resultsBox.CurrentRow.Cells[3].Value);
+                checkedOut = Convert.ToBoolean(resultsBox.CurrentRow.Cells[4].Value);
+
+                //update input box
+                foreach (var item in checkInOutStatusBox.Items)
+                {
+                    string[] hotelId = item.ToString().Split(' ');
+                    if (Convert.ToString(hotelId[0]) == Convert.ToString(resultsBox.CurrentRow.Cells[3].Value))
+                    {
+                        checkInOutStatusBox.Text = item.ToString();
+                        break;
+                    }
+                }
+            }
+            else
+            {
+                MessageBox.Show("Index out of range");
+            }
         }
     }
 }

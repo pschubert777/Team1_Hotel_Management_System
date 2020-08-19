@@ -113,11 +113,14 @@ namespace Hotel_Management_System
 
                 try
                 {
-                    /* Justin, just need to add the query.Parameters.AddwithValue for each parameter beginning with @ in the updat query*/ 
-                    //using (SqlCommand query = new SqlCommand("UPDATE Room SET Maintenance_status =@MaintStatus WHERE Room_number =@RoomNum AND Hotel_id ", Connection))
-                    //{
-                    //    
-                    //}
+                    using (SqlCommand query = new SqlCommand("UPDATE Room SET Maintenance_status =@MaintStatus WHERE Room_number =@RoomNum AND Hotel_id ", Connection))
+                    {
+                        query.Parameters.AddWithValue("@MaintStatus", room.status);
+                        query.Parameters.AddWithValue("@RoomNum", room.number);
+                        query.ExecuteNonQuery();
+
+                        MessageBox.Show("Updates completed!");
+                    }
                     
                 }
                 catch (Exception err)
@@ -149,7 +152,53 @@ namespace Hotel_Management_System
 
         private void roomListBox_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            //populate fields with data
+            // Transferring Data from Data grid view to textbox
+            if (roomListBox.CurrentRow.Index >= 0)
+            {
+                //update room object
+                room.number = Convert.ToInt32(roomListBox.CurrentRow.Cells[1].Value);
+                room.type = Convert.ToString(roomListBox.CurrentRow.Cells[2].Value);
+                room.hotel = Convert.ToInt32(roomListBox.CurrentRow.Cells[3].Value);
+                room.status = Convert.ToString(roomListBox.CurrentRow.Cells[4].Value);
+
+                //update input boxes
+                roomNumberBox.Value = room.number;
+                
+                foreach (var item in hotelBox.Items)
+                {
+                    string[] hotelId = item.ToString().Split(' ');
+                    if (Convert.ToInt32(hotelId[0]) == Convert.ToInt32(roomListBox.CurrentRow.Cells[3].Value))
+                    {
+
+                        hotelBox.Text = item.ToString();
+                        break;
+                    }
+                }
+                
+                foreach (var item in roomTypeBox.Items)
+                {
+                    string[] roomType = item.ToString().Split(' ');
+                    if (Convert.ToString(roomType[0]) == Convert.ToString(roomListBox.CurrentRow.Cells[2].Value))
+                    {
+                        roomTypeBox.Text = item.ToString();
+                        break;
+                    }
+                }
+                
+                foreach (var item in maintenance_combo_box.Items)
+                {
+                    string[] maint = item.ToString().Split(' ');
+                    if (Convert.ToString(maint[0]) == Convert.ToString(roomListBox.CurrentRow.Cells[4].Value))
+                    {
+                        maintenance_combo_box.Text = item.ToString();
+                        break;
+                    }
+                }
+            }
+            else
+            {
+                MessageBox.Show("Index out of range");
+            }
         }
 
         private void maintenance_combo_box_SelectedIndexChanged(object sender, EventArgs e)
