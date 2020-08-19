@@ -31,7 +31,7 @@ namespace Hotel_Management_System
         // rservation id for modification and cancellation of reservation
         private int reservation_id { get; set; }
 
-        private string connectionString { get; set; } = @"Data Source=(localdb)\ProjectsV13;Initial Catalog=master_base;Integrated Security=True;Connect Timeout=60;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
+        private string connectionString { get; set; } = @"Data Source=(localdb)\ProjectsV13;Initial Catalog=Hotel_Entity_Relationship_System;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
 
         private bool update_reservation { get; set; }
         private void clear()

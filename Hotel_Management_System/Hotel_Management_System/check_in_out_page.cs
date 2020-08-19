@@ -23,7 +23,7 @@ namespace Hotel_Management_System
         private void fill_data_grid_view()
         {
             DataTable x = new DataTable();
-            using (SqlConnection Connection = new SqlConnection(@"Data Source=(localdb)\ProjectsV13;Initial Catalog=master_base;Integrated Security=True;Connect Timeout=60;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False"))
+            using (SqlConnection Connection = new SqlConnection(@"Data Source=(localdb)\ProjectsV13;Initial Catalog=Hotel_Entity_Relationship_System;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False"))
             {
                 if (Connection.State == ConnectionState.Closed)
                 {
@@ -148,7 +148,16 @@ namespace Hotel_Management_System
             }
 
             // JOHN - logging stuff here ---------------------------------------------------------------------------------------
+            Logging logging = new Logging();
 
+            if (checkedIn)
+            {
+                logging.checkInLog(user);
+            }
+            else
+            {
+                logging.checkOutLog(user);
+            }
         }
 
         private void reservationIdBox_TextChanged(object sender, EventArgs e)
