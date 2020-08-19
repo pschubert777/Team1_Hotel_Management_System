@@ -22,7 +22,7 @@ namespace Hotel_Management_System
         private void fill_data_grid_view()
         {
             DataTable x = new DataTable();
-            using (SqlConnection Connection = new SqlConnection(@"Data Source=(localdb)\ProjectsV13;Initial Catalog=Hotel_Entity_Relationship_System;Integrated Security=True;Connect Timeout=60;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False"))
+            using (SqlConnection Connection = new SqlConnection(@"Data Source=(localdb)\ProjectsV13;Initial Catalog=master_base;Integrated Security=True;Connect Timeout=60;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False"))
             {
                 if (Connection.State == ConnectionState.Closed)
                 {
@@ -62,42 +62,76 @@ namespace Hotel_Management_System
 
         private void checkInOutStatusBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            
+           if(checkInOutStatusBox.Text=="Check In")
+            {
+                checkedIn = true;
+                checkedOut = false;
+                
+
+            }
+            else if (checkInOutStatusBox.Text == "Check Out")
+            {
+                checkedIn = false;
+                checkedOut = true;
+            }
+            else
+            {
+                checkedIn = false;
+                checkedOut = false;
+            }
         }
 
         private void statusSubmitButton_Click(object sender, EventArgs e)
         {
-
-            string reservationID = resultsBox.CurrentRow.Cells[0].Value.ToString();
-
-            using (SqlConnection Connection = new SqlConnection(@"Data Source=(localdb)\ProjectsV13;Initial Catalog=Hotel_Entity_Relationship_System;Integrated Security=True;Connect Timeout=60;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False"))
+            int reservationID = Convert.ToInt32(resultsBox.CurrentRow.Cells[0].Value);
+            if (checkInOutStatusBox.Text != "" && reservationID > 0)
             {
-                Connection.Open();
+                // if(resultsBox.CurrentRow.Index >=0)
+                
 
-                try
+                using (SqlConnection Connection = new SqlConnection(@"Data Source=(localdb)\ProjectsV13;Initial Catalog=master_base;Integrated Security=True;Connect Timeout=60;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False"))
                 {
-                    using (SqlCommand query = new SqlCommand("UPDATE Reservation SET Check_in = @checkedIn, Check_out = @checkedOut WHERE Id = @ResID", Connection))
-                    {
-                        //query.Parameters.AddWithValue("@Startdate", startDate);
-                        query.Parameters.AddWithValue("@checkedIn", checkedIn);
-                        query.Parameters.AddWithValue("@checkedOut", checkedOut);
-                        query.Parameters.AddWithValue("@ResID", reservationID);
-                        query.ExecuteNonQuery();
+                    Connection.Open();
 
-                        MessageBox.Show("Updates completed!");
+                    try
+                    {
+                        string commandString = checkedIn
+                            ? "UPDATE Reservation SET Check_in = @checkedIn WHERE Id = @ResID"
+                            : "UPDATE Reservation SET Check_out = @checkedOut WHERE Id = @ResID";
+
+                        using (SqlCommand query = new SqlCommand(commandString, Connection))
+                        {
+                            if (checkedIn)
+                            {
+                                query.Parameters.AddWithValue("@checkedIn", checkedIn.ToString().ToLower());
+                            }
+                            else
+                            {
+                                query.Parameters.AddWithValue("@checkedOut", checkedOut.ToString().ToLower());
+                            }
+                            //query.Parameters.AddWithValue("@Startdate", startDate);
+                            query.Parameters.AddWithValue("@ResID", reservationID);
+                            query.ExecuteNonQuery();
+
+                            MessageBox.Show("Updates completed!");
+                        }
+                    }
+                    catch (Exception err)
+                    {
+                        MessageBox.Show(err.Message);
+                    }
+                    finally
+                    {
+                        Connection.Close();
                     }
                 }
-                catch (Exception err)
-                {
-                    MessageBox.Show(err.Message);
-                }
-                finally
-                {
-                    Connection.Close();
-                }
+
+                fill_data_grid_view();
+            }
+            else{
+                MessageBox.Show("Select a reservation!");
             }
 
-            fill_data_grid_view();
         }
 
         private void reservationIdBox_TextChanged(object sender, EventArgs e)

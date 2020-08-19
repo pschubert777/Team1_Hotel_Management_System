@@ -18,7 +18,7 @@ namespace Hotel_Management_System
         private void fill_data_grid_view()
         {
             DataTable x = new DataTable();
-            using (SqlConnection Connection = new SqlConnection(@"Data Source=(localdb)\ProjectsV13;Initial Catalog=Hotel_Entity_Relationship_System;Integrated Security=True;Connect Timeout=60;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False"))
+            using (SqlConnection Connection = new SqlConnection(@"Data Source=(localdb)\ProjectsV13;Initial Catalog=master_base;Integrated Security=True;Connect Timeout=60;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False"))
             {
                 if (Connection.State == ConnectionState.Closed)
                 {
@@ -35,7 +35,7 @@ namespace Hotel_Management_System
 
         private void Populate_room_type_combo_box()
         {
-            using (SqlConnection Connection = new SqlConnection(@"Data Source=(localdb)\ProjectsV13;Initial Catalog=Hotel_Entity_Relationship_System;Integrated Security=True;Connect Timeout=60;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False"))
+            using (SqlConnection Connection = new SqlConnection(@"Data Source=(localdb)\ProjectsV13;Initial Catalog=master_base;Integrated Security=True;Connect Timeout=60;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False"))
             {
                 if (Connection.State == ConnectionState.Closed)
                 {
@@ -48,7 +48,7 @@ namespace Hotel_Management_System
                     {
                         while (x.Read())
                         {
-                            hotelBox.Items.Add(x[1].ToString());
+                            roomTypeBox.Items.Add(x[1].ToString());
                         }
                     }
                 }
@@ -57,7 +57,7 @@ namespace Hotel_Management_System
 
         private void Populate_hotel_combo_box()
         {
-            using (SqlConnection Connection = new SqlConnection(@"Data Source=(localdb)\ProjectsV13;Initial Catalog=Hotel_Entity_Relationship_System;Integrated Security=True;Connect Timeout=60;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False"))
+            using (SqlConnection Connection = new SqlConnection(@"Data Source=(localdb)\ProjectsV13;Initial Catalog=master_base;Integrated Security=True;Connect Timeout=60;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False"))
             {
                 if (Connection.State == ConnectionState.Closed)
                 {
@@ -87,6 +87,8 @@ namespace Hotel_Management_System
             InitializeComponent();
 
             fill_data_grid_view();
+            Populate_hotel_combo_box();
+            Populate_room_type_combo_box();
         }
 
         private void roomNumberBox_ValueChanged(object sender, EventArgs e)
@@ -107,21 +109,22 @@ namespace Hotel_Management_System
 
         private void submitButton_Click(object sender, EventArgs e)
         {
-            using (SqlConnection Connection = new SqlConnection(@"Data Source=(localdb)\ProjectsV13;Initial Catalog=Hotel_Entity_Relationship_System;Integrated Security=True;Connect Timeout=60;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False"))
+            using (SqlConnection Connection = new SqlConnection(@"Data Source=(localdb)\ProjectsV13;Initial Catalog=master_base;Integrated Security=True;Connect Timeout=60;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False"))
             {
                 Connection.Open();
 
                 try
                 {
-                    using (SqlCommand query = new SqlCommand("UPDATE Room SET Maintenance_status =@MaintStatus WHERE Room_number =@RoomNum AND Hotel_id ", Connection))
+                    using (SqlCommand query = new SqlCommand("UPDATE Room SET Maintenance_status =@MaintStatus WHERE Room_number =@RoomNum AND Hotel_id =@HotelId", Connection))
                     {
                         query.Parameters.AddWithValue("@MaintStatus", room.status);
                         query.Parameters.AddWithValue("@RoomNum", room.number);
+                        query.Parameters.AddWithValue("@HotelId", room.hotel);
                         query.ExecuteNonQuery();
 
                         MessageBox.Show("Updates completed!");
                     }
-                    
+                    fill_data_grid_view();
                 }
                 catch (Exception err)
                 {
