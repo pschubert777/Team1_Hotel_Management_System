@@ -80,5 +80,11 @@ namespace AccountManagementInterface
             dl.Show();
         }
 
+        private void btnAccountInfo_Click(object sender, EventArgs e)
+        {
+            frmAccountInfo objAccountInfo = new frmAccountInfo(user);
+            this.Hide();
+            objAccountInfo.Show();
+        }
     }
 }
