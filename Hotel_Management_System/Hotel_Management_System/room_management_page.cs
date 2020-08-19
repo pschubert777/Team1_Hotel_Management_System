@@ -146,7 +146,9 @@ namespace Hotel_Management_System
                     Connection.Close();
                 }
             }
-            
+
+            // JOHN - logging stuff here ---------------------------------------------------------------------------------------
+
         }
 
         private void cancelButton_Click(object sender, EventArgs e)
