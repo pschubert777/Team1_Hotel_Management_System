@@ -66,7 +66,7 @@ namespace AccountManagementInterface
 
         private void btnManageRooms_Click(object sender, EventArgs e)
         {
-            Hotel_Management_System.room_management_page objRoom_management_page = new Hotel_Management_System.room_management_page();
+            Hotel_Management_System.room_management_page objRoom_management_page = new Hotel_Management_System.room_management_page(user);
             this.Hide();
             objRoom_management_page.Show();
         }
@@ -89,7 +89,7 @@ namespace AccountManagementInterface
 
         private void btnCheckinOut_Click(object sender, EventArgs e)
         {
-            check_in_out_page objCheckInOut = new check_in_out_page();
+            check_in_out_page objCheckInOut = new check_in_out_page(user);
             this.Hide();
             objCheckInOut.Show();
         }
