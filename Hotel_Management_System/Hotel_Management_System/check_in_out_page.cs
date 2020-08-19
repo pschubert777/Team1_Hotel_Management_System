@@ -147,6 +147,8 @@ namespace Hotel_Management_System
                 MessageBox.Show("Select a reservation!");
             }
 
+            // JOHN - logging stuff here ---------------------------------------------------------------------------------------
+
         }
 
         private void reservationIdBox_TextChanged(object sender, EventArgs e)
