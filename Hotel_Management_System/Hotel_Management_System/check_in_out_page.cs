@@ -15,7 +15,8 @@ namespace Hotel_Management_System
     {
         public bool checkedIn { get; set; }
         public bool checkedOut { get; set; }
-        private int user_id { get; set; }
+
+        private User user = new User();
 
         private string reservationSearchID { get; set; }
 
@@ -50,10 +51,24 @@ namespace Hotel_Management_System
         public check_in_out_page()
         {
             InitializeComponent();
-
+            user.id = 0;
+            user.User_type = "Employee";
             checkedIn = false;
             checkedOut = false;
-            user_id = 0;
+            
+            reservationSearchID = "";
+
+            fill_data_grid_view();
+            getStatus();
+        }
+        public check_in_out_page(User u)
+        {
+            InitializeComponent();
+
+            user = u;
+            checkedIn = false;
+            checkedOut = false;
+            
             reservationSearchID = "";
 
             fill_data_grid_view();
@@ -178,7 +193,7 @@ namespace Hotel_Management_System
 
         private void returnButton_Click(object sender, EventArgs e)
         {
-            AccountManagementInterface.frmEmployeeMenu objReturnEmployeeMenu = new AccountManagementInterface.frmEmployeeMenu();
+            AccountManagementInterface.frmEmployeeMenu objReturnEmployeeMenu = new AccountManagementInterface.frmEmployeeMenu(user);
             this.Hide();
             objReturnEmployeeMenu.Show();
         }
