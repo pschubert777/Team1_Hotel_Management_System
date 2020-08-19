@@ -14,6 +14,7 @@ namespace Hotel_Management_System
     public partial class room_management_page : Form
     {
         roomType room = new roomType();
+        User user = new User();
 
         private void fill_data_grid_view()
         {
@@ -90,6 +91,16 @@ namespace Hotel_Management_System
             Populate_hotel_combo_box();
             Populate_room_type_combo_box();
         }
+        public room_management_page(User u)
+        {
+            InitializeComponent();
+            user = u;
+            fill_data_grid_view();
+            Populate_hotel_combo_box();
+            Populate_room_type_combo_box();
+
+            
+        }
 
         private void roomNumberBox_ValueChanged(object sender, EventArgs e)
         {
@@ -148,7 +159,7 @@ namespace Hotel_Management_System
 
         private void backButton_Click(object sender, EventArgs e)
         {
-            AccountManagementInterface.frmEmployeeMenu objReturnEmployeeMenu = new AccountManagementInterface.frmEmployeeMenu();
+            AccountManagementInterface.frmEmployeeMenu objReturnEmployeeMenu = new AccountManagementInterface.frmEmployeeMenu(user);
             this.Hide();
             objReturnEmployeeMenu.Show();
         }
