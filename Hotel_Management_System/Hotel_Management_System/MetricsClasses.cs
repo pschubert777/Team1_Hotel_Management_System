@@ -33,7 +33,7 @@ namespace Hotel_Management_System
             Rewards_redeemed = 0;
             Num_customers = 0;
 
-            Connection = new SqlConnection(@"Data Source=(localdb)\ProjectsV13;Initial Catalog=Hotel_Entity_Relationship_System;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False");
+            Connection = new SqlConnection(@"Data Source=(localdb)\ProjectsV13;Initial Catalog=Hotel_Entity_Relationship_System3;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False");
 
         }
         public void Calculate_rewards_outstanding()
@@ -133,7 +133,7 @@ namespace Hotel_Management_System
         public void Export_file()
         {
 
-            using (StreamWriter writer = File.CreateText(@"..\RewardsSummary.txt"))
+            using (StreamWriter writer = File.CreateText(@"C:\Users\ncare\Documents\HMS_ExportFiles\RewardsSummary.txt"))
             {
 
 
@@ -174,7 +174,7 @@ namespace Hotel_Management_System
 
 
             //today_date = DateTime.Now.Date;
-            Connection = new SqlConnection(@"Data Source=(localdb)\ProjectsV13;Initial Catalog=Hotel_Entity_Relationship_System;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False");
+            Connection = new SqlConnection(@"Data Source=(localdb)\ProjectsV13;Initial Catalog=master_base;Integrated Security=True;Connect Timeout=60;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False");
             Total_rooms_Occupied = 0;
             Total_rooms_Unoccupied = 0;
             Total_rooms_Unoccupied_maintenance = 0;
@@ -214,7 +214,7 @@ namespace Hotel_Management_System
             for (var individual_date = Start_date; individual_date <= End_date; individual_date =individual_date.AddDays(1))
             {
                 SqlCommand query2 = new SqlCommand("Select Count(*) From Reservation where Reservation_status NOT LIKE @Status AND @selectedDate Between Start_date and End_date", Connection);
-                query2.Parameters.AddWithValue("@Status", "Cancelled%");
+                query2.Parameters.AddWithValue("@Status", "RD%");
                 query2.Parameters.AddWithValue("@selectedDate", individual_date.Date);
 
                 int Rooms_Occupied = Convert.ToInt32(query2.ExecuteScalar());
@@ -260,7 +260,7 @@ namespace Hotel_Management_System
 
         public void ExportFile()
         {
-            using (StreamWriter writer = File.CreateText(@"C:\Users\peterschubert\Documents\FilesTest\Occupancy.txt"))
+            using (StreamWriter writer = File.CreateText(@"C:\Users\ncare\Documents\HMS_ExportFiles\Occupancy.txt"))
             {
 
 
@@ -294,7 +294,7 @@ namespace Hotel_Management_System
         {
             Start_date = start_date.Date;
             End_date = end_date.Date;
-            Connection = new SqlConnection(@"Data Source=(localdb)\ProjectsV13;Initial Catalog=Hotel_Entity_Relationship_System;Integrated Security=True;Connect Timeout=60;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False");
+            Connection = new SqlConnection(@"Data Source=(localdb)\ProjectsV13;Initial Catalog=Hotel_Entity_Relationship_System3;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False");
 
             Repeat_customers = 0;
             Num_Reservations = 0;
@@ -324,8 +324,8 @@ namespace Hotel_Management_System
             {
                 Connection.Open();
             }
-            SqlCommand query1 = new SqlCommand("Select Count(*) From Logs Where Action_type Like @ActionType% AND Action_date BETWEEN @Start_date AND @End_date", Connection);
-            query1.Parameters.AddWithValue("@ActionType", "Made Reservation");
+            SqlCommand query1 = new SqlCommand("Select Count(*) From Logs Where Action_type Like @ActionType AND Action_date BETWEEN @Start_date AND @End_date", Connection);
+            query1.Parameters.AddWithValue("@ActionType", "RC%");
             query1.Parameters.AddWithValue("@Start_date", Start_date.Date);
             query1.Parameters.AddWithValue("@End_date", End_date.Date);
             Num_Reservations = Convert.ToInt32(query1.ExecuteScalar());
@@ -339,8 +339,8 @@ namespace Hotel_Management_System
             {
                 Connection.Open();
             }
-            SqlCommand query1 = new SqlCommand("Select Count(*) From Logs Where Action_type Like @ActionType% AND Action_date BETWEEN @Start_date AND @End_date", Connection);
-            query1.Parameters.AddWithValue("@ActionType", "Cancelled");
+            SqlCommand query1 = new SqlCommand("Select Count(*) From Logs Where Action_type Like @ActionType AND Action_date BETWEEN @Start_date AND @End_date", Connection);
+            query1.Parameters.AddWithValue("@ActionType", "RD%");
             query1.Parameters.AddWithValue("@Start_date", Start_date.Date);
             query1.Parameters.AddWithValue("@End_date", End_date.Date);
             Num_Cancellations = Convert.ToInt32(query1.ExecuteScalar());
@@ -351,7 +351,7 @@ namespace Hotel_Management_System
         }
         public void ExportFile()
         {
-            using (StreamWriter writer = File.CreateText(@"C:\Users\peterschubert\Documents\FilesTest\Customer.txt"))
+            using (StreamWriter writer = File.CreateText(@"C:\Users\ncare\Documents\HMS_ExportFiles\Customer.txt"))
             {
                 writer.WriteLine($"Customer Summary from {Start_date.ToShortDateString()} to {End_date.ToShortDateString()}");
                 writer.WriteLine($"Number of Repeat Customers : {Repeat_customers} repeat customers");
