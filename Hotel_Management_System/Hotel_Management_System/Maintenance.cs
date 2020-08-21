@@ -21,7 +21,7 @@ namespace Hotel_Management_System
         {
             try
             {
-                using (StreamReader readFile = new StreamReader(@"C:\Users\peterschubert\Documents\FilesTest\Maintenance.txt"))
+                using (StreamReader readFile = new StreamReader(@"C:\Users\ncare\Documents\HMS_ExportFiles\Maintenance.txt"))
                 {
                     string maintenance_input = "";
                     DateTime date = DateTime.Now.Date;
@@ -58,7 +58,7 @@ namespace Hotel_Management_System
             }
             catch (Exception error)
             {
-                using (StreamWriter writer = File.AppendText(@"C:\Users\peterschubert\Documents\FilesTest\Errors.txt"))
+                using (StreamWriter writer = File.AppendText(@"C:\Users\ncare\Documents\HMS_ExportFiles\Errors.txt"))
                 {
                     writer.WriteLine($"Cannot Read Maintenance File! {DateTime.Now}");
                     writer.WriteLine(error.Message);
