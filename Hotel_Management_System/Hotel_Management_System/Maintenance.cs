@@ -12,7 +12,7 @@ namespace Hotel_Management_System
 {
     class Maintenance
     {
-        private string sqlString = @"Data Source=(localdb)\ProjectsV13;Initial Catalog=Hotel_Entity_Relationship_System3;Integrated Security=True;Connect Timeout=60;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
+        private string sqlString = @"Data Source=(localdb)\ProjectsV13;Initial Catalog=Hotel_Entity_Relationship_System4;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
         public Maintenance()
         {
 

@@ -20,6 +20,12 @@ namespace Hotel_Management_System
             config.readHotel();
             config.readPromotions();
 
+            Maintenance maint = new Maintenance();
+            maint.read_file();
+
+            ThirdPartyFile third = new ThirdPartyFile();
+            third.read_in_data();
+
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             //comment out below lines to prevent a certain page from opening

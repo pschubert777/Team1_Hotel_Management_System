@@ -31,7 +31,7 @@ namespace Hotel_Management_System
         // rservation id for modification and cancellation of reservation
         private int reservation_id { get; set; }
 
-        private string connectionString { get; set; } = @"Data Source=(localdb)\ProjectsV13;Initial Catalog=Hotel_Entity_Relationship_System3;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
+        private string connectionString { get; set; } = @"Data Source=(localdb)\ProjectsV13;Initial Catalog=Hotel_Entity_Relationship_System4;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
 
         private bool update_reservation { get; set; }
         private void clear()
@@ -555,10 +555,10 @@ namespace Hotel_Management_System
 
         public int Third_party_id { get; set; }
 
-        public string connectionString { get; set; }
-        
+        public string connectionString  { get; set; } = @"Data Source=(localdb)\ProjectsV13;Initial Catalog=Hotel_Entity_Relationship_System4;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
 
-      
+
+
         public void DetermineAvailability()
         {
             SqlConnection Connection = new SqlConnection(connectionString);
