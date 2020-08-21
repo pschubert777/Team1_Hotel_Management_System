@@ -31,7 +31,7 @@ namespace Hotel_Management_System
         // rservation id for modification and cancellation of reservation
         private int reservation_id { get; set; }
 
-        private string connectionString { get; set; } = @"Data Source=(localdb)\ProjectsV13;Initial Catalog=Hotel_Entity_Relationship_System;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
+        private string connectionString { get; set; } = @"Data Source=(localdb)\ProjectsV13;Initial Catalog=Hotel_Entity_Relationship_System3;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
 
         private bool update_reservation { get; set; }
         private void clear()
@@ -498,8 +498,8 @@ namespace Hotel_Management_System
                 foreach (var item in roomTypeBox.Items)
                 {
 
-                    string[] roomType = item.ToString().Split(' ');
-                    if (Convert.ToInt32(roomType[0]) == Convert.ToInt32(ReservationDataGridView.CurrentRow.Cells[2].Value))
+                    
+                    if (item.ToString() == ReservationDataGridView.CurrentRow.Cells[2].Value.ToString())
                     {
                       roomTypeBox.Text= item.ToString();
                         break;

@@ -141,11 +141,12 @@
             // 
             // cancelButton
             // 
+            this.cancelButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cancelButton.Location = new System.Drawing.Point(254, 321);
             this.cancelButton.Name = "cancelButton";
-            this.cancelButton.Size = new System.Drawing.Size(116, 23);
+            this.cancelButton.Size = new System.Drawing.Size(116, 41);
             this.cancelButton.TabIndex = 8;
-            this.cancelButton.Text = "Cancel";
+            this.cancelButton.Text = "Cancel Reservation";
             this.cancelButton.UseVisualStyleBackColor = true;
             this.cancelButton.Click += new System.EventHandler(this.cancelButton_Click);
             // 
@@ -254,7 +255,7 @@
             this.Third_party_Id,
             this.Reservation_status});
             this.ReservationDataGridView.Location = new System.Drawing.Point(414, 75);
-            this.ReservationDataGridView.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.ReservationDataGridView.Margin = new System.Windows.Forms.Padding(2);
             this.ReservationDataGridView.Name = "ReservationDataGridView";
             this.ReservationDataGridView.ReadOnly = true;
             this.ReservationDataGridView.RowHeadersWidth = 82;
