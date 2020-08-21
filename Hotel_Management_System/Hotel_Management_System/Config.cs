@@ -43,23 +43,27 @@ namespace Hotel_Management_System
             int hotelId = 0, occupancy, roomNumber, i = 0; ;
             double cost;
 
-            var lines = File.ReadLines(@"../Hotels.txt");
-
-            SqlConnection connection = new SqlConnection(@"Data Source=(localdb)\ProjectsV13;Initial Catalog=Hotel_Entity_Relationship_System;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False");
-
-            if (connection.State == System.Data.ConnectionState.Closed)
+            if (File.Exists(@"../Hotels.txt"))
             {
+                var lines = File.ReadLines(@"../Hotels.txt");
 
-                connection.Open();
-            }
 
-            SqlCommand command = connection.CreateCommand();
-            command.CommandType = CommandType.Text;
 
-            foreach (var line in lines)
-            {
-                string[] words = line.Split(' '); // split where spaces are
-                
+                SqlConnection connection = new SqlConnection(@"Data Source=(localdb)\ProjectsV13;Initial Catalog=Hotel_Entity_Relationship_System;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False");
+
+                if (connection.State == System.Data.ConnectionState.Closed)
+                {
+
+                    connection.Open();
+                }
+
+                SqlCommand command = connection.CreateCommand();
+                command.CommandType = CommandType.Text;
+
+                foreach (var line in lines)
+                {
+                    string[] words = line.Split(' '); // split where spaces are
+
                     if (words[i].Equals("D"))
                     {
 
@@ -97,27 +101,28 @@ namespace Hotel_Management_System
                             package += words[++i] + " ";
                         }
 
-                    // sql statement to insert to Rooms
-                    command.CommandText = "INSERT INTO Room " +
-                                    " (Room_type, Room_number, Num_guests_max, Monetary_cost, Hotel_id) " +
-                                    "VALUES ('" +
-                                    package + "', " +
-                                    roomNumber + ", " +
-                                    occupancy + ", " +
-                                    cost + ", " +
-                                    hotelId + ")";
+                        // sql statement to insert to Rooms
+                        command.CommandText = "INSERT INTO Room " +
+                                        " (Room_type, Room_number, Num_guests_max, Monetary_cost, Hotel_id) " +
+                                        "VALUES ('" +
+                                        package + "', " +
+                                        roomNumber + ", " +
+                                        occupancy + ", " +
+                                        cost + ", " +
+                                        hotelId + ")";
 
                         command.ExecuteNonQuery();
                     }
-                
 
-                cost = 0;
-                name = city = state = package = "";
-                i= occupancy = 0;
 
+                    cost = 0;
+                    name = city = state = package = "";
+                    i = occupancy = 0;
+
+                }
+
+                connection.Close();
             }
-
-            connection.Close();
         }
         public void readPromotions()
         {
@@ -125,79 +130,84 @@ namespace Hotel_Management_System
             string Package_name = "", amenities = "";
             float Cost = 0;
 
-            var lines = File.ReadLines(@"../Promotions.txt");
-
-            SqlConnection connection = new SqlConnection(@"Data Source=(localdb)\ProjectsV13;Initial Catalog=Hotel_Entity_Relationship_System;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False");
-
-            if (connection.State == System.Data.ConnectionState.Closed)
+            if (File.Exists(@"../Promotions.txt"))
             {
 
-                connection.Open();
-            }
 
-            SqlCommand command = connection.CreateCommand();
-            command.CommandType = CommandType.Text;
+                var lines = File.ReadLines(@"../Promotions.txt");
 
-            foreach (var line in lines)
-            {
+                SqlConnection connection = new SqlConnection(@"Data Source=(localdb)\ProjectsV13;Initial Catalog=Hotel_Entity_Relationship_System;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False");
 
-                string[] words = line.Split(' '); // split where spaces are
-                    
-                if (words[i].Equals("P"))
+                if (connection.State == System.Data.ConnectionState.Closed)
                 {
-                    if (amenities.Equals(""))
+
+                    connection.Open();
+                }
+
+                SqlCommand command = connection.CreateCommand();
+                command.CommandType = CommandType.Text;
+
+                foreach (var line in lines)
+                {
+
+                    string[] words = line.Split(' '); // split where spaces are
+
+                    if (words[i].Equals("P"))
                     {
-                        Package_number = Convert.ToInt32(words[++i]);
-                        Package_name = words[++i];
-                        float.TryParse(words[++i].Substring(1), out Cost);
+                        if (amenities.Equals(""))
+                        {
+                            Package_number = Convert.ToInt32(words[++i]);
+                            Package_name = words[++i];
+                            float.TryParse(words[++i].Substring(1), out Cost);
+                        }
+                        else
+                        {
+
+
+                            // sql statement to insert to hotels
+                            command.CommandText = "INSERT INTO Package (Package_number, Package_name, Cost, Description_amenities)" +
+                                                " VALUES ( " +
+                                                Package_number + ", '" +
+                                                Package_name + "', " +
+                                                Cost + ", '" +
+                                                amenities + "')";
+                            command.ExecuteNonQuery();
+
+                            Package_number = Convert.ToInt32(words[++i]);
+                            Package_name = words[++i];
+                            float.TryParse(words[++i].Substring(1), out Cost);
+                            amenities = "";
+                        }
+
                     }
-                    else
+                    else if (words[i].Equals("A"))
+                    {
+                        amenities += words[++i] + " ";
+                    }
+                    else // first line holding date leads here, possibly add logging here
                     {
 
-
-                        // sql statement to insert to hotels
-                        command.CommandText = "INSERT INTO Package (Package_number, Package_name, Cost, Description_amenities)" +
-                                            " VALUES ( " +
-                                            Package_number + ", '" +
-                                            Package_name + "', " +
-                                            Cost + ", '" +
-                                            amenities + "')";
-                        command.ExecuteNonQuery();
-
-                        Package_number = Convert.ToInt32(words[++i]);
-                        Package_name = words[++i];
-                        float.TryParse(words[++i].Substring(1), out Cost);
-                        amenities = "";
                     }
-                    
+
+                    i = 0;
+
+
                 }
-                else if (words[i].Equals("A")) 
+
+                if (Package_number != 0 && !amenities.Equals(""))
                 {
-                    amenities += words[++i] + " ";
+                    // sql statement to insert to hotels
+                    command.CommandText = "INSERT INTO Package (Package_number, Package_name, Cost, Description_amenities)" +
+                                        " VALUES ( " +
+                                        Package_number + ", '" +
+                                        Package_name + "', " +
+                                        Cost + ", '" +
+                                        amenities + "')";
+                    command.ExecuteNonQuery();
                 }
-                else // first line holding date leads here, possibly add logging here
-                {
 
-                }
-
-                i = 0;
-
-                
+                connection.Close();
             }
-
-            if (Package_number != 0 && !amenities.Equals(""))
-            {
-                // sql statement to insert to hotels
-                command.CommandText = "INSERT INTO Package (Package_number, Package_name, Cost, Description_amenities)" +
-                                    " VALUES ( " +
-                                    Package_number + ", '" +
-                                    Package_name + "', " +
-                                    Cost + ", '" +
-                                    amenities + "')";
-                command.ExecuteNonQuery();
-            }
-
-            connection.Close();
         }
     }
 }
