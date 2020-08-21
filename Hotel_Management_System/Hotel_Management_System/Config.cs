@@ -97,16 +97,15 @@ namespace Hotel_Management_System
                             package += words[++i] + " ";
                         }
 
-                        // sql statement to insert to Rooms
-                        command.CommandText = "INSERT INTO Room " +
-                                        " (Room_type, Room_number, Num_guests_max, Monetary_cost, Hotel_id, Package_types) " +
-                                        "VALUES (" +
-                                        "'standard', " + 
-                                        roomNumber + ", " +
-                                        occupancy + ", " +
-                                        cost + ", " +
-                                        hotelId + ", '" +
-                                        package + "')";
+                    // sql statement to insert to Rooms
+                    command.CommandText = "INSERT INTO Room " +
+                                    " (Room_type, Room_number, Num_guests_max, Monetary_cost, Hotel_id) " +
+                                    "VALUES ('" +
+                                    package + "', " +
+                                    roomNumber + ", " +
+                                    occupancy + ", " +
+                                    cost + ", " +
+                                    hotelId + ")";
 
                         command.ExecuteNonQuery();
                     }

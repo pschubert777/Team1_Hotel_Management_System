@@ -54,9 +54,9 @@ namespace Hotel_Management_System
             using (System.IO.StreamWriter outputFile = new System.IO.StreamWriter("Logging.txt"))
             {
 
-                if (user.User_type.Equals("C"))
+                if (user.User_type.Equals("Customer"))
                     outputFile.WriteLine("ID: " + user.id + "\tName: " + user.name + "\tUser Type: Customer\n");
-                else if (user.User_type.Equals("E"))
+                else if (user.User_type.Equals("Employee"))
                     outputFile.WriteLine("ID: " + user.id + "\nName: " + user.name + "\nUser Type: Employee\n");
 
                 outputFile.WriteLine(startDate + " - " + endDate + "\n");
@@ -199,7 +199,7 @@ namespace Hotel_Management_System
             SqlCommand command = connection.CreateCommand();
             command.CommandType = CommandType.Text;
 
-            if (user.User_type.Equals("C"))
+            if (user.User_type.Equals("Customer"))
                 command.CommandText = "INSERT INTO Logs (User_id, Action_date, User_type, Action_type) VALUES ("
                                                     + user.id + ", \'" + DateTime.Today + "\', \'" + user.User_type + "\', \'CC - Customer created\')";
             else
@@ -223,7 +223,7 @@ namespace Hotel_Management_System
             SqlCommand command = connection.CreateCommand();
             command.CommandType = CommandType.Text;
 
-            if (user.User_type.Equals("C"))
+            if (user.User_type.Equals("Customer"))
                 command.CommandText = "INSERT INTO Logs (User_id, Action_date, User_type, Action_type) VALUES ("
                                                     + user.id + ", \'" + DateTime.Today + "\', \'" + user.User_type + "\', \'CL - Customer logged in\')";
             else

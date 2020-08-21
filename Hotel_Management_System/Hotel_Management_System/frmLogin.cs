@@ -67,6 +67,8 @@ namespace AccountManagementInterface
                     person.name = tboxUsername.Text.Trim();
                     person.User_type = "Employee";
 
+                    Logging logging = new Logging();
+                    logging.loginLog(person);
 
                     frmEmployeeMenu objFrmEmployeeMenu = new frmEmployeeMenu(person);
                     this.Hide();
