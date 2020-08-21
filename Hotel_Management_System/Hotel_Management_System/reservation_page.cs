@@ -208,10 +208,7 @@ namespace Hotel_Management_System
 
             InitializeComponent();
 
-            person = new User();
-            person.name = "Name";
-            person.User_type = "Customer";
-            person.id = 1;
+            person = u;
             reservation_id = 0;
             update_reservation = false;
 

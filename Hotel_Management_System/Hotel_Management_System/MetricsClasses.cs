@@ -45,20 +45,24 @@ namespace Hotel_Management_System
                     }
                 // retrieving a rewards points summed up
                 SqlCommand query1_1 = new SqlCommand("Select SUM(Reward_Points) from Customer", Connection);
-                Customer_rewards_present = Convert.ToInt32(query1_1.ExecuteScalar());
+            var result = query1_1.ExecuteScalar();
+            Customer_rewards_present = result != DBNull.Value ? Convert.ToInt32(result) : 0;
 
                 // retrieving reward points spent between begin date and today's date
                 SqlCommand query1_2 = new SqlCommand("Select SUM(Reward_points_spent) from Transactions Where Transaction_date Between @StartDate AND @TodayDate", Connection);
                 query1_2.Parameters.AddWithValue("@StartDate", Start_date);
                 query1_2.Parameters.AddWithValue("@TodayDate", today_date);
-                Customer_Rewards_spent = Convert.ToInt32(query1_2.ExecuteScalar());
+            var result1 = query1_2.ExecuteScalar();
+            Customer_Rewards_spent = result1 != DBNull.Value ? Convert.ToInt32(result1) : 0;
 
 
-                // retrieving reward points gained between begin date and today's date
-                SqlCommand query1_3 = new SqlCommand("Select SUM(Reward_points_gained) from Transactions Where Transaction_date Between @StartDate AND @TodayDate", Connection);
+
+            // retrieving reward points gained between begin date and today's date
+            SqlCommand query1_3 = new SqlCommand("Select SUM(Reward_points_gained) from Transactions Where Transaction_date Between @StartDate AND @TodayDate", Connection);
                 query1_3.Parameters.AddWithValue("@StartDate", Start_date);
                 query1_3.Parameters.AddWithValue("@TodayDate", today_date);
-                Customer_Rewards_gained = Convert.ToInt32(query1_3.ExecuteScalar());
+            var result2 = query1_3.ExecuteScalar();
+            Customer_Rewards_gained = result2 != DBNull.Value ? Convert.ToInt32(result2) : 0;
 
                 Rewards_outstanding_start_date = (Customer_rewards_present - Customer_Rewards_gained) + Customer_Rewards_spent;
 
@@ -67,14 +71,16 @@ namespace Hotel_Management_System
                SqlCommand query2_2 = new SqlCommand("Select SUM(Reward_points_spent) from Transactions Where Transaction_date Between @EndDate AND @TodayDate", Connection);
                query2_2.Parameters.AddWithValue("@EndDate", End_date);
                query2_2.Parameters.AddWithValue("@TodayDate", today_date);
-               Customer_Rewards_spent = Convert.ToInt32(query2_2.ExecuteScalar());
+            var result3 = query2_2.ExecuteScalar();
+            Customer_Rewards_spent = result3 != DBNull.Value ? Convert.ToInt32(result3) : 0;
 
 
                // retrieving reward points gained between end date and today's date
                SqlCommand query2_3 = new SqlCommand("Select SUM(Reward_points_gained) from Transactions Where Transaction_date Between @StartDate AND @TodayDate", Connection);
                query2_3.Parameters.AddWithValue("@EndDate", End_date);
                query2_3.Parameters.AddWithValue("@TodayDate", today_date);
-               Customer_Rewards_gained = Convert.ToInt32(query2_3.ExecuteScalar());
+            var result4 = query2_3.ExecuteScalar();
+            Customer_Rewards_gained = result4 != DBNull.Value ? Convert.ToInt32(result4) : 0;
 
 
             Rewards_outstanding_end_date = (Customer_rewards_present - Customer_Rewards_gained) + Customer_Rewards_spent;
@@ -248,7 +254,7 @@ namespace Hotel_Management_System
             query1.Parameters.AddWithValue("@EndDate", End_date);
             //query1.Parameters.AddWithValue("@ID", "true");
             var result = query1.ExecuteScalar();
-            TotalRevenue = result != DBNull.Value ? Convert.ToInt32(query1.ExecuteScalar()) : 0;
+            TotalRevenue = result != DBNull.Value ? Convert.ToInt32(result) : 0;
 
 
             if (Connection.State == ConnectionState.Open)
