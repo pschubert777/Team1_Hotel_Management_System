@@ -180,7 +180,7 @@ namespace Hotel_Management_System
 
 
             //today_date = DateTime.Now.Date;
-            Connection = new SqlConnection(@"Data Source=(localdb)\ProjectsV13;Initial Catalog=master_base;Integrated Security=True;Connect Timeout=60;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False");
+            Connection = new SqlConnection(@"Data Source=(localdb)\ProjectsV13;Initial Catalog=Hotel_Entity_Relationship_System3;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False");
             Total_rooms_Occupied = 0;
             Total_rooms_Unoccupied = 0;
             Total_rooms_Unoccupied_maintenance = 0;
