@@ -33,7 +33,7 @@ namespace Hotel_Management_System
             Rewards_redeemed = 0;
             Num_customers = 0;
 
-            Connection = new SqlConnection(@"Data Source=(localdb)\ProjectsV13;Initial Catalog=Hotel_Entity_Relationship_System;Integrated Security=True;Connect Timeout=60;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False");
+            Connection = new SqlConnection(@"Data Source=(localdb)\ProjectsV13;Initial Catalog=Hotel_Entity_Relationship_System;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False");
 
         }
         public void Calculate_rewards_outstanding()
@@ -133,7 +133,7 @@ namespace Hotel_Management_System
         public void Export_file()
         {
 
-            using (StreamWriter writer = File.CreateText(@"C:\Users\peterschubert\Documents\FilesTest\RewardsSummary.txt"))
+            using (StreamWriter writer = File.CreateText(@"..\RewardsSummary.txt"))
             {
 
 
@@ -174,7 +174,7 @@ namespace Hotel_Management_System
 
 
             //today_date = DateTime.Now.Date;
-            Connection = new SqlConnection(@"Data Source=(localdb)\ProjectsV13;Initial Catalog=master_base;Integrated Security=True;Connect Timeout=60;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False");
+            Connection = new SqlConnection(@"Data Source=(localdb)\ProjectsV13;Initial Catalog=Hotel_Entity_Relationship_System;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False");
             Total_rooms_Occupied = 0;
             Total_rooms_Unoccupied = 0;
             Total_rooms_Unoccupied_maintenance = 0;

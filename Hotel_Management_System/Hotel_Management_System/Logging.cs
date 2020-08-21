@@ -273,6 +273,25 @@ namespace Hotel_Management_System
 
             connection.Close();
         }
+        public void roomLog(User user, decimal room, string status)
+        {
+            SqlConnection connection = new SqlConnection(@"Data Source=(localdb)\ProjectsV13;Initial Catalog=Hotel_Entity_Relationship_System;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False");
+
+            if (connection.State == System.Data.ConnectionState.Closed)
+            {
+
+                connection.Open();
+            }
+
+            SqlCommand command = connection.CreateCommand();
+            command.CommandType = CommandType.Text;
+
+            command.CommandText = "INSERT INTO Logs (User_id, Action_date, User_type, Action_type) VALUES ("
+                                                + user.id + ", \'" + DateTime.Today + "\', \'" + user.User_type + "\', \'RM - Room " + room.ToString() + " " + status + "\')";
+            command.ExecuteNonQuery();
+
+            connection.Close();
+        }
     }
 }
 

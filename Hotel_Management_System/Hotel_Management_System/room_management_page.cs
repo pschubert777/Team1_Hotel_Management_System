@@ -36,7 +36,7 @@ namespace Hotel_Management_System
 
         private void Populate_room_type_combo_box()
         {
-            using (SqlConnection Connection = new SqlConnection(@"Data Source=(localdb)\ProjectsV13;Initial Catalog=master_base;Integrated Security=True;Connect Timeout=60;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False"))
+            using (SqlConnection Connection = new SqlConnection(@"Data Source=(localdb)\ProjectsV13;Initial Catalog=Hotel_Entity_Relationship_System;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False"))
             {
                 if (Connection.State == ConnectionState.Closed)
                 {
@@ -120,7 +120,7 @@ namespace Hotel_Management_System
 
         private void submitButton_Click(object sender, EventArgs e)
         {
-            using (SqlConnection Connection = new SqlConnection(@"Data Source=(localdb)\ProjectsV13;Initial Catalog=master_base;Integrated Security=True;Connect Timeout=60;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False"))
+            using (SqlConnection Connection = new SqlConnection(@"Data Source=(localdb)\ProjectsV13;Initial Catalog=Hotel_Entity_Relationship_System;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False"))
             {
                 Connection.Open();
 
@@ -148,7 +148,8 @@ namespace Hotel_Management_System
             }
 
             // JOHN - logging stuff here ---------------------------------------------------------------------------------------
-
+            Logging logging = new Logging();
+            logging.roomLog(user, room.number, room.status);
         }
 
         private void cancelButton_Click(object sender, EventArgs e)
